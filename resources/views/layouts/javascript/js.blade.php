@@ -37,7 +37,8 @@
   <script src="{{ asset('stisla/assets/js/page/forms-advanced-forms.js') }}"></script>
   <script src="{{ asset('stisla/assets/js/page/modules-datatables.js') }}"></script>
   <script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
-  <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+  <!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
+  @yield('script_page')
 
   
   @if(session('fail'))
@@ -49,12 +50,3 @@
     );
   </script>
   @endif
-  <script>
-    $(document).ready(function () {
-      $('.select').select2();
-    });
-
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    });
-  </script>
