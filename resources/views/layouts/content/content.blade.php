@@ -1,8 +1,11 @@
-        <div class="container-fluid">
+    
 
           <!-- Page Heading -->
-          @yield('heading')
-
+          <div class="section-header">
+            @yield('section_header')
+          </div>
           <!-- Content Row -->
-          @yield('wrap_content')
-        </div>
+          <div class="section-body">
+            @yield('wrap_content')
+          </div>
+          

@@ -41,6 +41,16 @@ Route::group(['prefix' => 'account','middleware' => []],function () {
 		Route::post('/update/{id}','account\UserController@update');
 		Route::post('/delete','account\UserController@delete');
 	});
+
+	Route::group(['prefix' => 'admin'],function () {
+		Route::get('/','account\AdminController@index');
+		Route::get('/create','account\AdminController@create');
+		Route::post('/store','account\AdminController@store');
+		Route::get('/edit/{id}','account\AdminController@edit');
+		Route::post('/update/{id}','account\AdminController@update');
+		Route::post('/delete','account\AdminController@delete');
+	});
+
 	// ------------------ privileges -------------------
 	Route::group(['prefix' => 'privileges'],function () {
 		Route::get('/','account\UserPrivilegesController@index');
@@ -53,6 +63,7 @@ Route::group(['prefix' => 'account','middleware' => []],function () {
 		Route::post('/storePrivileges','account\UserPrivilegesController@storePrivileges');
 
 	});
+
 	// ------------------ menu -------------------
 	Route::group(['prefix' => 'menu'],function () {
 		Route::resource('/','account\MenuController');
@@ -64,13 +75,13 @@ Route::group(['prefix' => 'account','middleware' => []],function () {
 Route::group(['prefix' => 'general','middleware' => []],function () {
 
 	// ------------------ city -------------------
-	Route::group(['prefix' => 'city'],function () {
-		Route::get('/','general\CityController@index');
-		Route::get('/create','general\CityController@create');
-		Route::post('/store','general\CityController@store');
-		Route::get('/edit/{id}','general\CityController@edit');
-		Route::post('/update/{id}','general\CityController@update');
-		Route::post('/delete','general\CityController@delete');
+	Route::group(['prefix' => 'article'],function () {
+		Route::get('/','general\ArticleController@index');
+		Route::get('/create','general\ArticleController@create');
+		Route::post('/store','general\ArticleController@store');
+		Route::get('/edit/{id}','general\ArticleController@edit');
+		Route::post('/update/{id}','general\ArticleController@update');
+		Route::post('/delete','general\ArticleController@delete');
 	});
 
 	// ------------------ doa -------------------
