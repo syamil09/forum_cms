@@ -52,12 +52,12 @@
         <div id="site" class="collapse @if(Session::get('group') == 'general') {{'show'}} @endif" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item @if(Session::get('menu') == 'home') {{'active'}} @endif" href="{{ url('general/home-content') }}">Home Content</a>
-            <a class="collapse-item @if(Session::get('menu') == 'contact') {{'active'}} @endif" href="{{ url('general/contact') }}">Contact</a>
-            <a class="collapse-item @if(Session::get('menu') == 'about') {{'active'}} @endif" href="{{ url('general/about') }}">About Us</a>
-            <a class="collapse-item @if(Session::get('menu') == 'city') {{'active'}} @endif" href="{{ url('general/city') }}">City List</a>
-            <a class="collapse-item @if(Session::get('menu') == 'doa') {{'active'}} @endif" href="{{ url('general/doa') }}">Doa & Hadist</a>
-            <a class="collapse-item @if(Session::get('menu') == 'news') {{'active'}} @endif" href="{{ url('general/news') }}">News</a>
+            <a class="collapse-item @if(Session::get('menu') == 'home') {{'active'}} @endif" href="{{ url('general/home-content') }}">Article</a>
+            <a class="collapse-item @if(Session::get('menu') == 'contact') {{'active'}} @endif" href="{{ url('general/contact') }}">Event</a>
+            <!-- <a class="collapse-item @if(Session::get('menu') == 'about') {{'active'}} @endif" href="{{ url('general/about') }}">Vote</a> -->
+            <a class="collapse-item @if(Session::get('menu') == 'news') {{'active'}} @endif" href="{{ url('general/news') }}">Galleries</a>
+            <a class="collapse-item @if(Session::get('menu') == 'city') {{'active'}} @endif" href="{{ url('general/city') }}">Walk Through</a>
+            <a class="collapse-item @if(Session::get('menu') == 'doa') {{'active'}} @endif" href="{{ url('general/doa') }}">Tags</a>
           </div>
         </div>
       </li>
@@ -66,16 +66,16 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#mesjid" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-mosque"></i>
-          <span>Mesjid</span>
+          <span> Manage Company</span>
         </a>
         <div id="mesjid" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item @if(Session::get('menu') == 'mesjid') {{'active'}} @endif" href="{{ url('mesjid/list') }}">Mesjid List</a>
-            <a class="collapse-item @if(Session::get('menu') == 'kas') {{'active'}} @endif" href="{{ url('mesjid/kas') }}">Kas Mesjid</a>
-            <a class="collapse-item @if(Session::get('menu') == 'kegiatan') {{'active'}} @endif" href="{{ url('mesjid/kegiatan') }}">Kegiatan Mesjid</a>
-            <a class="collapse-item @if(Session::get('menu') == 'khutbah') {{'active'}} @endif" href="{{ url('mesjid/khutbah') }}">Khutbah Jumat</a>
-            <a class="collapse-item @if(Session::get('menu') == 'ustadz') {{'active'}} @endif" href="{{ url('mesjid/ustadz') }}">Ustadz List</a>
+            <a class="collapse-item @if(Session::get('menu') == 'mesjid') {{'active'}} @endif" href="{{ url('mesjid/list') }}">Company List</a>
+            <a class="collapse-item @if(Session::get('menu') == 'kas') {{'active'}} @endif" href="{{ url('mesjid/kas') }}">Vote</a>
+            <a class="collapse-item @if(Session::get('menu') == 'kegiatan') {{'active'}} @endif" href="{{ url('mesjid/kegiatan') }}">Shop</a>
+            <a class="collapse-item @if(Session::get('menu') == 'khutbah') {{'active'}} @endif" href="{{ url('mesjid/khutbah') }}">Khutbah</a>
+            <a class="collapse-item @if(Session::get('menu') == 'ustadz') {{'active'}} @endif" href="{{ url('mesjid/ustadz') }}">About Us</a>
           </div>
         </div>
       </li>
@@ -85,6 +85,6 @@
           <i class="fas fa-fw fa-sign-out-alt"></i>
           <span>Log Out</span>
         </a>
-      </li> 
+      </li>
 
     </ul>
