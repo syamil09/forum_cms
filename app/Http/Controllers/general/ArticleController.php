@@ -14,7 +14,11 @@ class ArticleController extends Controller
 
     public function index(Request $req)
     {
-        return view('app.general.article.index',compact(''));
+      $token = $req->session()->get('token');
+
+      $response = $this->get(env('GATEWAY_URL'). 'article', $token);
+      $articles = ($response['success'])?$response['data']:null;
+      return view('app.general.article.index',compact('articles'));
     }
 
     public function create()
@@ -31,7 +35,7 @@ class ArticleController extends Controller
         //     'city_name' => [
         //         'jambi','bogor','solo'
         //     ]
-            
+
         // ];
         // foreach ($city as $key => $value) {
         //     foreach ($city[$key] as $key2 => $value2) {
@@ -39,7 +43,7 @@ class ArticleController extends Controller
         //         $response = $this->post(env('GATEWAY_URL').'city/add',$data,$token);
         //     }
         // }
-        
+
         $response = $this->post(env('GATEWAY_URL').'city/add',$request->all(),$token);
         // return $response;
         if($response['success'])
@@ -49,7 +53,7 @@ class ArticleController extends Controller
         }else {
             return redirect('general/city')->with('failed','Data Doesnt Created ,'.$response['message']);
         }
-        
+
     }
 
     public function show($id)
@@ -86,7 +90,7 @@ class ArticleController extends Controller
     {
         $token = $req->session()->get('token');
         $response = $this->post(env('GATEWAY_URL').'city/delete',$req->all(),$token);
-        
+
         if($response['success'])
         {
             LogActivity::addToLog('Deleted Data City');
