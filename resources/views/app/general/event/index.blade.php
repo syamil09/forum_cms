@@ -3,7 +3,7 @@
 @section('title','Forum | Events')
 
 @section('section_header')
-<h1>Article</h1>
+<h1>Events</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">General</a></div>
@@ -96,8 +96,8 @@
                           <tr>
                             <!-- <th class="text-center">#<th> -->
                             <th>Title</th>
-                            <th>Views</th>
-                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Start</th>
                             <th class="text-center">Action</th>
                           </tr>
                         </thead>
@@ -111,14 +111,8 @@
                           <tr>
                             <!-- <td>1</td> -->
                             <td>{{ $event['title'] }}</td>
-                            <td>
-                              @if($event['views'] == null)
-                                {{ 0 }}
-                              @else
-                                {{ $event['views'] }}
-                              @endif
-                            </td>
-                            <td>{{ $event['category'] }}</td>
+                            <td>{{ $event['location'] }}</td>
+                            <td>{{ $event['event_start'] }}</td>
                             <td class="text-center">
                               <a href="event/detail/{{$event['id']}}" class="btn btn-info btn-sm">Detail</a>
                               <a href="event/edit/{{$event['id']}}" class="btn btn-warning btn-sm">Edit</a>

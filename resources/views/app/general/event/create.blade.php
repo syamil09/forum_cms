@@ -3,11 +3,11 @@
 @section('title','Forum | Article')
 
 @section('section_header')
-<h1>Create Post</h1>
+<h1>Create Event</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">CreateArticle</div>
+  <div class="breadcrumb-item">CreateEvent</div>
 </div>
 @endsection
 
@@ -16,7 +16,7 @@
   <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4>Write Your Post</h4>
+          <h4>Make Event</h4>
         </div>
         <div class="card-body">
           <div class="form-group row mb-4">
@@ -26,18 +26,21 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event Start</label>
             <div class="col-sm-12 col-md-7">
-              <select class="form-control selectric">
-                  <option value="review">Review</option>
-                  <option value="tips & trick">Tips & Trick</option>
-              </select>
+              <input type="date" class="form-control" name="event_start" value="">
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event End</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="date" class="form-control" name="event_end" value="">
             </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple"></textarea>
+              <textarea class="summernote-simple" name="description"></textarea>
             </div>
           </div>
                     <div class="form-group row mb-4">
@@ -50,10 +53,18 @@
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Location</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control inputtags">
+                        <input type="text" class="form-control" name="location">
                       </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <div class="col-sm-12 col-md-4 offset-2">
+                          <input type="text" name="latitude" class="form-control" placeholder="Latitude...">
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                          <input type="text" name="longitude" class="form-control" placeholder="Longitude...">
+                        </div>
                     </div>
                     <!-- <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
@@ -68,7 +79,8 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
-                        <button class="btn btn-primary">Create Post</button>
+                        <a href="/general/event" class="btn btn-secondary">Cancel</a>
+                        <button class="btn btn-primary">Create Event</button>
                       </div>
                     </div>
                   </div>
