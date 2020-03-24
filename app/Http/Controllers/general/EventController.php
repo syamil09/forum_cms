@@ -9,21 +9,22 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\LogActivity;
 
-class ArticleController extends Controller
+class EventController extends Controller
 {
 
     public function index(Request $req)
     {
       $token = $req->session()->get('token');
 
-      $response = $this->get(env('GATEWAY_URL'). 'article', $token);
-      $articles = ($response['success'])?$response['data']:null;
-      return view('app.general.article.index',compact('articles'));
+      $response = $this->get(env('GATEWAY_URL'). 'event', $token);
+      $events = ($response['success'])?$response['data']:null;
+      $message = $response['message'];
+      return view('app.general.event.index',compact('events', 'message'));
     }
 
     public function create()
     {
-        return view('app.general.article.create');
+        return view('app.general.event.create');
     }
 
 
@@ -60,18 +61,18 @@ class ArticleController extends Controller
     {
         $token = $req->session()->get('token');
 
-        $response = $this->get(env('GATEWAY_URL'). 'article/edit/'. $id, $token);
-        $article = ($response['success'])?$response['data']:null;
+        $response = $this->get(env('GATEWAY_URL'). 'event/edit/'. $id, $token);
+        $event = ($response['success'])?$response['data']:null;
 
-        return view('app.general.article.detail', compact('article'));
+        return view('app.general.event.detail', compact('event'));
     }
 
     public function edit(Request $req,$id)
     {
         $token      = $req->session()->get('token');
-        $response   = $this->get(env('GATEWAY_URL').'article/edit/'.$id,$token);
+        $response   = $this->get(env('GATEWAY_URL').'event/edit/'.$id,$token);
         $edit       = ($response['success'])?$response['data']:null;
-        return view('app.general.article.edit',compact('edit'));
+        return view('app.general.event.edit',compact('edit'));
     }
 
 
@@ -80,7 +81,7 @@ class ArticleController extends Controller
         $data = $request->except('_token');
         $token = session()->get('token');
         // return $data;
-        $response = $this->post(env('GATEWAY_URL').'article/update/'.$id,$data,$token);
+        $response = $this->post(env('GATEWAY_URL').'event/update/'.$id,$data,$token);
         // dd($response);
         if($response['success'])
         {

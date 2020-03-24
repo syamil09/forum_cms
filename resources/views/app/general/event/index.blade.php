@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Events')
 
 @section('section_header')
 <h1>Article</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">Article</div>
+  <div class="breadcrumb-item">Events</div>
 </div>
 @endsection
 
@@ -87,7 +87,7 @@
     <div class="card">
                   <div class="card-header">
                     <!-- <h4>Basic DataTables</h4> -->
-                    <a href="article/create" class="btn btn-success">create new article</a>
+                    <a href="event/create" class="btn btn-success">create new event</a>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -102,29 +102,35 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach ($articles as $article)
+                          @if ($events == null)
+                          <tr>
+                            <td class="text-center" colspan="4">{{$message}}</td>
+                          </tr>
+                          @else
+                          @foreach ($events as $event)
                           <tr>
                             <!-- <td>1</td> -->
-                            <td>{{ $article['title'] }}</td>
+                            <td>{{ $event['title'] }}</td>
                             <td>
-                              @if($article['views'] == null)
+                              @if($event['views'] == null)
                                 {{ 0 }}
                               @else
-                                {{ $article['views'] }}
+                                {{ $event['views'] }}
                               @endif
                             </td>
-                            <td>{{ $article['category'] }}</td>
+                            <td>{{ $event['category'] }}</td>
                             <td class="text-center">
-                              <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm">Detail</a>
-                              <a href="article/edit/{{$article['id']}}" class="btn btn-warning btn-sm">Edit</a>
-                              <form action="{{ url('general/article/delete') }}" method="post" class="d-inline form-del">
+                              <a href="event/detail/{{$event['id']}}" class="btn btn-info btn-sm">Detail</a>
+                              <a href="event/edit/{{$event['id']}}" class="btn btn-warning btn-sm">Edit</a>
+                              <form action="{{ url('general/event/delete') }}" method="post" class="d-inline form-del">
                                 @csrf
-                                <input type="hidden" name="id" value="{{$article['id']}}">
+                                <input type="hidden" name="id" value="{{$event['id']}}">
                                 <button type="submit" class="btn btn-danger btn-sm delete">Delete</button>
                               </form>
                             </td>
                           </tr>
                           @endforeach
+                          @endif
                         </tbody>
                       </table>
                     </div>

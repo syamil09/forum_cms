@@ -74,7 +74,7 @@ Route::group(['prefix' => 'account','middleware' => []],function () {
 
 Route::group(['prefix' => 'general','middleware' => []],function () {
 
-	// ------------------ city -------------------
+	// ------------------ Article -------------------
 	Route::group(['prefix' => 'article'],function () {
 		Route::get('/','general\ArticleController@index');
 		Route::get('/create','general\ArticleController@create');
@@ -82,17 +82,18 @@ Route::group(['prefix' => 'general','middleware' => []],function () {
 		Route::get('/edit/{id}','general\ArticleController@edit');
 		Route::post('/update/{id}','general\ArticleController@update');
 		Route::post('/delete','general\ArticleController@delete');
+		Route::get('/detail/{id}','general\ArticleController@show');
 	});
 
-	// ------------------ doa -------------------
-	Route::group(['prefix' => 'doa'],function () {
-		Route::get('/','general\DoaController@index');
-		Route::get('/create','general\DoaController@create');
-		Route::post('/store','general\DoaController@store');
-		Route::get('/edit/{id}','general\DoaController@edit');
-		Route::post('/update/{id}','general\DoaController@update');
-		Route::post('/delete','general\DoaController@delete');
-		Route::get('/detail/{id}','general\DoaController@show');
+	// ------------------ Event -------------------
+	Route::group(['prefix' => 'event'],function () {
+		Route::get('/','general\EventController@index');
+		Route::get('/create','general\EventController@create');
+		Route::post('/store','general\EventController@store');
+		Route::get('/edit/{id}','general\EventController@edit');
+		Route::post('/update/{id}','general\EventController@update');
+		Route::post('/delete','general\EventController@delete');
+		Route::get('/detail/{id}','general\EventController@show');
 	});
 
 	// ------------------ doa -------------------
