@@ -31,28 +31,23 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
-        // dd($request->all());
-        // $city = [
-        //     'city_name' => [
-        //         'jambi','bogor','solo'
-        //     ]
+        $data = $request->all();
 
-        // ];
-        // foreach ($city as $key => $value) {
-        //     foreach ($city[$key] as $key2 => $value2) {
-        //         $data = ['city_name' => $city[$key][$key2]];
-        //         $response = $this->post(env('GATEWAY_URL').'city/add',$data,$token);
-        //     }
-        // }
+        $validator = Validator::make($data, [
+          'image' => 'required | mimes:png,jpeg,jpg | max:3072',
+        ]);
+        if ($validator->fails()) {
+          return redirect()->back()->with('failed',$validator->getMessageBag()->first())->withInput();
+        }
 
-        $response = $this->post(env('GATEWAY_URL').'city/add',$request->all(),$token);
+        $response = $this->post(env('GATEWAY_URL').'event/add',$data,$token);
         // return $response;
         if($response['success'])
         {
-            LogActivity::addToLog('Added Data City');
-            return redirect('general/city')->with('success','Data '.$response['data']['city_name'].' Created');
+            // LogActivity::addToLog('Added Data City');
+            return redirect('general/event')->with('success','Event '.$response['data']['title'].' Created');
         }else {
-            return redirect('general/city')->with('failed','Data Doesnt Created ,'.$response['message']);
+            return redirect('general/event')->with('failed','Event Doesnt Created ,'.$response['message']);
         }
 
     }
