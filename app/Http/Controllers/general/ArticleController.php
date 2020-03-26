@@ -30,26 +30,24 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
-        // dd($request->all());
-        // $city = [
-        //     'city_name' => [
-        //         'jambi','bogor','solo'
-        //     ]
+        $data = $request->except('tags','image','_token');
 
-        // ];
-        // foreach ($city as $key => $value) {
-        //     foreach ($city[$key] as $key2 => $value2) {
-        //         $data = ['city_name' => $city[$key][$key2]];
-        //         $response = $this->post(env('GATEWAY_URL').'city/add',$data,$token);
-        //     }
-        // }
-
-        $response = $this->post(env('GATEWAY_URL').'city/add',$request->all(),$token);
+        $request['tags'] = explode(',',$request->tags);
+        foreach ($request['tags'] as $key => $value) {
+            $json['name'] = 'tags';
+            $json['contents'] = $value;
+            $tags[] = $json;
+        }
+        
+        $img['name'] = 'image';
+        $img['contents'] = fopen($request->image,'r');
+        $img['filename'] = 'photo.png';
+       
+        $response = $this->postMulti(env('GATEWAY_URL').'article/add',$data,$token,$img,$tags);
         // return $response;
         if($response['success'])
         {
-            LogActivity::addToLog('Added Data City');
-            return redirect('general/city')->with('success','Data '.$response['data']['city_name'].' Created');
+            return redirect('general/article')->with('success','Data created');
         }else {
             return redirect('general/city')->with('failed','Data Doesnt Created ,'.$response['message']);
         }
@@ -62,7 +60,6 @@ class ArticleController extends Controller
 
         $response = $this->get(env('GATEWAY_URL'). 'article/edit/'. $id, $token);
         $article = ($response['success'])?$response['data']:null;
-
         return view('app.general.article.detail', compact('article'));
     }
 
@@ -71,17 +68,35 @@ class ArticleController extends Controller
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'article/edit/'.$id,$token);
         $edit       = ($response['success'])?$response['data']:null;
+        if($edit != null) {
+            $edit['tags'] = implode(',', $edit['tags']);
+        }
+        // dd($edit);
         return view('app.general.article.edit',compact('edit'));
     }
 
 
     public function update(Request $request, $id)
     {
-        $data = $request->except('_token');
         $token = session()->get('token');
-        // return $data;
-        $response = $this->post(env('GATEWAY_URL').'article/update/'.$id,$data,$token);
-        // dd($response);
+        $data = $request->except('tags','image','_token');
+
+        $request['tags'] = explode(',',$request->tags);
+        foreach ($request['tags'] as $key => $value) {
+            $json['name'] = 'tags';
+            $json['contents'] = $value;
+            $tags[] = $json;
+        }
+        
+        $img['name'] = 'image';
+        $img['contents'] = null;
+        if($request->image != null) {
+            $img['contents'] = fopen($request->image,'r');
+            $img['filename'] = 'photo.png';
+        }
+        
+        $response = $this->postMulti(env('GATEWAY_URL').'article/update/'.$id,$data,$token,$img,$tags);
+        dd($response);
         if($response['success'])
         {
             LogActivity::addToLog('Updated Data City');

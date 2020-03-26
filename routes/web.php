@@ -15,9 +15,8 @@
 // });
 
 // Route::get('/','LoginController@cekSession');
-Route::get('/',function() {
-	return view('app.dashboard');
-});
+
+Route::get('/','LoginController@cekSession');
 Route::get('token','LoginController@token');
 Route::get('home',function () {
 	return view('layouts.app');
@@ -29,7 +28,7 @@ Route::get('cek','LoginController@cekSession');
 Route::get('login','LoginController@login');
 
 // ------------------ account -------------------
-Route::group(['prefix' => 'account','middleware' => []],function () {
+Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () {
 
 	// ------------------ user -------------------
 	Route::group(['prefix' => 'user'],function () {
@@ -51,28 +50,11 @@ Route::group(['prefix' => 'account','middleware' => []],function () {
 		Route::post('/delete','account\AdminController@delete');
 	});
 
-	// ------------------ privileges -------------------
-	Route::group(['prefix' => 'privileges'],function () {
-		Route::get('/','account\UserPrivilegesController@index');
-		Route::get('/create','account\UserPrivilegesController@create');
-		Route::post('/store','account\UserPrivilegesController@store');
-		Route::get('/edit/{id}','account\UserPrivilegesController@edit');
-		Route::post('/update/{id}','account\UserPrivilegesController@update');
-		Route::post('/delete','account\UserPrivilegesController@delete');
-		Route::get('/show/{id}','account\UserPrivilegesController@show');
-		Route::post('/storePrivileges','account\UserPrivilegesController@storePrivileges');
-
-	});
-
-	// ------------------ menu -------------------
-	Route::group(['prefix' => 'menu'],function () {
-		Route::resource('/','account\MenuController');
-	});
 
 	Route::get('activity','account\LogActivityController@index');
 });
 
-Route::group(['prefix' => 'general','middleware' => []],function () {
+Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () {
 
 	// ------------------ Article -------------------
 	Route::group(['prefix' => 'article'],function () {

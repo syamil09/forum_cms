@@ -31,6 +31,37 @@ class Controller extends BaseController
     	return $result;
     }
 
+    public function postMulti($url,$input=[],$token=null,$image = '',$arr = '')
+    {
+        foreach ($input as $key => $value) {
+            $json['name'] = $key;
+            $json['contents'] = $value;
+            $data[] = $json;
+        }
+        
+        if($arr != '') {
+            foreach ($arr as $key => $value) {
+                $json['name'] = $value['name'].'[]';
+                $json['contents'] = $value['contents'];
+                $data[] = $json;
+            }
+        }
+        $data[] = $image;
+        // dd($data);
+        $client = new Client();
+        $response = $client->post($url,[
+            'multipart' => $data,
+            'headers' => [
+                'Authorization' =>  $token == null?"":$token,
+                // 'content-type' => 'application/x-www-form-urlencoded'
+            ]
+        ]);
+
+        $result = json_decode($response->getBody(),true);
+
+        return $result;
+    }
+
     public function get($url,$token = null)
     {
     	$client = new Client();
@@ -40,13 +71,6 @@ class Controller extends BaseController
                 'Authorization' => $token == null?"":$token
             ]
         ]);
-        // $response = $client->get($url,[
-        //     'headers' => [
-        //         'Authorization' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1Nzk0MzAxNDUsImV4cCI6MTU3OTQzMzc0NSwiZGF0YSI6eyJpZCI6NiwidXNlcm5hbWUiOiJyYWthIn19.stCsqQtfxWR5aY0M8VH626Zr1QfNsXSVB4-BKFFT5V8'
-        //     ]
-        // ]);
-
-        
     	$result = json_decode($response->getBody(),true);
 
     	return $result;

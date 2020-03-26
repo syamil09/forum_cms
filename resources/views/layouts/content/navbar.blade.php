@@ -4,13 +4,7 @@
       <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
       <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
     </ul>
-    {{-- <div class="form-group">
-      <select class="form-control select2" data-width="250">
-        <option disabled selected>Please select company</option>
-        <option>Fevci</option>
-        <option>Astra</option>
-      </select>
-    </div> --}}
+    @if(session()->get('data')['role'] == 'super admin')
     <div class="search-element">
       {{-- <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250"> --}}
       <select class="form-control select2" data-width="250">
@@ -78,6 +72,7 @@
         </div>
       </div>
     </div>
+    @endif
   </form>
   <ul class="navbar-nav navbar-right">
     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
@@ -220,7 +215,7 @@
           <i class="fas fa-cog"></i> Settings
         </a>
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item has-icon text-danger">
+        <a href="{{ url('signout') }}" class="dropdown-item has-icon text-danger">
           <i class="fas fa-sign-out-alt"></i> Logout
         </a>
       </div>

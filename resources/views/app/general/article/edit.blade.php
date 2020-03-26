@@ -19,7 +19,8 @@
         <h4>Edit Your Post</h4>
       </div>
       <div class="card-body">
-        <form class="" action="{{url('general/article/update/'). '$edit['id']'}}" method="post" enctype="multipart/form-data">
+        <form method="POST" action="{{  url('general/article/update/'.$edit['id']) }}" class="needs-validation" novalidate="">
+        @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
             <div class="col-sm-12 col-md-7">
@@ -44,7 +45,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview">
+              <div id="image-preview" class="image-preview" style="background-image: url({{$edit['image']}});">
                 <label for="image-upload" id="image-label">Choose File</label>
                 <input type="file" name="image" id="image-upload" />
               </div>

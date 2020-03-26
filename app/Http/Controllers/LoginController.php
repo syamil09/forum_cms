@@ -14,19 +14,29 @@ class LoginController extends Controller
      */
     public function index(Request $req)
     {
-
-        $response = $this->post(env('GATEWAY_URL').'auth/signin',$req->all());
+        $response = $this->post(env('GATEWAY_URL').'admin/signin',$req->all());
 
         if($response['success'])
         {
+            $dataSession = [
+                'company_id' => $response['data']['company_id'],
+                'user_id'    => $response['data']['id'],
+                'username'   => $response['data']['username'],
+                'email'      => $response['data']['email'],
+                'photo'      => $response['data']['photo'],
+                'role'       => $response['data']['role']
+            ];
+            // $req->session()->flush();
             $req->session()->put('token',$response['token']);
+            $req->session()->put('data',$dataSession);
             $req->session()->put('menu','dashboard');
-            $priv = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$response['data']['user_group_id'],$response['token']);
-            $menuGroup = $this->get(env('GATEWAY_URL').'menu-group',$response['token']);
-            $menu = $this->get(env('GATEWAY_URL').'menu',$response['token']);
-            $req->session()->put('privileges',$priv['data']);
-            $req->session()->put('menu_group_user',$menuGroup['data']);
-            $req->session()->put('menu_user',$menu['data']);
+   
+            // $priv = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$response['data']['user_group_id'],$response['token']);
+            // $menuGroup = $this->get(env('GATEWAY_URL').'menu-group',$response['token']);
+            // $menu = $this->get(env('GATEWAY_URL').'menu',$response['token']);
+            // $req->session()->put('privileges',$priv['data']);
+            // $req->session()->put('menu_group_user',$menuGroup['data']);
+            // $req->session()->put('menu_user',$menu['data']);
             // return session()->get('menu_user');
             return redirect('/')->with('success','You are login');
         }
