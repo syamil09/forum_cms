@@ -54,10 +54,10 @@ class LoginController extends Controller
         if($req->session()->has('token'))
         {
             $profile = $this->get(env('GATEWAY_URL').'user/profile',session()->get('token'));
-            $dataProfile = $profile['data'];
-            $req->session()->put('username',$dataProfile['username']);
-            $req->session()->put('photo',$dataProfile['photo']);
-            $req->session()->put('data-user',$dataProfile);
+            // $dataProfile = $profile['data'];
+            // $req->session()->put('username',$dataProfile['username']);
+            // $req->session()->put('photo',$dataProfile['photo']);
+            // $req->session()->put('data-user',$dataProfile);
             return view('app.dashboard');
         }else {
             return redirect('login');
