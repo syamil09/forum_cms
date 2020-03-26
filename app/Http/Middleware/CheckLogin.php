@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use GuzzleHttp\Client;
 
-class ceklogin
+class CheckLogin
 {
     /**
      * Handle an incoming request.
@@ -16,18 +16,19 @@ class ceklogin
      */
     public function handle($request, Closure $next)
     {
-        if(!session()->has('token'))
-        {
-            return redirect('login');
-        }
-        $response = $this->get(env('GATEWAY_URL').'user',session()->get('token'));
+        // if(!session()->has('token'))
+        // {
 
-        if($response['success'] == false)
-        {
-            session()->forget('token','menu','group');
-            // Session::flush();
-            return redirect('login')->with('message','Your Session is expired!');
-        }
+        //     return redirect('login');
+        // }
+        // $response = $this->get(env('GATEWAY_URL').'user',session()->get('token'));
+
+        // if($response['success'] == false)
+        // {
+        //     session()->forget('token','menu','group');
+        //     // Session::flush();
+        //     return redirect('login')->with('message','Your Session is expired!');
+        // }
         return $next($request);
     }
 

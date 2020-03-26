@@ -19,16 +19,18 @@
           <h4>Write Your Post</h4>
         </div>
         <div class="card-body">
+          <form method="POST" action="{{  url('general/article/store') }}" class="needs-validation" novalidate="">
+            @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" name="title">
             </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
             <div class="col-sm-12 col-md-7">
-              <select class="form-control selectric">
+              <select class="form-control selectric" name="category">
                   <option value="review">Review</option>
                   <option value="tips & trick">Tips & Trick</option>
               </select>
@@ -37,7 +39,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple"></textarea>
+              <textarea class="summernote-simple" name="content"></textarea>
             </div>
           </div>
                     <div class="form-group row mb-4">
@@ -52,7 +54,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control inputtags">
+                        <input type="text" class="form-control inputtags" name="tags" value="satu,dua,tiga">
                       </div>
                     </div>
                     <!-- <div class="form-group row mb-4">
@@ -71,6 +73,7 @@
                         <button class="btn btn-primary">Create Post</button>
                       </div>
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>
