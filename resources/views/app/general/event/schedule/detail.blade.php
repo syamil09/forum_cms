@@ -3,7 +3,7 @@
 @section('title','Forum | Article')
 
 @section('section_header')
-<h1>Schedule</h1>
+<h1>Event Schedule</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">General</a></div>

@@ -21,6 +21,12 @@
       <div class="card-body">
         <!-- <div class="alert alert-success">Yess</div> -->
         <div class="table-responsive">
+          @if(session('success'))
+          <div class="alert alert-success">{{session('success')}}</div>
+          @endif
+          @if(session('failed'))
+          <div class="alert alert-danger">{{session('failed')}}</div>
+          @endif
           <table class="table table-striped" id="table-1">
             <thead>
               <tr>

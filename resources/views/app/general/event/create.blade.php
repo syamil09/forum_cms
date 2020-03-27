@@ -16,7 +16,7 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4>Make Event</h4>
+        <h4>Create Event</h4>
       </div>
       <div class="card-body">
         <form class="needs-validation" action="{{url('general/event/store')}}" method="post" enctype="multipart/form-data">

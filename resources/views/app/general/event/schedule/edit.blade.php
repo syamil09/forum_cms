@@ -21,6 +21,7 @@
       </div>
       <div class="card-body">
         <form class="" action="{{url('general/event/'.$event_id.'/schedules/update/'. $edit['id'])}}" method="post" enctype="multipart/form-data">
+          @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
             <div class="col-sm-12 col-md-7">
@@ -28,7 +29,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
             <div class="col-sm-12 col-md-7">
               <textarea class="summernote-simple">{{$edit['description']}}</textarea>
             </div>
