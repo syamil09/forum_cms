@@ -38,7 +38,7 @@
             <!-- <div class="col-sm-12 col-md-7">
               <textarea class="summernote-simple"></textarea>
             </div> -->
-            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-6">{{$article['content']}}</label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-6"><?= $article['content']; ?></label>
           </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Thumbnail</label>
@@ -54,21 +54,15 @@
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Tags : </label>
-                      <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3"></label>
+                      <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">
+                        @foreach ($article['tags'] as $tag)
+                        <span class="badge badge-primary">{{ $tag }}</span>
+                        @endforeach
+                      </label>
                       <!-- <div class="col-sm-12 col-md-7">
                         <input type="text" class="form-control inputtags">
                       </div> -->
                     </div>
-                    <!-- <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-                      <div class="col-sm-12 col-md-7">
-                        <select class="form-control selectric">
-                          <option>Publish</option>
-                          <option>Draft</option>
-                          <option>Pending</option>
-                        </select>
-                      </div>
-                    </div> -->
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3"></label>
                       <div class="col-sm-12 col-md-7">

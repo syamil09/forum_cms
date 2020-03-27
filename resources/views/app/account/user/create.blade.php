@@ -15,31 +15,31 @@
 <div class="row justify-content-center">
 	<div class="col-6">
 		<div class="card">
-			{{-- <div class="card-header"></div> --}}
 			<div class="card-body">
-				<form action="">
+				@if(session('failed'))
+				<div class="alert alert-danger">{{ session('failed') }}</div>
+				@endif
+				<form action="{{ url('account/user/store') }}" method="POST" class="needs-validation" novalidate="">
+					@csrf
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control purchase-code" placeholder="Enter Name">
+						<input type="text" class="form-control" name="name" required>
 					</div>
 					<div class="form-group">
 						<label>Username</label>
-						<input type="text" class="form-control invoice-input">
+						<input type="text" class="form-control" name="username" required>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-						<input type="email" class="form-control datemask" placeholder="">
+						<input type="email" class="form-control" name="email" required>
 					</div>
 					<div class="form-group">
-						<label>Phone Number</label>
-						<input type="text" class="form-control creditcard">
+						<label>Password</label>
+						<input type="password" class="form-control" name="password" required>
 				    </div>
-					<div class="form-group">
-						<label>Tags</label>
-						<input type="text" class="form-control inputtags">
-					</div>
+
 					<button type="submit" class="btn btn-primary">Add Member</button>
-					<button type="button" class="btn btn-secondary">Back</button>
+					<a href="{{ url('account/user') }}" class="btn btn-secondary">Back</a>
 				</form>
 			</div>
 		</div>
