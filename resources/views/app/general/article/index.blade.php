@@ -34,7 +34,7 @@
             <tbody>
             @if($articles == null)
               <tr>
-                <td colspan="4" align="center">No Data Avaible</td>
+                <td class="text-center" colspan="4">{{$message}}</td>
               </tr>
             @else
               @foreach ($articles as $article)
@@ -50,12 +50,12 @@
                 </td>
                 <td>{{ $article['category'] }}</td>
                 <td class="text-center">
-                  <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm">Detail</a>
-                  <a href="{{ url('general/article/edit/').'/'.$article['id'] }}" class="btn btn-warning btn-sm">Edit</a>
+                  <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
+                  <a href="{{ url('general/article/edit/').'/'.$article['id'] }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                   <form action="{{ url('general/article/delete') }}" method="post" class="d-inline form-del">
                   @csrf
                     <input type="hidden" name="id" value="{{$article['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm delete" onclick="return confirm('delete this data?');">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm delete" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>

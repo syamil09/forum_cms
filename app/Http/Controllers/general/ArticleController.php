@@ -18,7 +18,8 @@ class ArticleController extends Controller
 
       $response = $this->get(env('GATEWAY_URL'). 'article', $token);
       $articles = ($response['success'])?$response['data']:null;
-      return view('app.general.article.index',compact('articles'));
+      $message = $response['message'];
+      return view('app.general.article.index',compact('articles', 'message'));
     }
 
     public function create()
