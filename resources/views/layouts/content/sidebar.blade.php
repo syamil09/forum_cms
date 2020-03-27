@@ -24,10 +24,10 @@
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="{{ url('general/article/') }}">Article</a></li>
             <li><a class="nav-link" href="{{ url('general/event/') }}">Event</a></li>
-            <li><a class="nav-link" href="bootstrap-breadcrumb.html">Vote</a></li>
-            <li><a class="nav-link" href="bootstrap-buttons.html">Splash Screen</a></li>
-            <li><a class="nav-link" href="bootstrap-card.html">Walk Through</a></li>
-            <li><a class="nav-link" href="bootstrap-card.html">Highlight</a></li>
+            <li><a class="nav-link" href="{{ url('general/vote') }}">Vote</a></li>
+            <li><a class="nav-link" href="{{ url('general/splashscreen') }}">Splash Screen</a></li>
+            <li><a class="nav-link" href="{{ url('general/walkthrough') }}">Walk Through</a></li>
+            <li><a class="nav-link" href="{{ url('general/highlight') }}">Highlight</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
