@@ -49,18 +49,18 @@
                 </td>
                 <td>{{ $article['category'] }}</td>
                 <td class="text-center">
-                  <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm">Detail</a>
-                  <a href="article/edit/{{$article['id']}}" class="btn btn-warning btn-sm">Edit</a>
+                  <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm btn-action"><i class="fas fa-info"></i></a>
+                  <a href="article/edit/{{$article['id']}}" class="btn btn-warning btn-sm btn-action"><i class="fas fa-pencil-alt"></i></a>
                   <form action="{{ url('general/article/delete') }}" method="post" class="d-inline form-del">
                   @csrf
                     <input type="hidden" name="id" value="{{$article['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm delete">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-action"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>
-              @endforeach             
+              @endforeach
             @endif
-                          
+
             </tbody>
           </table>
         </div>
@@ -90,7 +90,7 @@
             @else
               @foreach ($articles as $article)
                           <tr>
-                           
+
                             <td>{{ $article['title'] }}</td>
                             <td>
                               @if($article['views'] == null)
@@ -110,9 +110,9 @@
                               </form>
                             </td>
                           </tr>
-              @endforeach             
+              @endforeach
             @endif
-                          
+
             </tbody>
           </table>
         </div>

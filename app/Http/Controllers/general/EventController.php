@@ -33,19 +33,12 @@ class EventController extends Controller
         $token = $request->session()->get('token');
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-          'image' => 'required | mimes:png,jpeg,jpg | max:3072',
-        ]);
-        if ($validator->fails()) {
-          return redirect()->back()->with('failed',$validator->getMessageBag()->first())->withInput();
-        }
-
         $response = $this->post(env('GATEWAY_URL').'event/add',$data,$token);
         // return $response;
         if($response['success'])
         {
             // LogActivity::addToLog('Added Data City');
-            return redirect('general/event')->with('success','Event '.$response['data']['title'].' Created');
+            return redirect('general/event')->with('success','Event Created');
         }else {
             return redirect('general/event')->with('failed','Event Doesnt Created ,'.$response['message']);
         }
@@ -80,24 +73,24 @@ class EventController extends Controller
         // dd($response);
         if($response['success'])
         {
-            LogActivity::addToLog('Updated Data City');
-            return redirect('general/city')->with('success','Data '.$response['data']['city_name'].' Updated');
+            // LogActivity::addToLog('Updated Data City');
+            return redirect('general/event')->with('success','Event Updated');
         }else {
-            return redirect('general/city')->with('failed','Data '.$response['data']['city_name'].' Doesnt Updated. '.$response['message']);
+            return redirect('general/event')->with('failed','Event Doesnt Updated. '.$response['message']);
         }
     }
 
     public function delete(Request $req)
     {
         $token = $req->session()->get('token');
-        $response = $this->post(env('GATEWAY_URL').'city/delete',$req->all(),$token);
+        $response = $this->post(env('GATEWAY_URL').'event/delete',$req->all(),$token);
 
         if($response['success'])
         {
-            LogActivity::addToLog('Deleted Data City');
-            return redirect('general/city')->with('success','Data Deleted');
+            // LogActivity::addToLog('Deleted Data City');
+            return redirect('general/event')->with('success','Event Deleted');
         }else {
-            return redirect('general/city')->with('failed','Data Doesnt Deleted');
+            return redirect('general/event')->with('failed','Event Doesnt Deleted');
         }
 
     }

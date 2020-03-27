@@ -30,7 +30,7 @@ class LoginController extends Controller
             $req->session()->put('token',$response['token']);
             $req->session()->put('data',$dataSession);
             $req->session()->put('menu','dashboard');
-   
+
             // $priv = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$response['data']['user_group_id'],$response['token']);
             // $menuGroup = $this->get(env('GATEWAY_URL').'menu-group',$response['token']);
             // $menu = $this->get(env('GATEWAY_URL').'menu',$response['token']);
@@ -54,10 +54,10 @@ class LoginController extends Controller
         if($req->session()->has('token'))
         {
             $profile = $this->get(env('GATEWAY_URL').'user/profile',session()->get('token'));
-            $dataProfile = $profile['data'];
-            $req->session()->put('username',$dataProfile['username']);
-            $req->session()->put('photo',$dataProfile['photo']);
-            $req->session()->put('data-user',$dataProfile);
+            // $dataProfile = $profile['data'];
+            // $req->session()->put('username',$dataProfile['username']);
+            // $req->session()->put('photo',$dataProfile['photo']);
+            // $req->session()->put('data-user',$dataProfile);
             return view('app.dashboard');
         }else {
             return redirect('login');

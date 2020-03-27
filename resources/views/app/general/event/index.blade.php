@@ -87,7 +87,7 @@
     <div class="card">
                   <div class="card-header">
                     <!-- <h4>Basic DataTables</h4> -->
-                    <a href="event/create" class="btn btn-success">create new event</a>
+                    <a href="{{ url('general/event/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Event</a>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -114,12 +114,12 @@
                             <td>{{ $event['location'] }}</td>
                             <td>{{ $event['event_start'] }}</td>
                             <td class="text-center">
-                              <a href="event/detail/{{$event['id']}}" class="btn btn-info btn-sm">Detail</a>
-                              <a href="event/edit/{{$event['id']}}" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="event/detail/{{$event['id']}}" class="btn btn-info btn-sm btn-action"><i class="fas fa-info"></i></a>
+                              <a href="event/edit/{{$event['id']}}" class="btn btn-warning btn-sm btn-action"><i class="fas fa-pencil-alt"></i></a>
                               <form action="{{ url('general/event/delete') }}" method="post" class="d-inline form-del">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$event['id']}}">
-                                <button type="submit" class="btn btn-danger btn-sm delete">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm btn-action"><i class="fas fa-trash"></i></button>
                               </form>
                             </td>
                           </tr>

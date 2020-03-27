@@ -83,7 +83,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3"></label>
                       <div class="col-sm-12 col-md-7">
-                        <a href="/general/event" class="btn btn-secondary">Back</a>
+                        <a href="{{url('general/event')}}" class="btn btn-secondary">Back</a>
                       </div>
                     </div>
                   </div>

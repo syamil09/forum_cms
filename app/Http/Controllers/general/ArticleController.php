@@ -38,11 +38,11 @@ class ArticleController extends Controller
             $json['contents'] = $value;
             $tags[] = $json;
         }
-        
+
         $img['name'] = 'image';
-        $img['contents'] = fopen($request->image,'r');
+        $img['contents'] = fopen($request['image'],'r');
         $img['filename'] = 'photo.png';
-       
+
         $response = $this->postMulti(env('GATEWAY_URL').'article/add',$data,$token,$img,$tags);
         // return $response;
         if($response['success'])
@@ -87,14 +87,14 @@ class ArticleController extends Controller
             $json['contents'] = $value;
             $tags[] = $json;
         }
-        
+
         $img['name'] = 'image';
         $img['contents'] = null;
         if($request->image != null) {
             $img['contents'] = fopen($request->image,'r');
             $img['filename'] = 'photo.png';
         }
-        
+
         $response = $this->postMulti(env('GATEWAY_URL').'article/update/'.$id,$data,$token,$img,$tags);
         dd($response);
         if($response['success'])
