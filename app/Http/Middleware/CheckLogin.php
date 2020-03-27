@@ -16,19 +16,18 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        // if(!session()->has('token'))
-        // {
-
-        //     return redirect('login');
-        // }
-        // $response = $this->get(env('GATEWAY_URL').'user',session()->get('token'));
-
-        // if($response['success'] == false)
-        // {
-        //     session()->forget('token','menu','group');
-        //     // Session::flush();
-        //     return redirect('login')->with('message','Your Session is expired!');
-        // }
+        if(!session()->has('token'))
+        {
+            return redirect('login');
+        }
+        $response = $this->get(env('GATEWAY_URL').'admin',session()->get('token'));
+        // dd(session()->get('data')['user_id']);
+        if($response['success'] == false)
+        {
+            session()->forget('token','menu','group');
+            // Session::flush();
+            return redirect('login')->with('message','Your Session is expired!');
+        }
         return $next($request);
     }
 

@@ -19,6 +19,7 @@
         <a href="{{ url('general/article/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Article</a>
       </div>
       <div class="card-body">
+        <!-- <div class="alert alert-success">Yess</div> -->
         <div class="table-responsive">
           <table class="table table-striped" id="table-1">
             <thead>
@@ -49,12 +50,12 @@
                 </td>
                 <td>{{ $article['category'] }}</td>
                 <td class="text-center">
-                  <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm btn-action"><i class="fas fa-info"></i></a>
-                  <a href="article/edit/{{$article['id']}}" class="btn btn-warning btn-sm btn-action"><i class="fas fa-pencil-alt"></i></a>
+                  <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm">Detail</a>
+                  <a href="{{ url('general/article/edit/').'/'.$article['id'] }}" class="btn btn-warning btn-sm">Edit</a>
                   <form action="{{ url('general/article/delete') }}" method="post" class="d-inline form-del">
                   @csrf
                     <input type="hidden" name="id" value="{{$article['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm btn-action"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger btn-sm delete" onclick="return confirm('delete this data?');">Delete</button>
                   </form>
                 </td>
               </tr>
@@ -66,58 +67,6 @@
         </div>
       </div>
     </div>
-
-   <!--  <div class="card">
-      <div class="card-header">
-        <a href="article/create" class="btn btn-success">create new article</a>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-striped" id="table-1">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Views</th>
-                <th>Category</th>
-                <th class="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-            @if($articles == null)
-              <tr>
-                <td colspan="4" align="center">No Data Avaible</td>
-              </tr>
-            @else
-              @foreach ($articles as $article)
-                          <tr>
-
-                            <td>{{ $article['title'] }}</td>
-                            <td>
-                              @if($article['views'] == null)
-                                {{ 0 }}
-                              @else
-                                {{ $article['views'] }}
-                              @endif
-                            </td>
-                            <td>{{ $article['category'] }}</td>
-                            <td class="text-center">
-                              <a href="article/detail/{{$article['id']}}" class="btn btn-info btn-sm">Detail</a>
-                              <a href="article/edit/{{$article['id']}}" class="btn btn-warning btn-sm">Edit</a>
-                              <form action="{{ url('general/article/delete') }}" method="post" class="d-inline form-del">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$article['id']}}">
-                                <button type="submit" class="btn btn-danger btn-sm delete">Delete</button>
-                              </form>
-                            </td>
-                          </tr>
-              @endforeach
-            @endif
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-  </div> -->
 </div>
 
 @endsection

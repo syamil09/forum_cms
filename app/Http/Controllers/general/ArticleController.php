@@ -68,7 +68,7 @@ class ArticleController extends Controller
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'article/edit/'.$id,$token);
         $edit       = ($response['success'])?$response['data']:null;
-        if($edit != null) {
+        if($edit != null && implode(',', $edit['tags']) ) {
             $edit['tags'] = implode(',', $edit['tags']);
         }
         // dd($edit);
@@ -96,27 +96,27 @@ class ArticleController extends Controller
         }
 
         $response = $this->postMulti(env('GATEWAY_URL').'article/update/'.$id,$data,$token,$img,$tags);
-        dd($response);
         if($response['success'])
         {
-            LogActivity::addToLog('Updated Data City');
-            return redirect('general/city')->with('success','Data '.$response['data']['city_name'].' Updated');
+            // LogActivity::addToLog('Updated Data City');
+            return redirect('general/article')->with('success','Data Updated');
         }else {
-            return redirect('general/city')->with('failed','Data '.$response['data']['city_name'].' Doesnt Updated. '.$response['message']);
+            return redirect('general/article')->with('failed','Data Doesnt Updated. '.$response['message']);
         }
     }
 
     public function delete(Request $req)
     {
+        dd('hapus');
         $token = $req->session()->get('token');
-        $response = $this->post(env('GATEWAY_URL').'city/delete',$req->all(),$token);
+        $response = $this->post(env('GATEWAY_URL').'article/delete',$req->all(),$token);
 
         if($response['success'])
         {
-            LogActivity::addToLog('Deleted Data City');
-            return redirect('general/city')->with('success','Data Deleted');
+            // LogActivity::addToLog('Deleted Data City');
+            return redirect('general/article')->with('success','Data Deleted');
         }else {
-            return redirect('general/city')->with('failed','Data Doesnt Deleted');
+            return redirect('general/article')->with('failed','Data Doesnt Deleted');
         }
 
     }
