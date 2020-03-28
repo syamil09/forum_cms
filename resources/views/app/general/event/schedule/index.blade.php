@@ -51,12 +51,12 @@
                 <td>{{ $sch['time'] }}</td>
                 <td>{{ $sch['title'] }}</td>
                 <td class="text-center">
-                  <a href="schedule/detail/{{$sch['id']}}" class="btn btn-info btn-sm btn-action"><i class="fas fa-info"></i></a>
-                  <a href="schedule/edit/{{$sch['id']}}" class="btn btn-warning btn-sm btn-action"><i class="fas fa-pencil-alt"></i></a>
+                  <a href="schedule/detail/{{$sch['id']}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
+                  <a href="schedule/edit/{{$sch['id']}}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                   <form action="{{ url('general/event/'.$event_id.'/schedule/delete') }}" method="post" class="d-inline form-del">
                     @csrf
                     <input type="hidden" name="id" value="{{$sch['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm btn-action" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>

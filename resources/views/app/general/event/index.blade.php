@@ -50,14 +50,14 @@
                 <td>{{ $event['location'] }}</td>
                 <td>{{ $event['event_start'] }}</td>
                 <td class="text-center">
-                  <a href="event/detail/{{$event['id']}}" class="btn btn-info btn-sm btn-action"><i class="fas fa-info"></i></a>
-                  <a href="event/edit/{{$event['id']}}" class="btn btn-warning btn-sm btn-action"><i class="fas fa-pencil-alt"></i></a>
-                  <a href="event/{{$event['id']}}/schedule" class="btn btn-dark btn-sm btn-action"><i class="fas fa-clipboard-list"></i></a>
-                  <a href="event/{{$event['id']}}/gallery" class="btn btn-success btn-sm btn-action"><i class="fas fa-images"></i></a>
+                  <a href="event/detail/{{$event['id']}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
+                  <a href="event/edit/{{$event['id']}}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                  <a href="event/{{$event['id']}}/schedule" class="btn btn-dark btn-sm"><i class="fas fa-clipboard-list"></i></a>
+                  <a href="event/{{$event['id']}}/gallery" class="btn btn-success btn-sm"><i class="fas fa-images"></i></a>
                   <form action="{{ url('general/event/delete') }}" method="post" class="d-inline form-del">
                     @csrf
                     <input type="hidden" name="id" value="{{$event['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm btn-action" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>

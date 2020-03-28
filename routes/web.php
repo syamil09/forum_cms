@@ -86,6 +86,16 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 			Route::post('/delete','general\ScheduleController@delete');
 			Route::get('/detail/{id}','general\ScheduleController@show');
 		});
+
+		Route::group(['prefix' => '{event_id}/gallery'], function () {
+			Route::get('/','general\GalleryController@index');
+			// Route::get('/create','general\GalleryController@create');
+			Route::post('/store','general\GalleryController@store');
+			// Route::get('/edit/{id}','general\GalleryController@edit');
+			// Route::post('/update/{id}','general\GalleryController@update');
+			Route::post('/delete','general\GalleryController@delete');
+			Route::get('/detail/{id}','general\GalleryController@show');
+		});
 	});
 
 	// ------------------ Walktrough -------------------
