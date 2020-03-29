@@ -19,7 +19,9 @@
         <a href="{{ url('general/article/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Article</a>
       </div>
       <div class="card-body">
-        <!-- <div class="alert alert-success">Yess</div> -->
+        @if(session('failed'))
+        <div class="alert alert-success">{{ session('failed') }}</div>
+        @endif
         <div class="table-responsive">
           @if(session('success'))
           <div class="alert alert-success">{{session('success')}}</div>
