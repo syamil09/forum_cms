@@ -3,11 +3,11 @@
 @section('title','Forum | Events')
 
 @section('section_header')
-<h1>Events</h1>
+<h1>WalkThrough</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">WalkTehrough</div>
+  <div class="breadcrumb-item">WalkThrough</div>
 </div>
 @endsection
 
@@ -17,6 +17,12 @@
     <div class="card">
       <div class="card-body">
         <div class="table-responsive">
+          @if(session('success'))
+          <div class="alert alert-success">{{session('success')}}</div>
+          @endif
+          @if(session('failed'))
+          <div class="alert alert-danger">{{session('failed')}}</div>
+          @endif
           <table class="table table-striped" id="table-1">
             <thead>
               <tr>
@@ -40,12 +46,12 @@
                 </td>
                 <td>{{ $wt['title'] }}</td>
                 <td class="text-center">
-                  <a href="event/detail/{{$wt['id']}}" class="btn btn-info btn-sm btn-action"><i class="fas fa-info"></i></a>
-                  <a href="event/edit/{{$wt['id']}}" class="btn btn-warning btn-sm btn-action"><i class="fas fa-pencil-alt"></i></a>
-                  <form action="{{ url('general/event/delete') }}" method="post" class="d-inline form-del">
+                  <a href="walkthrough/detail/{{$wt['id']}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
+                  <a href="walkthrough/edit/{{$wt['id']}}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                  <form action="{{ url('general/walkthrough/delete') }}" method="post" class="d-inline form-del">
                     @csrf
                     <input type="hidden" name="id" value="{{$wt['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm btn-action" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>
@@ -57,7 +63,7 @@
       </div>
       <div class="card-header">
         <!-- <h4>Basic DataTables</h4> -->
-        <a href="{{ url('general/event/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Walktrough</a>
+        <a href="{{ url('general/walkthrough/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Walktrough</a>
       </div>
     </div>
   </div>
