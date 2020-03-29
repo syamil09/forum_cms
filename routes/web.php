@@ -76,6 +76,37 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::post('/update/{id}','general\EventController@update');
 		Route::post('/delete','general\EventController@delete');
 		Route::get('/detail/{id}','general\EventController@show');
+
+		Route::group(['prefix' => '{event_id}/schedule'], function () {
+			Route::get('/','general\ScheduleController@index');
+			Route::get('/create','general\ScheduleController@create');
+			Route::post('/store','general\ScheduleController@store');
+			Route::get('/edit/{id}','general\ScheduleController@edit');
+			Route::post('/update/{id}','general\ScheduleController@update');
+			Route::post('/delete','general\ScheduleController@delete');
+			Route::get('/detail/{id}','general\ScheduleController@show');
+		});
+
+		Route::group(['prefix' => '{event_id}/gallery'], function () {
+			Route::get('/','general\GalleryController@index');
+			// Route::get('/create','general\GalleryController@create');
+			Route::post('/store','general\GalleryController@store');
+			// Route::get('/edit/{id}','general\GalleryController@edit');
+			// Route::post('/update/{id}','general\GalleryController@update');
+			Route::post('/delete','general\GalleryController@delete');
+			Route::get('/detail/{id}','general\GalleryController@show');
+		});
+	});
+
+	// ------------------ Walktrough -------------------
+	Route::group(['prefix' => 'walkthrough'],function () {
+		Route::get('/','general\WalkthroughController@index');
+		Route::get('/create','general\WalkthroughController@create');
+		Route::post('/store','general\WalkthroughController@store');
+		Route::get('/edit/{id}','general\WalkthroughController@edit');
+		Route::post('/update/{id}','general\WalkthroughController@update');
+		Route::post('/delete','general\WalkthroughController@delete');
+		Route::get('/detail/{id}','general\WalkthroughController@show');
 	});
 
 	// ------------------ doa -------------------

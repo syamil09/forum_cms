@@ -18,7 +18,8 @@ class ArticleController extends Controller
 
       $response = $this->get(env('GATEWAY_URL'). 'article', $token);
       $articles = ($response['success'])?$response['data']:null;
-      return view('app.general.article.index',compact('articles'));
+      $message = $response['message'];
+      return view('app.general.article.index',compact('articles', 'message'));
     }
 
     public function create()
@@ -38,11 +39,11 @@ class ArticleController extends Controller
             $json['contents'] = $value;
             $tags[] = $json;
         }
-        
+
         $img['name'] = 'image';
-        $img['contents'] = fopen($request->image,'r');
+        $img['contents'] = fopen($request['image'],'r');
         $img['filename'] = 'photo.png';
-       
+
         $response = $this->postMulti(env('GATEWAY_URL').'article/add',$data,$token,$img,$tags);
         // return $response;
         if($response['success'])
@@ -87,7 +88,7 @@ class ArticleController extends Controller
             $json['contents'] = $value;
             $tags[] = $json;
         }
-        
+
         $img['name'] = 'image';
         $img['contents'] = null;
         if($request->image != null) {

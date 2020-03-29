@@ -3,11 +3,11 @@
 @section('title','Forum | Article')
 
 @section('section_header')
-<h1>Create Post</h1>
+<h1>Create Event</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">EditArticle</div>
+  <div class="breadcrumb-item">CreateEvent</div>
 </div>
 @endsection
 
@@ -16,46 +16,56 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4>Edit Your Post</h4>
+        <h4>Make Event</h4>
       </div>
       <div class="card-body">
-        <form method="POST" action="{{  url('general/article/update/'.$edit['id']) }}" class="needs-validation" novalidate="">
-        @csrf
+        <form class="" action="{{url('general/event/store')}}" method="post" enctype="multipart/form-data">
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" value="{{$edit['title']}}" name="title">
+              <input type="text" class="form-control" name="title" value="{{old('title')}}">
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event Start</label>
             <div class="col-sm-12 col-md-7">
-              <select class="form-control selectric" name="category">
-                  <option value="review" @if($edit['category'] == 'review') selected @endif>Review</option>
-                  <option value="tips & trick" @if($edit['category'] == 'tips & trick') selected @endif>Tips & Trick</option>
-              </select>
+              <input type="date" class="form-control" name="event_start" value="{{old('event_start')}}">
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event End</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="date" class="form-control" name="event_end" value="{{old('event_end')}}">
             </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple" name="content">{{$edit['content']}}</textarea>
+              <textarea class="summernote-simple" name="description">{{old('description')}}</textarea>
             </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview" style="background-image: url({{$edit['image']}});">
+              <div id="image-preview" class="image-preview">
                 <label for="image-upload" id="image-label">Choose File</label>
                 <input type="file" name="image" id="image-upload" />
               </div>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Location</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control inputtags" value="" name="tag">
+              <input type="text" class="form-control" name="location" value="{{old('location')}}">
             </div>
+          </div>
+          <div class="form-group row mb-4">
+              <div class="col-sm-12 col-md-4 offset-2">
+                <input type="text" name="latitude" class="form-control" placeholder="Latitude..." value="{{old('latitude')}}">
+              </div>
+              <div class="col-sm-12 col-md-4">
+                <input type="text" name="longitude" class="form-control" placeholder="Longitude..." value="{{old('longitude')}}">
+              </div>
           </div>
           <!-- <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
@@ -70,11 +80,11 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">
-              <a href="{{url('general/article')}}" class="btn btn-secondary">Cancel</a>
-              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <a href="{{url('general/event')}}" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">Create Event</button>
             </div>
           </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>

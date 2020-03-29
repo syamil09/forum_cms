@@ -30,7 +30,7 @@ class LoginController extends Controller
             $req->session()->put('token',$response['token']);
             $req->session()->put('data',$dataSession);
             $req->session()->put('menu','dashboard');
-   
+
             // $priv = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$response['data']['user_group_id'],$response['token']);
             // $menuGroup = $this->get(env('GATEWAY_URL').'menu-group',$response['token']);
             // $menu = $this->get(env('GATEWAY_URL').'menu',$response['token']);
