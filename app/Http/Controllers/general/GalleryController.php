@@ -31,10 +31,16 @@ class GalleryController extends Controller
     public function store(Request $request, $event_id)
     {
         $token = $request->session()->get('token');
-        $data = $request->all();
+        $data = $request->except('image');
         $data['event_id'] = $event_id;
 
-        $response = $this->post(env('GATEWAY_URL').'event/gallery/add',$data,$token);
+        foreach ($request['image'] as $i => $value) {
+            $img[$i]['name'] = 'photo[]';
+            $img[$i]['contents'] = fopen($value, 'r');
+            $img[$i]['filename'] = 'photo.png';
+        }
+        // dd($img);
+        $response = $this->postMulti(env('GATEWAY_URL').'event/gallery/add',$data,$token,null,$img);
         // return $response;
         if($response['success'])
         {
@@ -81,11 +87,11 @@ class GalleryController extends Controller
         }
     }
 
-    public function delete(Request $req)
+    public function delete(Request $req,$event_id)
     {
         $token = $req->session()->get('token');
-        $response = $this->post(env('GATEWAY_URL').'event/ gallery/delete',$req->all(),$token);
-
+        $response = $this->post(env('GATEWAY_URL').'event/gallery/delete',$req->all(),$token);
+  
         if($response['success'])
         {
             // LogActivity::addToLog('Deleted Data City');

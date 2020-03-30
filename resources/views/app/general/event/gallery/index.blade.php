@@ -37,7 +37,12 @@
               @else
               @foreach ($galleries as $g)
               <div class=" card col-md-3">
-                <img src="" alt="event photo" class="card-img-top">
+                <img src="{{ $g['photo'] }}" alt="event photo" class="card-img-top rounded img-fluid">
+                <form action="{{ url('general/event/'.$event_id.'/gallery/delete') }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="id" value="{{ $g['id'] }}">
+                  <button class="btn btn-sm btn-danger mt-1" type="submit">Delete</button>
+                </form>
               </div>
               @endforeach
               @endif
@@ -57,7 +62,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Add Photo</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Add Photos</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -70,17 +75,53 @@
             <div class="col-md-9 offset-2">
               <div id="image-preview" class="image-preview">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload" />
+                <input type="file" name="image[]" id="image-upload" multiple />
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
         <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button>
       </div>
       </form>
+  <!--     <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <form method="POST" action="{{url('general/event/'.$event_id.'/gallery/store')}}" class="dropzone" id="mydropzone" enctype="multipart/form-data">
+                @csrf
+                <div class="fallback">
+                  <input name="image[]" type="file" multiple />
+                  
+                </div>
+                
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="uploadfiles" class="btn btn-primary"><i class="fas fa-plus"></i>&nbspAdd to Gallery</button>
+            </div>
+            </form>
+          </div>
+        </div> -->
+      </div>
     </div>
   </div>
 </div>
+@section('script_page')
+<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+<!-- <script src="{{ asset('stisla/assets/js/page/components-multiple-upload.js') }}"></script> -->
+<script>
+  Dropzone.autoDiscover = false;
+
+var myDropzone = new Dropzone(".dropzone", { 
+   autoProcessQueue: false,
+   parallelUploads: 10 ,// Number of files process at a time (default 2)
+   url:"{{ url('general/event/'.$event_id.'/gallery/store') }}",
+});
+
+$('#uploadfiles').click(function(){
+   myDropzone.processQueue();
+});
+</script>
+@endsection

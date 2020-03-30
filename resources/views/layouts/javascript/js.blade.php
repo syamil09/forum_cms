@@ -27,6 +27,7 @@
   <script src="{{ asset('stisla/node_modules/summernote/dist/summernote-bs4.js') }}"></script>
   <script src="{{ asset('stisla/node_modules/selectric/public/jquery.selectric.min.js') }}"></script>
   <script src="{{ asset('stisla/node_modules/jquery_upload_preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
+  <script src="{{ asset('stisla/node_modules/dropzone/dist/min/dropzone.min.js') }}"></script>
 
   <!-- Template JS File -->
   <script src="{{ asset('stisla/assets/js/scripts.js') }}"></script>

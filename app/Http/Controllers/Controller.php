@@ -42,12 +42,16 @@ class Controller extends BaseController
         
         if($arr != '') {
             foreach ($arr as $key => $value) {
-                $json['name'] = $value['name'].'[]';
-                $json['contents'] = $value['contents'];
-                $data[] = $json;
+                // $json['name'] = $value['name'].'[]';
+                // $json['contents'] = $value['contents'];
+                $data[] = $value;
             }
         }
-        $data[] = $image;
+
+        if($image != '') {
+            $data[] = $image;
+        }
+        
         // dd($data);
         $client = new Client();
         $response = $client->post($url,[

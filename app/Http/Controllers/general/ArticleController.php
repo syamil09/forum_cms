@@ -40,7 +40,7 @@ class ArticleController extends Controller
             $tags[] = $json;
         }
 
-        $img['name'] = 'image';
+        $img['name'] = 'image[]';
         $img['contents'] = fopen($request['image'],'r');
         $img['filename'] = 'photo.png';
 

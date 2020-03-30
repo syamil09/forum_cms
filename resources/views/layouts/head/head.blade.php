@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="{{ asset('stisla/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('stisla/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('stisla/node_modules/summernote/dist/summernote-bs4.css') }}">
+<link rel="stylesheet" href="{{ asset('stisla/node_modules/dropzone/dist/min/dropzone.min.css') }}">
 <!-- <link rel="stylesheet" href="{{ asset('stisla/node_modules/selectric/public/selectric.css') }}"> -->
 
 
