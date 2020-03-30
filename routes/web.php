@@ -109,15 +109,15 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','general\WalkthroughController@show');
 	});
 
-	// ------------------ doa -------------------
-	Route::group(['prefix' => 'news'],function () {
-		Route::get('/','general\NewsController@index');
-		Route::get('/create','general\NewsController@create');
-		Route::post('/store','general\NewsController@store');
-		Route::get('/edit/{id}','general\NewsController@edit');
-		Route::post('/update/{id}','general\NewsController@update');
-		Route::post('/delete','general\NewsController@delete');
-		Route::get('/detail/{id}','general\NewsController@show');
+	// ------------------ Company -------------------
+	Route::group(['prefix' => 'company'],function () {
+		Route::get('/','company/CompanyController@index');
+		Route::get('/create','company/CompanyController@create');
+		Route::post('/store','company/CompanyController@store');
+		Route::get('/edit/{id}','company/CompanyController@edit');
+		Route::post('/update/{id}','company/CompanyController@update');
+		Route::post('/delete','company/CompanyController@delete');
+		Route::get('/detail/{id}','company/CompanyController@show');
 	});
 
 	// ------------------ home content -------------------
