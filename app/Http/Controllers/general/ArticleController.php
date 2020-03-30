@@ -69,7 +69,7 @@ class ArticleController extends Controller
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'article/edit/'.$id,$token);
         $edit       = ($response['success'])?$response['data']:null;
-        if($edit != null && implode(',', $edit['tags']) ) {
+        if($edit != null && $edit['tags'] != null) {
             $edit['tags'] = implode(',', $edit['tags']);
         }
         // dd($edit);
@@ -84,7 +84,7 @@ class ArticleController extends Controller
 
         $request['tags'] = explode(',',$request->tags);
         foreach ($request['tags'] as $key => $value) {
-            $json['name'] = 'tags';
+            $json['name'] = 'tags[]';
             $json['contents'] = $value;
             $tags[] = $json;
         }
@@ -97,6 +97,7 @@ class ArticleController extends Controller
         }
 
         $response = $this->postMulti(env('GATEWAY_URL').'article/update/'.$id,$data,$token,$img,$tags);
+   
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Data City');
