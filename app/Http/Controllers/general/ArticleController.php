@@ -93,7 +93,7 @@ class ArticleController extends Controller
         }
 
         $img['name'] = 'image';
-        $img['contents'] = null;
+        $img['contents'] = '';
         if($request->image != null) {
             $img['contents'] = fopen($request->image,'r');
             $img['filename'] = 'photo.png';

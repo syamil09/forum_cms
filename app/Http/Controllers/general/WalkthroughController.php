@@ -34,11 +34,17 @@ class WalkthroughController extends Controller
     public function store(Request $request)
     {
       $token = $request->session()->get('token');
-      $data = $request->all();
-      // dd($data['image']);
+      $data = $request->except('image');
+      $img['name'] = 'image';
+      $img['contents'] = '';
 
-      $response = $this->post(env('GATEWAY_URL').'walk_through/add',$data,$token);
-      // return $response;
+      if($request->has('image')) {
+        $img['contents'] = fopen($request['image'],'r');
+        $img['filename'] = 'photo.png';
+      }
+
+      $response = $this->postMulti(env('GATEWAY_URL').'walk_through/add',$data,$token,$img,'');
+      return $response;
       if($response['success'])
       {
           // LogActivity::addToLog('Added Data City');
@@ -66,19 +72,27 @@ class WalkthroughController extends Controller
         return view('app.general.walkthrough.edit',compact('edit'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         $token = session()->get('token');
-        $data = $request->all();
+        $data = $request->except('image');
 
-        $response = $this->post(env('GATEWAY_URL').'walk_through/update/'.$id,$data,$token);
-        // return $response;
+        $img['name'] = 'image';
+        $img['contents'] = '';
+        // dd($request->all());
+        if($request->image != null) {
+          $img['name'] = 'image';
+          $img['contents'] = fopen($request->image,'r');
+          $img['filename'] = 'photo.png';
+        }
+        $response = $this->postMulti(env('GATEWAY_URL').'walk_through/update/'.$id,$data,$token,$img);
+
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Contact');
             return redirect('general/walkthrough')->with('success','Data Saved');
         }else {
-            return redirect('general/walkthrough')->with('failed','Data Doesnt Saved. '. $response['message']);
+            return redirect('general/walkthrough')->with('failed','Data Doesnt Saved.');
         }
     }
 

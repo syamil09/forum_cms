@@ -109,17 +109,6 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','general\WalkthroughController@show');
 	});
 
-	// ------------------ Company -------------------
-	Route::group(['prefix' => 'company'],function () {
-		Route::get('/','company/CompanyController@index');
-		Route::get('/create','company/CompanyController@create');
-		Route::post('/store','company/CompanyController@store');
-		Route::get('/edit/{id}','company/CompanyController@edit');
-		Route::post('/update/{id}','company/CompanyController@update');
-		Route::post('/delete','company/CompanyController@delete');
-		Route::get('/detail/{id}','company/CompanyController@show');
-	});
-
 	// ------------------ home content -------------------
 	Route::group(['prefix' => 'home-content'],function () {
 		Route::get('/','general\HomeContentController@index');
@@ -136,6 +125,22 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 	Route::group(['prefix' => 'contact'],function () {
 		Route::get('/','general\ContactController@index');
 		Route::post('/update','general\ContactController@update');
+	});
+
+});
+
+// ------------------ Company -------------------
+Route::group(['prefix' => 'company'], function () {
+
+	// ------------------ community -------------------
+	Route::group(['prefix' => 'community'], function () {
+		Route::get('/','company\CommunityController@index');
+		Route::get('/create','company\CommunityController@create');
+		Route::post('/store','company\CommunityController@store');
+		Route::get('/edit/{id}','company\CommunityController@edit');
+		Route::post('/update/{id}','company\CommunityController@update');
+		Route::post('/delete','company\CommunityController@delete');
+		Route::get('/detail/{id}','company\CommunityController@show');
 	});
 
 });
