@@ -32,25 +32,28 @@ class ArticleController extends Controller
     {
         $token = $request->session()->get('token');
         $data = $request->except('tags','image','_token');
+        $img['name'] = 'image';
+        $img['contents'] = '';
 
         $request['tags'] = explode(',',$request->tags);
         foreach ($request['tags'] as $key => $value) {
-            $json['name'] = 'tags';
+            $json['name'] = 'tags[]';
             $json['contents'] = $value;
             $tags[] = $json;
         }
 
-        $img['name'] = 'image[]';
-        $img['contents'] = fopen($request['image'],'r');
-        $img['filename'] = 'photo.png';
-
+        if($request->has('image')) {
+            $img['contents'] = fopen($request['image'],'r');
+            $img['filename'] = 'photo.png';
+        }
+        
         $response = $this->postMulti(env('GATEWAY_URL').'article/add',$data,$token,$img,$tags);
-        // return $response;
+        // dd($response);
         if($response['success'])
         {
             return redirect('general/article')->with('success','Data created');
         }else {
-            return redirect('general/city')->with('failed','Data Doesnt Created ,'.$response['message']);
+            return redirect('general/article')->with('failed','Data Doesnt Created ,'.$response['message']);
         }
 
     }
