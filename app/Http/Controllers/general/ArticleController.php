@@ -50,7 +50,7 @@ class ArticleController extends Controller
         {
             return redirect('general/article')->with('success','Data created');
         }else {
-            return redirect('general/city')->with('failed','Data Doesnt Created ,'.$response['message']);
+            return redirect('general/article')->with('failed','Data Doesnt Created ,'.$response['message']);
         }
 
     }
@@ -97,7 +97,7 @@ class ArticleController extends Controller
         }
 
         $response = $this->postMulti(env('GATEWAY_URL').'article/update/'.$id,$data,$token,$img,$tags);
-   
+
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Data City');

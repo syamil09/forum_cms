@@ -19,7 +19,7 @@
         <h4>Write Your Post</h4>
       </div>
       <div class="card-body">
-        <form method="POST" action="{{  url('general/article/store') }}" class="needs-validation" novalidate="">
+        <form method="POST" action="{{  url('general/article/store') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
           @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>

@@ -35,6 +35,7 @@ class WalkthroughController extends Controller
     {
       $token = $request->session()->get('token');
       $data = $request->all();
+      // dd($data['image']);
 
       $response = $this->post(env('GATEWAY_URL').'walk_through/add',$data,$token);
       // return $response;
@@ -65,21 +66,19 @@ class WalkthroughController extends Controller
         return view('app.general.walkthrough.edit',compact('edit'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $token = session()->get('token');
-        $data = [
-            'title' => $request['title'],
-            'content' => $request['content'],
-        ];
-        $response = $this->post(env('GATEWAY_URL').'contact/update/'.$id,$data,$token);
+        $data = $request->all();
+
+        $response = $this->post(env('GATEWAY_URL').'walk_through/update/'.$id,$data,$token);
         // return $response;
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Contact');
-            return redirect('general/contact')->with('success','Data Saved');
+            return redirect('general/walkthrough')->with('success','Data Saved');
         }else {
-            return redirect('general/contact')->with('failed','Data Doesnt Saved. '.$response['message']);
+            return redirect('general/walkthrough')->with('failed','Data Doesnt Saved. '. $response['message']);
         }
     }
 
