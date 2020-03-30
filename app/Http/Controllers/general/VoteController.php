@@ -35,7 +35,6 @@ class VoteController extends Controller
     {
         $token = Session::get('token');
         $votes = $this->get(env('GATEWAY_URL') . 'vote', $token);
-        return $votes;
         $votes = $this->replaceExistData($votes);
 
         return view('app/general/vote/index', compact('votes'));
