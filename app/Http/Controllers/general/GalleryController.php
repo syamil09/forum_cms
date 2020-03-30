@@ -16,7 +16,7 @@ class GalleryController extends Controller
     {
       $token = $req->session()->get('token');
 
-      $response = $this->get(env('GATEWAY_URL'). 'event/gallery', $token);
+      $response = $this->get(env('GATEWAY_URL'). 'event/gallery/'.$event_id, $token);
       $galleries = ($response['success'])?$response['data']:null;
       $message = $response['message'];
       return view('app.general.event.gallery.index',compact('galleries', 'message', 'event_id'));
@@ -95,9 +95,9 @@ class GalleryController extends Controller
         if($response['success'])
         {
             // LogActivity::addToLog('Deleted Data City');
-            return redirect('general/event'.$event_id.'/gallery')->with('success','Gallery Event Deleted');
+            return redirect('general/event/'.$event_id.'/gallery')->with('success','Photo in Gallery Event Deleted');
         }else {
-            return redirect('general/event'.$event_id.'/gallery')->with('failed','Gallery Event Doesnt Deleted');
+            return redirect('general/event/'.$event_id.'/gallery')->with('failed','Photo in Gallery Event Doesnt Deleted');
         }
 
     }

@@ -38,10 +38,10 @@
               @foreach ($galleries as $g)
               <div class=" card col-md-3">
                 <img src="{{ $g['photo'] }}" alt="event photo" class="card-img-top rounded img-fluid">
-                <form action="{{ url('general/event/'.$event_id.'/gallery/delete') }}" method="POST">
+                <form action="{{ url('general/event/'.$event_id.'/gallery/delete') }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   <input type="hidden" name="id" value="{{ $g['id'] }}">
-                  <button class="btn btn-sm btn-danger mt-1" type="submit">Delete</button>
+                  <button class="btn btn-sm btn-danger mt-1" type="submit" onclick="return confirm('delete this data?');">Delete</button>
                 </form>
               </div>
               @endforeach
