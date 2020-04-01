@@ -16,7 +16,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('vote.create') }}" class="btn btn-success">create new article</a>
+                    <a href="{{ route('vote.create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Voting</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -61,7 +61,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="5">Empty</td>
+                                    <td class="text-center" colspan="6">Empty</td>
                                 </tr>
                             @endforelse
 
