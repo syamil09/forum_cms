@@ -109,8 +109,6 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','general\WalkthroughController@show');
 	});
 
-<<<<<<< HEAD
-=======
     // ------------------ Company -------------------
     Route::group(['prefix' => 'company'],function () {
         Route::get('/','company/CompanyController@index');
@@ -127,7 +125,6 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
         'index', 'create', 'store', 'destroy', //'show', 'edit', 'update',
     ]);
 
->>>>>>> 34328c6afbbdfc921d932328d02a4b58d8556926
 	// ------------------ home content -------------------
 	Route::group(['prefix' => 'home-content'],function () {
 		Route::get('/','general\HomeContentController@index');
