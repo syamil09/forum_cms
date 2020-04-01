@@ -145,6 +145,28 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 
 });
 
+// ------------------ Company -------------------
+Route::group(['prefix' => 'company'], function () {
+
+	// ------------------ community -------------------
+	Route::group(['prefix' => 'community'], function () {
+		Route::get('/','company\CommunityController@index');
+		Route::get('/create','company\CommunityController@create');
+		Route::post('/store','company\CommunityController@store');
+		Route::get('/edit/{id}','company\CommunityController@edit');
+		Route::post('/update/{id}','company\CommunityController@update');
+		Route::post('/delete','company\CommunityController@delete');
+		Route::get('/detail/{id}','company\CommunityController@show');
+
+		Route::group(['prefix' => '{{company_id}}/about'], function () {
+			Route::get('/', 'company\AboutController@edit');
+			Route::get('/add', 'company\AboutController@store');
+			Route::get('/update/{id}', 'company\AboutController@update');
+		});
+	});
+
+});
+
 
 
 

@@ -33,8 +33,8 @@
         <li class="nav-item dropdown">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Companies</span></a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="components-article.html">Company</a></li>
-            <li><a class="nav-link beep beep-sidebar" href="components-avatar.html">Shop</a></li>
+            <li><a class="nav-link" href="{{url('company/community')}}">Community</a></li>
+            <li><a class="nav-link" href="{{url('company/shop')}}">Shop</a></li>
           </ul>
         </li>
       </ul>
