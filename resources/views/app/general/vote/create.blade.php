@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Vote')
 
 @section('section_header')
     <h1>Create Voting</h1>
@@ -53,13 +53,13 @@
                             </div>
 
                         </div>
-                        <div class="form-group row mb-4">
-                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                            <div class="col-sm-12 col-md-7">
-                                <span class="text-danger">Note: Please make sure before click button create vote, you naver can't edit if voting
-                                alerdy started</span>
-                            </div>
-                        </div>
+                        {{--<div class="form-group row mb-4">--}}
+                            {{--<label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>--}}
+                            {{--<div class="col-sm-12 col-md-7">--}}
+                                {{--<span class="text-danger">Note: Please make sure before click button create vote, you naver can't edit if voting--}}
+                                {{--alerdy started</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
 

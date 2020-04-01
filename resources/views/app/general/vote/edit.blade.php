@@ -1,84 +1,131 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Vote')
 
 @section('section_header')
-<h1>Create Post</h1>
-<div class="section-header-breadcrumb">
-  <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">EditArticle</div>
-</div>
+    <h1>Edit Voting</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
+        <div class="breadcrumb-item"><a href="#">General</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('vote.index') }}">Vote</a></div>
+        <div class="breadcrumb-item">Edit</div>
+    </div>
 @endsection
 
 @section('wrap_content')
-<div class="row">
-  <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <h4>Edit Your Post</h4>
-        </div>
-        <div class="card-body">
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" value="{{$edit['title']}}">
-            </div>
-          </div>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-            <div class="col-sm-12 col-md-7">
-              <select class="form-control selectric">
-                  <option value="review" @if($edit['category'] == 'review') selected @endif>Review</option>
-                  <option value="tips & trick" @if($edit['category'] == 'tips & trick') selected @endif>Tips & Trick</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-            <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple">{{$edit['content']}}</textarea>
-            </div>
-          </div>
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
-                      <div class="col-sm-12 col-md-7">
-                        <div id="image-preview" class="image-preview">
-                          <label for="image-upload" id="image-label">Choose File</label>
-                          <input type="file" name="image" id="image-upload" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
-                      <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control inputtags" value="">
-                      </div>
-                    </div>
-                    <!-- <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-                      <div class="col-sm-12 col-md-7">
-                        <select class="form-control selectric">
-                          <option>Publish</option>
-                          <option>Draft</option>
-                          <option>Pending</option>
-                        </select>
-                      </div>
-                    </div> -->
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                      <div class="col-sm-12 col-md-7">
-                        <a href="/general/article" class="btn btn-secondary">Cancel</a>
-                        <button class="btn btn-primary">Save Changes</button>
-                      </div>
-                    </div>
-                  </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Set up voting</h4>
                 </div>
-              </div>
+                <div class="card-body">
+                    <form method="POST" action="{{  route('vote.update', $vote['id']) }}">
+                        @csrf
+                        <input type="hidden" name="_method" value="PATCH">
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                            <div class="col-sm-12 col-md-7">
+                                <input name="title" type="text" class="form-control" value="{{ $vote['title'] }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Start Voting</label>
+                            <div class="col-sm-12 col-md-7">
+                                <input name="start_vote" type="text" class="form-control DateTimeVoting" value="{{ $vote['start_vote'] }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">End Voting</label>
+                            <div class="col-sm-12 col-md-7">
+                                <input name="end_vote" type="text" class="form-control DateTimeVoting" value="{{ $vote['end_vote'] }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Candidate</label>
+                            <div class="col-sm-12 col-md-7">
+                                <select class="form-control select2" style="width: 100%" name="candidates[]" multiple="multiple" required>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user['id'] }}" data-image="{{ $user['photo'] }}" {{ $user['selected'] }}>{{ $user['name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        {{--<div class="form-group row mb-4">--}}
+                            {{--<label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>--}}
+                            {{--<div class="col-sm-12 col-md-7">--}}
+                                {{--<span class="text-danger">Note: Please make sure before click button create vote, you naver can't edit if voting--}}
+                                {{--alerdy started</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+
+                            <div class="text-md-left col-12 col-md-2 col-lg-2">
+                                <a class="btn btn-secondary" href="{{ route('vote.index') }}">Cancel</a>
+                                <button class="btn btn-primary">Update Vote</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
             </div>
+        </div>
+    </div>
 
 @endsection
 
 @section('script_page')
-<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+    <script>
+        $('.DateTimeVoting').daterangepicker({
+            locale: {format: 'DD-MM-YYYY HH:mm'},
+            singleDatePicker: true,
+            timePicker: true,
+            timePicker24Hour: true,
+        });
+
+        $(".select2").select2({
+            templateResult: formatStateResult,
+            templateSelection: formatState
+        }).on("select2:select", function (evt) {
+            var element = evt.params.data.element;
+            var $element = $(element);
+
+            $element.detach();
+            $(this).append($element);
+            $(this).trigger("change");
+        });
+
+        function formatStateResult(opt) {
+            if (!opt.id) {
+                return opt.text;
+            }
+            var DataImage = $(opt.element).data('image');
+            if (!DataImage) {
+                return opt.text;
+            } else {
+                var $opt = $(
+                    '<span><img class="rounded-circle" src="' + DataImage + '" alt="avatar" width="32px"> ' + opt.text + '</span>'
+                );
+                return $opt;
+            }
+        }
+
+        function formatState(opt) {
+            if (!opt.id) {
+                return opt.text;
+            }
+            var DataImage = $(opt.element).data('image');
+            if (!DataImage) {
+                return opt.text;
+            } else {
+                var $opt = $(
+                    '<span><img class="mr-2 rounded-circle" src="' + DataImage + '" alt="avatar" width="16px"> ' + opt.text + '</span>'
+                );
+                return $opt;
+            }
+        }
+
+
+    </script>
 @endsection
