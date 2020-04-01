@@ -107,7 +107,29 @@ class VoteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $token = Session::get('token');
+        $company = session()->get('data')['company_id'];
+
+        $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
+        $vote = $this->replaceExistData($vote);
+
+        $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
+        $users = $this->replaceExistData($users);
+
+        $selected = collect($users)->whereIn('id', array_column($vote['candidates'], 'user_id'))->map(function($data) {
+            $data['selected'] = 'selected';
+            return $data;
+        })->toArray();
+
+        $users = collect($users)->whereNotIn('id', array_column($vote['candidates'], 'user_id'))->map(function($data) {
+            $data['selected'] = '';
+            return $data;
+        })->toArray();
+
+        $users = array_merge($users, $selected);
+
+        return view('app\general\vote\edit', compact('vote', 'users'));
+
     }
 
     /**
@@ -119,7 +141,14 @@ class VoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except(['_token','_method']);
+        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($data['start_vote']));
+        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($data['end_vote']));
+
+        $token = Session::get('token');
+        $vote = $this->post(env('GATEWAY_URL') . 'vote/update/' . $id, $data, $token);
+
+        return redirect(route('vote.index'));
     }
 
     /**

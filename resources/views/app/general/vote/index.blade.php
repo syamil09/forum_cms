@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Vote')
 
 @section('section_header')
     <h1>Votes</h1>
@@ -52,7 +52,7 @@
                                             {{--<button class="btn btn-info"><i class="fa fa-eye"></i></button>--}}
                                         {{--</div>--}}
                                         <div class="btn-group">
-                                            <button class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                            <a class="btn btn-warning" href="{{route('vote.edit', $vote['id'])}}"><i class="fa fa-edit"></i></a>
                                         </div>
                                         <div class="btn-group">
                                             <button onclick="delConfirm('{{ route('vote.destroy', $vote['id']) }}')" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
