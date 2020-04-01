@@ -85,7 +85,7 @@
         <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button>
       </div>
       </form>
-  <!--     <div class="row">
+      <!-- <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-body">
@@ -93,18 +93,18 @@
                 @csrf
                 <div class="fallback">
                   <input name="image[]" type="file" multiple />
-                  
+
                 </div>
-                
-              
+
+
             </div>
             <div class="modal-footer">
               <button type="button" id="uploadfiles" class="btn btn-primary"><i class="fas fa-plus"></i>&nbspAdd to Gallery</button>
             </div>
             </form>
           </div>
-        </div> -->
-      </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -114,7 +114,7 @@
 <script>
   Dropzone.autoDiscover = false;
 
-var myDropzone = new Dropzone(".dropzone", { 
+var myDropzone = new Dropzone(".dropzone", {
    autoProcessQueue: false,
    parallelUploads: 10 ,// Number of files process at a time (default 2)
    url:"{{ url('general/event/'.$event_id.'/gallery/store') }}",

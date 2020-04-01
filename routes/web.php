@@ -141,6 +141,12 @@ Route::group(['prefix' => 'company'], function () {
 		Route::post('/update/{id}','company\CommunityController@update');
 		Route::post('/delete','company\CommunityController@delete');
 		Route::get('/detail/{id}','company\CommunityController@show');
+
+		Route::group(['prefix' => '{{company_id}}/about'], function () {
+			Route::get('/', 'company\AboutController@edit');
+			Route::get('/add', 'company\AboutController@store');
+			Route::get('/update/{id}', 'company\AboutController@update');
+		});
 	});
 
 });
