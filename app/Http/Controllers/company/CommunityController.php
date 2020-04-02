@@ -81,7 +81,7 @@ class CommunityController extends Controller
       $about = $this->get(env('GATEWAY_URL').'about/edit/'.$id,$token);
       $about = ($about['success'])?$about['data']:null;
 
-      return view('app.mesjid.list.detail', compact('detail','about'));
+      return view('app.company.community.detail', compact('detail','about'));
     }
 
     /**

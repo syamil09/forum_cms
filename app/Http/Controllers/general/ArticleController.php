@@ -43,10 +43,10 @@ class ArticleController extends Controller
         }
 
         if($request->has('image')) {
-            $img['contents'] = fopen($request['image'],'r');
+            $img['contents'] = fopen($request->image,'r');
             $img['filename'] = 'photo.png';
         }
-        
+
         $response = $this->postMulti(env('GATEWAY_URL').'article/add',$data,$token,$img,$tags);
         // dd($response);
         if($response['success'])

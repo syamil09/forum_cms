@@ -109,21 +109,10 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','general\WalkthroughController@show');
 	});
 
-    // ------------------ Company -------------------
-    Route::group(['prefix' => 'company'],function () {
-        Route::get('/','company/CompanyController@index');
-        Route::get('/create','company/CompanyController@create');
-        Route::post('/store','company/CompanyController@store');
-        Route::get('/edit/{id}','company/CompanyController@edit');
-        Route::post('/update/{id}','company/CompanyController@update');
-        Route::post('/delete','company/CompanyController@delete');
-        Route::get('/detail/{id}','company/CompanyController@show');
-    });
-
-    // ------------------ Vote -------------------
-    Route::resource('/vote', 'general\VoteController')->only([
-        'index', 'create', 'store', 'edit', 'update','destroy', //'show',
-    ]);
+  // ------------------ Vote -------------------
+  Route::resource('/vote', 'general\VoteController')->only([
+      'index', 'create', 'store', 'edit', 'update','destroy', //'show',
+  ]);
 
 	// ------------------ home content -------------------
 	Route::group(['prefix' => 'home-content'],function () {
@@ -163,6 +152,17 @@ Route::group(['prefix' => 'company'], function () {
 			Route::get('/add', 'company\AboutController@store');
 			Route::get('/update/{id}', 'company\AboutController@update');
 		});
+	});
+
+	// ------------------ shop -------------------
+	Route::group(['prefix' => 'shop'], function () {
+		Route::get('/','company\ShopController@index');
+		Route::get('/create','company\ShopController@create');
+		Route::post('/store','company\ShopController@store');
+		Route::get('/edit/{id}','company\ShopController@edit');
+		Route::post('/update/{id}','company\ShopController@update');
+		Route::post('/delete','company\ShopController@delete');
+		Route::get('/detail/{id}','company\ShopController@show');
 	});
 
 });
