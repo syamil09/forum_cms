@@ -133,7 +133,7 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 
     // ------------------ Vote -------------------
     Route::resource('/vote', 'general\VoteController')->only([
-        'index', 'create' //, 'store', 'show', 'edit', 'update', 'destroy'
+        'index', 'create', 'store', 'edit', 'update','destroy', //'show',
     ]);
 
 	// ------------------ home content -------------------
@@ -152,6 +152,28 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 	Route::group(['prefix' => 'contact'],function () {
 		Route::get('/','general\ContactController@index');
 		Route::post('/update','general\ContactController@update');
+	});
+
+});
+
+// ------------------ Company -------------------
+Route::group(['prefix' => 'company'], function () {
+
+	// ------------------ community -------------------
+	Route::group(['prefix' => 'community'], function () {
+		Route::get('/','company\CommunityController@index');
+		Route::get('/create','company\CommunityController@create');
+		Route::post('/store','company\CommunityController@store');
+		Route::get('/edit/{id}','company\CommunityController@edit');
+		Route::post('/update/{id}','company\CommunityController@update');
+		Route::post('/delete','company\CommunityController@delete');
+		Route::get('/detail/{id}','company\CommunityController@show');
+
+		Route::group(['prefix' => '{{company_id}}/about'], function () {
+			Route::get('/', 'company\AboutController@edit');
+			Route::get('/add', 'company\AboutController@store');
+			Route::get('/update/{id}', 'company\AboutController@update');
+		});
 	});
 
 });

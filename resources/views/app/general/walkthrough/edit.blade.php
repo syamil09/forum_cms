@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Walktrough')
 
 @section('section_header')
-<h1>Create Post</h1>
+<h1>Walktrough</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">EditEvent</div>
+  <div class="breadcrumb-item">EditWalkthrough</div>
 </div>
 @endsection
 
@@ -16,10 +16,10 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4>Edit Your Event</h4>
+        <h4>Edit Walktrough</h4>
       </div>
       <div class="card-body">
-        <form class="" action="{{ url('general/walkthrough/update').'/'.$edit['id'] }}" method="post" enctype="multipart/form-data">
+        <form class="" action="{{ url('general/walkthrough/update/'.$edit['id']) }}" method="post" enctype="multipart/form-data">
           @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
             <div class="col-sm-12 col-md-7">
               <div id="image-preview" class="image-preview" style="background-image: url({{ $edit['image'] }});">
                 <label for="image-upload" id="image-label">Choose File</label>
@@ -42,16 +42,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-            <div class="col-sm-12 col-md-7">
-              <select class="form-control selectric">
-                <option>Publish</option>
-                <option>Draft</option>
-                <option>Pending</option>
-              </select>
-            </div>
-          </div> -->
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">

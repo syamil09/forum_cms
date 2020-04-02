@@ -76,17 +76,17 @@ class WalkthroughController extends Controller
     {
         $token = session()->get('token');
         $data = $request->except('image');
-      
+
         $img['name'] = 'image';
         $img['contents'] = '';
         // dd($request->all());
         if($request->image != null) {
-          $img['name'] = 'image';
+          // $img['name'] = 'image';
           $img['contents'] = fopen($request->image,'r');
           $img['filename'] = 'photo.png';
         }
         $response = $this->postMulti(env('GATEWAY_URL').'walk_through/update/'.$id,$data,$token,$img);
-       
+// dd($response['message']);
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Contact');

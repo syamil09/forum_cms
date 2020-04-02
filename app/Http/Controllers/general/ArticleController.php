@@ -100,7 +100,7 @@ class ArticleController extends Controller
         }
 
         $response = $this->postMulti(env('GATEWAY_URL').'article/update/'.$id,$data,$token,$img,$tags);
-   
+
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Data City');
