@@ -84,10 +84,19 @@
 @endsection
 
 @section('script_page')
-    <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
     <script>
         $(".select2").select2({
             tags: true
         });
+        $.uploadPreview({
+            input_field: "#image-upload",   // Default: .image-upload
+            preview_box: "#image-preview",  // Default: .image-preview
+            label_field: "#image-label",    // Default: .image-label
+            label_default: "Choose File",   // Default: Choose File
+            label_selected: "Change File",  // Default: Change File
+            no_label: false,                // Default: false
+            success_callback: null          // Default: null
+        });
     </script>
+
 @endsection
