@@ -40,7 +40,7 @@
               <!-- <p class="card-text"></p> -->
             </div>
             <div class="card-footer text-center">
-              <a href="{{url('company/community/'.$com['id'].'/about')}}" class="btn btn-success btn-sm">About</a>
+              <a href="{{url('company/about/' .$com['id'])}}" class="btn btn-success btn-sm">About</a>
               <a href="{{url('company/community/detail/'.$com['id'])}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
               <a href="{{url('company/community/edit/'.$com['id'])}}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
               <form action="{{ url('company/community/delete') }}" method="post" class="d-inline form-del">

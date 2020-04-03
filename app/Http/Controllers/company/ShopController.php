@@ -60,7 +60,7 @@ class ShopController extends Controller
         $data = $request->except('photo');
         $photo['name'] = 'image';
         $photo['contents'] = '';
-        if($request->hasFile('image')) {
+        if($request->has('image')) {
             $photo['contents'] = fopen($request->image,'r');
             $photo['filename'] = 'shop.png';
         }
