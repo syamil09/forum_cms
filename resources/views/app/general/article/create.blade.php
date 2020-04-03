@@ -49,7 +49,7 @@
                             <div class="col-sm-12 col-md-7">
                                 <div id="image-preview" class="image-preview">
                                     <label for="image-upload" id="image-label">Choose File</label>
-                                    <input type="file" name="image" id="image-upload"/>
+                                    <input type="file" name="image" id="image-upload" />
                                 </div>
                             </div>
                         </div>
@@ -84,6 +84,7 @@
 @endsection
 
 @section('script_page')
+    <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
     <script>
         $(".select2").select2({
             tags: true
