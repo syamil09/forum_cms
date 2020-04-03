@@ -28,6 +28,7 @@
                                 <th>Start</th>
                                 <th>End</th>
                                 <th>Candidates</th>
+                                <th>Total Voter</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -40,12 +41,11 @@
                                     <td>{{ date('d-m-Y H:i', strtotime($vote['end_vote'])) }}</td>
                                     <td>
                                         @foreach($vote['candidates'] as $candidate)
-                                            <img class="mr-2 rounded-circle" src="{{$candidate['photo']}}" alt="" width="16px">
-                                            {{$candidate['name']}} <br>
+                                            <img class="mr-2 rounded-circle" src="{{$candidate['user']['photo']}}" alt="" width="16px">
+                                            {{$candidate['user']['name']}} ({{ $candidate['voter'] }}) <br>
                                         @endforeach
                                     </td>
-
-
+                                    <td>{{ $vote['total_voter'] }}</td>
 
                                     <td width="90px">
                                         {{--<div class="btn-group">--}}
