@@ -67,6 +67,17 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','general\ArticleController@show');
 	});
 
+	// ------------------ Article Category -------------------
+	Route::group(['prefix' => 'article_category'],function () {
+		Route::get('/','general\ArticleCategoryController@index');
+		Route::get('/create','general\ArticleCategoryController@create');
+		Route::post('/store','general\ArticleCategoryController@store');
+		Route::get('/edit/{id}','general\ArticleCategoryController@edit');
+		Route::post('/update/{id}','general\ArticleCategoryController@update');
+		Route::post('/delete','general\ArticleCategoryController@delete');
+		Route::get('/detail/{id}','general\ArticleCategoryController@show');
+	});
+
 	// ------------------ Event -------------------
 	Route::group(['prefix' => 'event'],function () {
 		Route::get('/','general\EventController@index');
