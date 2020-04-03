@@ -30,9 +30,10 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                             <div class="col-sm-12 col-md-7">
-                                <select class="form-control selectric" name="category">
-                                    <option value="1" @if($edit['category_id'] == 1) selected @endif>Tips & Trick</option>
-                                    <option value="2" @if($edit['category_id'] == 2) selected @endif>Review</option>
+                                <select class="form-control selectric" name="category_id">
+                                    @foreach($categorys as $category)
+                                        <option value="{{ $category['id'] }}">{{ $category['category'] }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
