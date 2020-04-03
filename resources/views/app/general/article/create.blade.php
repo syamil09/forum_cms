@@ -89,33 +89,5 @@
         $(".select2").select2({
             tags: true
         });
-        function formatStateResult(opt) {
-            if (!opt.id) {
-                return opt.text;
-            }
-            var DataImage = $(opt.element).data('image');
-            if (!DataImage) {
-                return opt.text;
-            } else {
-                var $opt = $(
-                    '<span><img class="rounded-circle" src="' + DataImage + '" alt="avatar" width="32px"> ' + opt.text + '</span>'
-                );
-                return $opt;
-            }
-        }
-        function formatState(opt) {
-            if (!opt.id) {
-                return opt.text;
-            }
-            var DataImage = $(opt.element).data('image');
-            if (!DataImage) {
-                return opt.text;
-            } else {
-                var $opt = $(
-                    '<span><img class="mr-2 rounded-circle" src="' + DataImage + '" alt="avatar" width="16px"> ' + opt.text + '</span>'
-                );
-                return $opt;
-            }
-        }
     </script>
 @endsection
