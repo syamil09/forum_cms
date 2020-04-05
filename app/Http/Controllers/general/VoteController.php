@@ -41,8 +41,10 @@ class VoteController extends Controller
         if (key_exists('data', $votes)) {
             foreach ($votes['data'] as $iVote => $vote){
                 foreach ($vote['candidates'] as $iCandidate => $candidate) {
-                    $user = $users->where('id', $candidate['user_id'])->first();
-                    $votes['data'][$iVote]['candidates'][$iCandidate] = $user;
+                    $user = $users->where('id', $candidate['user_id'])->map(function ($data) {
+                        return collect($data)->only(['name','photo']);
+                    })->first();
+                    $votes['data'][$iVote]['candidates'][$iCandidate]['user'] = $user;
                 }
             }
         }
