@@ -57,17 +57,17 @@ class ShopController extends Controller
     {
       // return $request->all();
         $token = $request->session()->get('token');
-        $data = $request->except('photo');
-        $photo['name'] = 'image';
+        $data = $request->except('image');
+        $photo['name'] = 'photo';
         $photo['contents'] = '';
         if($request->has('image')) {
-            $photo['contents'] = fopen($request->image,'r');
+            $photo['contents'] = fopen($request->image, 'r');
             $photo['filename'] = 'shop.png';
         }
 
         // dd($photo);
         $response = $this->postMulti(env('GATEWAY_URL').'shop/item/add', $data, $token, $photo);
-        dd($response);
+        // return $response;
         if ($response['success']) {
             // LogActivity::addToLog('Added Data Mesjid');
             return redirect('company/shop')->with('success', 'Data Created');
