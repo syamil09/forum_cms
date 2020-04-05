@@ -122,17 +122,17 @@ class ShopController extends Controller
     {
       $token = $request->session()->get('token');
 
-      $data = $request->except('photo');
+      $data = $request->except('_token','photo');
 
-      $photo['name'] = "image";
+      $photo['name'] = "photo";
       $photo['contents'] = '';
       if ($request->photo != null) {
         $photo['contents'] = fopen($request->image,'r');
         $photo['filename'] = 'shop.png';
       }
 
-      dd($photo);
       $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token,$photo);
+      // return $response;
       if($response['success'])
       {
         // LogActivity::addToLog('Updated Data Mesjid');
