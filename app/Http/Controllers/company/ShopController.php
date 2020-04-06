@@ -122,11 +122,11 @@ class ShopController extends Controller
     {
       $token = $request->session()->get('token');
 
-      $data = $request->except('_token','photo');
+      $data = $request->except('_token','image');
 
       $photo['name'] = "photo";
       $photo['contents'] = '';
-      if ($request->photo != null) {
+      if ($request->image != null) {
         $photo['contents'] = fopen($request->image,'r');
         $photo['filename'] = 'shop.png';
       }
