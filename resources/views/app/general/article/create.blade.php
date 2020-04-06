@@ -49,7 +49,7 @@
                             <div class="col-sm-12 col-md-7">
                                 <div id="image-preview" class="image-preview">
                                     <label for="image-upload" id="image-label">Choose File</label>
-                                    <input type="file" name="image" id="image-upload"/>
+                                    <input type="file" name="image" id="image-upload" />
                                 </div>
                             </div>
                         </div>
@@ -88,33 +88,15 @@
         $(".select2").select2({
             tags: true
         });
-        function formatStateResult(opt) {
-            if (!opt.id) {
-                return opt.text;
-            }
-            var DataImage = $(opt.element).data('image');
-            if (!DataImage) {
-                return opt.text;
-            } else {
-                var $opt = $(
-                    '<span><img class="rounded-circle" src="' + DataImage + '" alt="avatar" width="32px"> ' + opt.text + '</span>'
-                );
-                return $opt;
-            }
-        }
-        function formatState(opt) {
-            if (!opt.id) {
-                return opt.text;
-            }
-            var DataImage = $(opt.element).data('image');
-            if (!DataImage) {
-                return opt.text;
-            } else {
-                var $opt = $(
-                    '<span><img class="mr-2 rounded-circle" src="' + DataImage + '" alt="avatar" width="16px"> ' + opt.text + '</span>'
-                );
-                return $opt;
-            }
-        }
+        $.uploadPreview({
+            input_field: "#image-upload",   // Default: .image-upload
+            preview_box: "#image-preview",  // Default: .image-preview
+            label_field: "#image-label",    // Default: .image-label
+            label_default: "Choose File",   // Default: Choose File
+            label_selected: "Change File",  // Default: Change File
+            no_label: false,                // Default: false
+            success_callback: null          // Default: null
+        });
     </script>
+
 @endsection

@@ -41,14 +41,16 @@ class VoteController extends Controller
         if (key_exists('data', $votes)) {
             foreach ($votes['data'] as $iVote => $vote){
                 foreach ($vote['candidates'] as $iCandidate => $candidate) {
-                    $user = $users->where('id', $candidate['user_id'])->first();
-                    $votes['data'][$iVote]['candidates'][$iCandidate] = $user;
+                    $user = $users->where('id', $candidate['user_id'])->map(function ($data) {
+                        return collect($data)->only(['name','photo']);
+                    })->first();
+                    $votes['data'][$iVote]['candidates'][$iCandidate]['user'] = $user;
                 }
             }
         }
 
         $votes = $this->replaceExistData($votes);
-        return view('app/general/vote/index', compact('votes'));
+        return view('app.general.vote.index', compact('votes'));
     }
 
     /**
@@ -65,7 +67,7 @@ class VoteController extends Controller
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
         $users = $this->replaceExistData($users);
 
-        return view('app\general\vote\create', compact('users'));
+        return view('app.general.vote.create', compact('users'));
     }
 
     /**
@@ -128,7 +130,7 @@ class VoteController extends Controller
 
         $users = array_merge($users, $selected);
 
-        return view('app\general\vote\edit', compact('vote', 'users'));
+        return view('app.general.vote.edit', compact('vote', 'users'));
 
     }
 

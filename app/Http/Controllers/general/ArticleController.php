@@ -38,7 +38,7 @@ class ArticleController extends Controller
         $img['contents'] = '';
 
         if ($request->has('image')) {
-            $img['contents'] = fopen($request['image'], 'r');
+            $img['contents'] = fopen($request->image, 'r');
             $img['filename'] = 'photo.png';
         }
         $response = $this->postMulti(env('GATEWAY_URL') . 'article/add', $data, $token, $img);
@@ -63,9 +63,9 @@ class ArticleController extends Controller
     {
         $token = $req->session()->get('token');
         $response = $this->get(env('GATEWAY_URL') . 'article/edit/' . $id, $token);
+        $categorys = $this->get(env('GATEWAY_URL') . 'article_category', $token)['data'];
         $edit = ($response['success']) ? $response['data'] : null;
-
-        return view('app.general.article.edit', compact('edit'));
+        return view('app.general.article.edit', compact('edit', 'categorys'));
     }
 
 

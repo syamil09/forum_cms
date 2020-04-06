@@ -20,21 +20,27 @@ class AboutController extends Controller
         $response = $this->get(env('GATEWAY_URL').'about/',$token);
         $about = ($response['success'] == false)?null:$response['data'];
         $message = $response['message'];
-        return view('app.general.about.index',compact('about','message'));
+        return view('app.company.about.index',compact('about','message'));
     }
 
     public function create()
     {
-        return view('app.general.news.create');
+        return view('app.company.news.create');
     }
 
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
-        $data = $request->all();
+        $data = $request->except('image');
+        $img['name'] = 'image';
+        $img['contents'] = '';
+        if ($request->has('image')) {
+          $img['contents'] = fopen($request->image, 'r');
+          $img['filename'] = 'about.png';
+        }
 
         // dd($data);
-        $response = $this->post(env('GATEWAY_URL').'about/add', $data, $token);
+        $response = $this->postMulti(env('GATEWAY_URL').'about/add', $data, $token, $img);
         // return $response;
         if ($response['success']) {
             // LogActivity::addToLog('Added Data Mesjid');
@@ -45,27 +51,35 @@ class AboutController extends Controller
 
     }
 
-    public function edit(Request $req, $company_id)
+    public function edit(Request $req, $id)
     {
         $token      = $req->session()->get('token');
-        $response   = $this->get(env('GATEWAY_URL').'about/edit/'.$company_id,$token);
+        $response   = $this->get(env('GATEWAY_URL').'about/edit/'.$id,$token);
         $about      = ($response['success'])?$response['data']:null;
-        return view('app.company.about.edit',compact('about', 'company_id'));
+        return view('app.company.about.edit',compact('about', 'id'));
     }
 
 
     public function update(Request $request, $id)
     {
         $token = session()->get('token');
+        $data = $request->except('image');
 
-        $response = $this->post(env('GATEWAY_URL').'about/update/'.$id,$data,$token);
-        // dd($response);
+        $img['name'] = "image";
+        $img['contents'] = '';
+        if ($request->image != null) {
+          $img['contents'] = fopen($request->image,'r');
+          $img['filename'] = 'about.png';
+        }
+
+        $response = $this->postMulti(env('GATEWAY_URL').'about/update/'.$id,$data,$token, $img);
+        // return $response;
         if($response['success'])
         {
-            LogActivity::addToLog('Updated About Us');
-            return redirect('general/about')->with('success','Data Saved');
+            // LogActivity::addToLog('Updated About Us');
+            return redirect('company/community')->with('success','Data Saved');
         }else {
-            return redirect('general/about')->with('failed','Data Doesnt Saved. '.$response['message']);
+            return redirect('company/community')->with('failed','Data Doesnt Saved.');
         }
     }
 

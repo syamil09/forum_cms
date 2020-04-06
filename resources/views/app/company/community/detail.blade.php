@@ -19,12 +19,12 @@
           <h4>Detail</h4>
         </div>
         <div class="card-body">
-          <div class="form-group row mb-4">x
+          <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Company Name : </label>
-            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$company['company_name']}}</label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['company_name']}}</label>
           </div>
           @if ($about == null)
-          <div class="alert alert-secondary">
+          <div class="alert alert-secondary text-center">
             About Company Not Set
           </div>
           @else

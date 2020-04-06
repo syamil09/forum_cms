@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Forum | Company')
+@section('title','Forum | Community')
 
 @section('section_header')
-<h1>Edit Community</h1>
+<h1>About Community</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
   <div class="breadcrumb-item"><a href="#">Company</a></div>
-  <div class="breadcrumb-item">EditCommunity</div>
+  <div class="breadcrumb-item">AboutCommunity</div>
 </div>
 @endsection
 
@@ -16,13 +16,13 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4>Edit Community</h4>
+        <h4>About Community</h4>
       </div>
       <div class="card-body">
         @if ($about == null)
-        <form method="POST" action="{{  url('company/community/'.$company_id.'/about/add') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form method="POST" action="{{  url('company/about/add') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
         @else
-        <form method="POST" action="{{  url('company/community/'.$company_id.'/about/update/'.$about['id']) }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form method="POST" action="{{  url('company/about/update/'.$about['company_id']) }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
         @endif
         @csrf
           <div class="form-group row mb-4">
@@ -37,13 +37,13 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">History</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple">@if ($about != null){{$about['history']}} @endif</textarea>
+              <textarea class="summernote-simple" name="history">@if ($about != null){{$about['history']}} @endif</textarea>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Secretatiat</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">secretariat</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" value="@if ($about != null) {{$about['secretatiat']}} @endif" name="secretatiat">
+              <input type="text" class="form-control" value="@if ($about != null) {{$about['secretariat']}} @endif" name="secretariat">
             </div>
           </div>
           <div class="form-group row mb-4">
