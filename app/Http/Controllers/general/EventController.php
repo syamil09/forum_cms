@@ -31,9 +31,16 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
-        $data = $request->all();
+        $data = $request->except('image');
 
-        $response = $this->post(env('GATEWAY_URL').'event/add',$data,$token);
+        $img['name'] = 'image';
+        $img['contents'] = '';
+        if ($request->has('image')) {
+          $img['contents'] = fopen($request->image, 'r');
+          $img['filename'] = 'event.png';
+        }
+
+        $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token, $img);
         // return $response;
         if($response['success'])
         {
@@ -66,11 +73,19 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->except('_token');
+        $data = $request->except('_token', 'image');
         $token = session()->get('token');
         // return $data;
-        $response = $this->post(env('GATEWAY_URL').'event/update/'.$id,$data,$token);
-        // dd($response);
+
+        $img['name'] = 'image';
+        $img['contents'] = '';
+        if ($request->has('image')) {
+          $img['contents'] = fopen($request->image, 'r');
+          $img['filename'] = 'event.png';
+        }
+
+        $response = $this->postMulti(env('GATEWAY_URL').'event/update/'.$id,$data,$token, $img);
+        // return $response;
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Data City');
