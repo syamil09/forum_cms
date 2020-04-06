@@ -49,15 +49,6 @@ class ArticleCategoryController extends Controller
 
     }
 
-    public function show(Request $req, $id)
-    {
-        $token = $req->session()->get('token');
-
-        $response = $this->get(env('GATEWAY_URL'). 'article/edit/'. $id, $token);
-        $article = ($response['success'])?$response['data']:null;
-        return view('app.general.article.detail', compact('article'));
-    }
-
     public function edit(Request $req, $id)
     {
         $token      = $req->session()->get('token');

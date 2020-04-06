@@ -47,8 +47,6 @@
                                 <!-- <td>1</td> -->
                                 <td>{{ $category['category'] }}</td>
                                 <td class="text-center">
-                                    <a href="article_category/detail/{{$category['id']}}" class="btn btn-info btn-sm"><i
-                                            class="fas fa-info"></i></a>
                                     <a href="{{ url('general/article_category/edit/').'/'.$category['id'] }}"
                                         class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
                                     <form action="{{ url('general/article_category/delete') }}" method="post"

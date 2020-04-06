@@ -75,7 +75,6 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/edit/{id}','general\ArticleCategoryController@edit');
 		Route::post('/update/{id}','general\ArticleCategoryController@update');
 		Route::post('/delete','general\ArticleCategoryController@delete');
-		Route::get('/detail/{id}','general\ArticleCategoryController@show');
 	});
 
 	// ------------------ Event -------------------
@@ -107,6 +106,17 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 			Route::post('/delete','general\GalleryController@delete');
 			Route::get('/detail/{id}','general\GalleryController@show');
 		});
+	});
+
+	// ------------------ Highlight -------------------
+	Route::group(['prefix' => 'highlight'],function () {
+		Route::get('/','general\HighlightController@index');
+		Route::get('/create','general\HighlightController@create');
+		Route::post('/store','general\HighlightController@store');
+		Route::get('/edit/{id}','general\HighlightController@edit');
+		Route::post('/update/{id}','general\HighlightController@update');
+		Route::post('/delete','general\HighlightController@delete');
+		Route::get('/detail/{id}','general\HighlightController@show');
 	});
 
 	// ------------------ Walktrough -------------------
