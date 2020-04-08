@@ -55,17 +55,18 @@ class HighlightController extends Controller
 
         $response = $this->get(env('GATEWAY_URL') . 'highlight/show/' . $id, $token);
         $highlight = ($response['success']) ? $response['data'] : null;
-// return $response;
-        if ($response['data'] == 'article') {
-            // $response = $this->get(env('GATEWAY_URL') . 'article/edit/' . $highlight['module_id'], $token);
-            $article = $this->get(env('GATEWAY_URL') . 'article/edit/' . $response['module_id'], $token)['data'];
-            return view('app.general.highlight.detail', compact('article', 'highlight'));
-        } else {
-            // $response = $this->get(env('GATEWAY_URL'). 'event/edit/'. $highlight['module_id'], $token);
-            $event = $this->get(env('GATEWAY_URL') . 'event/edit/' . $s['module_id'], $token)['data'];
-            return view('app.general.highlight.detail', compact('event', 'highlight'));
-        }
         
+        foreach ($highlight as $key => $value) {
+            if ($value['module_name'] == 'article') {
+                // $response = $this->get(env('GATEWAY_URL') . 'article/edit/' . $highlight['module_id'], $token);
+                $article = $this->get(env('GATEWAY_URL') . 'article/edit/' . $value['module_id'], $token)['data'];
+                return view('app.general.highlight.detail', compact('article', 'highlight'));
+            } else {
+                // $response = $this->get(env('GATEWAY_URL'). 'event/edit/'. $highlight['module_id'], $token);
+                $event = $this->get(env('GATEWAY_URL') . 'event/edit/' . $value['module_id'], $token)['data'];
+                return view('app.general.highlight.detail', compact('event', 'highlight'));
+            }
+        }                
     }
     
     public function delete(Request $req)
