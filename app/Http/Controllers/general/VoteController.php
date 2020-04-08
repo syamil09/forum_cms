@@ -148,7 +148,8 @@ class VoteController extends Controller
 
         $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
         $vote = $this->replaceExistData($vote);
-
+        $vote['start_vote'] = date('d-m-Y H:i', strtotime($vote['start_vote']));
+        $vote['end_vote'] = date('d-m-Y H:i:s', strtotime($vote['end_vote']));
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
         $users = $this->replaceExistData($users);
 
@@ -163,7 +164,6 @@ class VoteController extends Controller
         })->toArray();
 
         $users = array_merge($users, $selected);
-
         return view('app.general.vote.edit', compact('vote', 'users'));
 
     }
