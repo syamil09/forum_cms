@@ -40,7 +40,7 @@
             <!-- <div class="col-sm-12 col-md-7">
               <textarea class="summernote-simple"></textarea>
             </div> -->
-            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-6">{{$walkthrough['description']}}</label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-6">{!! $walkthrough['description'] !!}</label>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3"></label>
