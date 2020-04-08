@@ -22,7 +22,7 @@
                 </div>
                 <div class="card-body scrollbox" id="scroll" style="height: 38vh; overflow: hidden; outline: currentcolor none medium;" tabindex="2">
                     <ul class="list-unstyled list-unstyled-border">
-                        @foreach($votings as $voting)
+                        @forelse($votings as $voting)
                             <li class="media">
                                 <img class="mr-3 rounded" src="{{ $voting['user']['photo'] }}" alt="product" width="55">
                                 <div class="media-body">
@@ -33,7 +33,8 @@
                                     </div>
                                 </div>
                             </li>
-                        @endforeach
+                        @empty
+                        @endforelse
                     </ul>
                 </div>
             </div>

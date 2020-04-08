@@ -106,7 +106,10 @@ class VoteController extends Controller
         $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
         $vote = $this->replaceExistData($vote);
         $candidates = $vote['candidates'];
-        $votings = $vote['voting'];
+        $votings = [];
+
+
+
         $vote = collect($vote)->except(['candidates','voting']);
 
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
@@ -118,15 +121,17 @@ class VoteController extends Controller
             })->first();
         }
 
-        foreach ($votings as  $i => $voting){
-            $votings[$i]['user'] = $users->where('id', $voting['user_id'])->map(function ($data) {
-                return collect($data)->only(['name', 'photo']);
-            })->first();
-            $votings[$i]['candidate'] = $users->where('id', $voting['candidate_id'])->map(function ($data) {
-                return collect($data)->only(['name', 'photo']);
-            })->first();
+        if (key_exists('voting', $vote)) {
+            $votings = $vote['voting'];
+            foreach ($votings as  $i => $voting){
+                $votings[$i]['user'] = $users->where('id', $voting['user_id'])->map(function ($data) {
+                    return collect($data)->only(['name', 'photo']);
+                })->first();
+                $votings[$i]['candidate'] = $users->where('id', $voting['candidate_id'])->map(function ($data) {
+                    return collect($data)->only(['name', 'photo']);
+                })->first();
+            }
         }
-
         return view('app.general.vote.detail', compact('vote','candidates','votings'));
     }
 
