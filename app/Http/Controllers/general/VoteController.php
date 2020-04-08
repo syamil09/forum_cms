@@ -10,10 +10,12 @@ class VoteController extends Controller
 {
 
     /**
-     * Checking key data exist and replace them to the main variable
+     * Checking key data exist and replace them to other main variable
      *
-     * @param $datas
-     * @return mixed
+     * @param mixed $datas
+     * @param bool $multipe
+     *
+     * @return array|\stdClass
      */
     private function replaceExistData($datas, $multipe = true)
     {
@@ -98,7 +100,34 @@ class VoteController extends Controller
      */
     public function show($id)
     {
-        //
+        $token = Session::get('token');
+        $company = session()->get('data')['company_id'];
+
+        $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
+        $vote = $this->replaceExistData($vote);
+        $candidates = $vote['candidates'];
+        $votings = $vote['voting'];
+        $vote = collect($vote)->except(['candidates','voting']);
+
+        $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
+        $users = collect($this->replaceExistData($users));
+
+        foreach ($candidates as  $i => $candidate){
+            $candidates[$i]['user'] = $users->where('id', $candidate['user_id'])->map(function ($data) {
+                return collect($data)->only(['name', 'photo']);
+            })->first();
+        }
+
+        foreach ($votings as  $i => $voting){
+            $votings[$i]['user'] = $users->where('id', $voting['user_id'])->map(function ($data) {
+                return collect($data)->only(['name', 'photo']);
+            })->first();
+            $votings[$i]['candidate'] = $users->where('id', $voting['candidate_id'])->map(function ($data) {
+                return collect($data)->only(['name', 'photo']);
+            })->first();
+        }
+
+        return view('app.general.vote.detail', compact('vote','candidates','votings'));
     }
 
     /**

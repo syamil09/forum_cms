@@ -121,9 +121,7 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 	});
 
   // ------------------ Vote -------------------
-  Route::resource('/vote', 'general\VoteController')->only([
-      'index', 'create', 'store', 'edit', 'update','destroy', //'show',
-  ]);
+  Route::resource('/vote', 'general\VoteController');
 
 	// ------------------ home content -------------------
 	Route::group(['prefix' => 'home-content'],function () {

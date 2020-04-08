@@ -47,10 +47,10 @@
                                     </td>
                                     <td>{{ $vote['total_voter'] }}</td>
 
-                                    <td width="90px">
-                                        {{--<div class="btn-group">--}}
-                                            {{--<button class="btn btn-info"><i class="fa fa-eye"></i></button>--}}
-                                        {{--</div>--}}
+                                    <td width="129px">
+                                        <div class="btn-group">
+                                            <a href="{{ route('vote.show', $vote['id']) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                        </div>
                                         <div class="btn-group">
                                             <a class="btn btn-warning" href="{{route('vote.edit', $vote['id'])}}"><i class="fa fa-edit"></i></a>
                                         </div>
