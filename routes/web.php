@@ -146,7 +146,7 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 });
 
 // ------------------ Company -------------------
-Route::group(['prefix' => 'company'], function () {
+Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function () {
 
 	// ------------------ community -------------------
 	Route::group(['prefix' => 'community'], function () {
