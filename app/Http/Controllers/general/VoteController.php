@@ -106,11 +106,8 @@ class VoteController extends Controller
         $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
         $vote = $this->replaceExistData($vote);
         $candidates = $vote['candidates'];
+
         $votings = [];
-
-
-
-        $vote = collect($vote)->except(['candidates','voting']);
 
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
         $users = collect($this->replaceExistData($users));
