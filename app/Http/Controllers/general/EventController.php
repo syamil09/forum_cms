@@ -47,10 +47,9 @@ class EventController extends Controller
 
     public function show(Request $req, $id)
     {
-        $token = $req->session()->get('token');
-
+        $token    = $req->session()->get('token');
         $response = $this->get(env('GATEWAY_URL'). 'event/edit/'. $id, $token);
-        $event = ($response['success'])?$response['data']:null;
+        $event    = $response['success'] ? $response['data'] : null;
 
         return view('app.general.event.detail', compact('event'));
     }
