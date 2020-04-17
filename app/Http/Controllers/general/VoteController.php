@@ -52,6 +52,8 @@ class VoteController extends Controller
         }
 
         $votes = $this->replaceExistData($votes);
+        // Descending
+        rsort($votes);
         return view('app.general.vote.index', compact('votes'));
     }
 
