@@ -80,9 +80,10 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($data['start_vote']));
-        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($data['end_vote']));
+        $data = $request->except('voting_period');
+        $votingPeriod =  explode(' - ', $request->voting_period);
+        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[0]));
+        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[1]));
 
         $token = Session::get('token');
         $votes = $this->post(env('GATEWAY_URL') . 'vote/add', $data, $token);

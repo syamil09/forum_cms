@@ -48,7 +48,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Voting Period</label>
                             <div class="col-sm-12 col-md-7">
-                                <input name="datetimes" type="text" class="form-control">
+                                <input name="voting_period" type="text" class="form-control rangeDateTimes">
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -111,7 +111,7 @@
     {{-- End Valiidatoor --}}
     <script>
 
-        $('input[name="datetimes"]').daterangepicker({
+        $('.rangeDateTimes').daterangepicker({
             timePicker: true,
             timePicker24Hour: true,
             startDate: moment().startOf('hour'),
