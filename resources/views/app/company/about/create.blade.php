@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Company')
 
 @section('section_header')
-<h1>Create Walktrough</h1>
+<h1>Create Community</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">CreateWalkthrough</div>
+  <div class="breadcrumb-item"><a href="#">Company</a></div>
+  <div class="breadcrumb-item">CreateCommunity</div>
 </div>
 @endsection
 
@@ -16,37 +16,37 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4>Add Walktrough</h4>
+        <h4>Create Community</h4>
       </div>
       <div class="card-body">
-        <form class="" action="{{url('general/walkthrough/store')}}" method="post" enctype="multipart/form-data">
+        <form method="POST" action="{{  url('company/community/store') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
           @csrf
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Community Name</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" name="title" value="{{old('title')}}">
+              <input type="text" class="form-control" name="company_name" value="{{old('company_name')}}">
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Key</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple" name="description">{{old('description')}}</textarea>
+              <input type="password" class="form-control" name="comp_key" value="{{old('comp_key')}}">
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">image</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Spalsh Screen</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview">
+              <div id="image-preview" class="image-preview" style="background-image: {{url('UploadedFile/SplashScreen/default.jpg')}}">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload" />
+                <input type="file" name="spalsh_screen" id="image-upload" />
               </div>
             </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">
-              <a href="{{url('general/walkthrough')}}" class="btn btn-secondary">Cancel</a>
-              <button type="submit" class="btn btn-primary">Add Walktrough</button>
+              <a href="{{url('company/community')}}" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">Create</button>
             </div>
           </div>
         </form>

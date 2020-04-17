@@ -67,6 +67,16 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','general\ArticleController@show');
 	});
 
+	// ------------------ Article Category -------------------
+	Route::group(['prefix' => 'article_category'],function () {
+		Route::get('/','general\ArticleCategoryController@index');
+		Route::get('/create','general\ArticleCategoryController@create');
+		Route::post('/store','general\ArticleCategoryController@store');
+		Route::get('/edit/{id}','general\ArticleCategoryController@edit');
+		Route::post('/update/{id}','general\ArticleCategoryController@update');
+		Route::post('/delete','general\ArticleCategoryController@delete');
+	});
+
 	// ------------------ Event -------------------
 	Route::group(['prefix' => 'event'],function () {
 		Route::get('/','general\EventController@index');
@@ -98,6 +108,15 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		});
 	});
 
+	// ------------------ Highlight -------------------
+	Route::group(['prefix' => 'highlight'],function () {
+		Route::get('/','general\HighlightController@index');
+		Route::get('/create','general\HighlightController@create');
+		Route::post('/store','general\HighlightController@store');
+		Route::post('/delete','general\HighlightController@delete');
+		Route::get('/detail/{id}','general\HighlightController@show');
+	});
+
 	// ------------------ Walktrough -------------------
 	Route::group(['prefix' => 'walkthrough'],function () {
 		Route::get('/','general\WalkthroughController@index');
@@ -109,16 +128,8 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','general\WalkthroughController@show');
 	});
 
-	// ------------------ Company -------------------
-	Route::group(['prefix' => 'company'],function () {
-		Route::get('/','company/CompanyController@index');
-		Route::get('/create','company/CompanyController@create');
-		Route::post('/store','company/CompanyController@store');
-		Route::get('/edit/{id}','company/CompanyController@edit');
-		Route::post('/update/{id}','company/CompanyController@update');
-		Route::post('/delete','company/CompanyController@delete');
-		Route::get('/detail/{id}','company/CompanyController@show');
-	});
+  // ------------------ Vote -------------------
+  Route::resource('/vote', 'general\VoteController');
 
 	// ------------------ home content -------------------
 	Route::group(['prefix' => 'home-content'],function () {
@@ -136,6 +147,39 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 	Route::group(['prefix' => 'contact'],function () {
 		Route::get('/','general\ContactController@index');
 		Route::post('/update','general\ContactController@update');
+	});
+
+});
+
+// ------------------ Company -------------------
+Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function () {
+
+	// ------------------ community -------------------
+	Route::group(['prefix' => 'community'], function () {
+		Route::get('/','company\CommunityController@index');
+		Route::get('/create','company\CommunityController@create');
+		Route::post('/store','company\CommunityController@store');
+		Route::get('/edit/{id}','company\CommunityController@edit');
+		Route::post('/update/{id}','company\CommunityController@update');
+		Route::post('/delete','company\CommunityController@delete');
+		Route::get('/detail/{id}','company\CommunityController@show');
+
+	});
+	Route::group(['prefix' => 'about'], function () {
+		Route::get('/{id}', 'company\AboutController@edit');
+		Route::post('/add', 'company\AboutController@store');
+		Route::post('/update/{id}', 'company\AboutController@update');
+	});
+
+	// ------------------ shop -------------------
+	Route::group(['prefix' => 'shop'], function () {
+		Route::get('/','company\ShopController@index');
+		Route::get('/create','company\ShopController@create');
+		Route::post('/store','company\ShopController@store');
+		Route::get('/edit/{id}','company\ShopController@edit');
+		Route::post('/update/{id}','company\ShopController@update');
+		Route::post('/delete','company\ShopController@delete');
+		Route::get('/detail/{id}','company\ShopController@show');
 	});
 
 });

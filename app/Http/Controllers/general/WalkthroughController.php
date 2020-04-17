@@ -39,12 +39,12 @@ class WalkthroughController extends Controller
       $img['contents'] = '';
 
       if($request->has('image')) {
-        $img['contents'] = fopen($request['image'],'r');
-        $img['filename'] = 'photo.png';
+        $img['contents'] = fopen($request->image,'r');
+        $img['filename'] = 'walkthrough.png';
       }
 
       $response = $this->postMulti(env('GATEWAY_URL').'walk_through/add',$data,$token,$img,'');
-      return $response;
+      // return $response;
       if($response['success'])
       {
           // LogActivity::addToLog('Added Data City');
@@ -76,17 +76,17 @@ class WalkthroughController extends Controller
     {
         $token = session()->get('token');
         $data = $request->except('image');
-      
+
         $img['name'] = 'image';
         $img['contents'] = '';
         // dd($request->all());
         if($request->image != null) {
-          $img['name'] = 'image';
+          // $img['name'] = 'image';
           $img['contents'] = fopen($request->image,'r');
-          $img['filename'] = 'photo.png';
+          $img['filename'] = 'walkthrough.png';
         }
         $response = $this->postMulti(env('GATEWAY_URL').'walk_through/update/'.$id,$data,$token,$img);
-       
+        // return $response;
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Contact');

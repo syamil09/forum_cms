@@ -2,128 +2,108 @@
 
 namespace App\Http\Controllers\general;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use Illuminate\Support\Facades\Validator;
-use App\Helpers\LogActivity;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
 
     public function index(Request $req)
     {
-      $token = $req->session()->get('token');
+        $token = $req->session()->get('token');
+        $response = $this->get(env('GATEWAY_URL') . 'article', $token);
+        $articles = ($response['success']) ? $response['data'] : [];
+        $message = $response['message'];
 
-      $response = $this->get(env('GATEWAY_URL'). 'article', $token);
-      $articles = ($response['success'])?$response['data']:null;
-      $message = $response['message'];
-      return view('app.general.article.index',compact('articles', 'message'));
+        return view('app.general.article.index', compact('articles', 'message'));
     }
 
     public function create()
     {
-        return view('app.general.article.create');
+        $token = session()->get('token');
+        $categorys = $this->get(env('GATEWAY_URL') . 'article_category', $token)['data'];
+        return view('app.general.article.create', compact('categorys'));
     }
 
 
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
-        $data = $request->except('tags','image','_token');
+        $data = $request->except('image', '_token');
+        if (!empty($data['tags'])) {
+            $data['tags'] = json_encode($data['tags'], true);
+        }
+
         $img['name'] = 'image';
         $img['contents'] = '';
 
-        $request['tags'] = explode(',',$request->tags);
-        foreach ($request['tags'] as $key => $value) {
-            $json['name'] = 'tags[]';
-            $json['contents'] = $value;
-            $tags[] = $json;
-        }
-
-        if($request->has('image')) {
-            $img['contents'] = fopen($request['image'],'r');
+        if ($request->has('image')) {
+            $img['contents'] = fopen($request->image, 'r');
             $img['filename'] = 'photo.png';
         }
-        
-        $response = $this->postMulti(env('GATEWAY_URL').'article/add',$data,$token,$img,$tags);
-        // dd($response);
-        if($response['success'])
-        {
-            return redirect('general/article')->with('success','Data created');
-        }else {
-            return redirect('general/article')->with('failed','Data Doesnt Created ,'.$response['message']);
+        $response = $this->postMulti(env('GATEWAY_URL') . 'article/add', $data, $token, $img);
+
+        if ($response['success']) {
+            return redirect('general/article')->with('success', 'Data created');
         }
 
+        return redirect('general/article')->with('failed', 'Data Doesnt Created ,' . $response['message']);
     }
 
     public function show(Request $req, $id)
     {
         $token = $req->session()->get('token');
 
-        $response = $this->get(env('GATEWAY_URL'). 'article/edit/'. $id, $token);
-        $article = ($response['success'])?$response['data']:null;
+        $response = $this->get(env('GATEWAY_URL') . 'article/edit/' . $id, $token);
+        $article = ($response['success']) ? $response['data'] : null;
         return view('app.general.article.detail', compact('article'));
     }
 
-    public function edit(Request $req,$id)
+    public function edit(Request $req, $id)
     {
-        $token      = $req->session()->get('token');
-        $response   = $this->get(env('GATEWAY_URL').'article/edit/'.$id,$token);
-        $edit       = ($response['success'])?$response['data']:null;
-        if($edit != null && $edit['tags'] != null) {
-            $edit['tags'] = implode(',', $edit['tags']);
-        }
-        // dd($edit);
-        return view('app.general.article.edit',compact('edit'));
+        $token = $req->session()->get('token');
+        $response = $this->get(env('GATEWAY_URL') . 'article/edit/' . $id, $token);
+        $categorys = $this->get(env('GATEWAY_URL') . 'article_category', $token)['data'];
+        $edit = ($response['success']) ? $response['data'] : null;
+        return view('app.general.article.edit', compact('edit', 'categorys'));
     }
 
 
     public function update(Request $request, $id)
     {
         $token = session()->get('token');
-        $data = $request->except('tags','image','_token');
-
-        $request['tags'] = explode(',',$request->tags);
-        foreach ($request['tags'] as $key => $value) {
-            $json['name'] = 'tags[]';
-            $json['contents'] = $value;
-            $tags[] = $json;
+        $data = $request->except('image', '_token');
+        if (!empty($data['tags'])) {
+            $data['tags'] = json_encode($data['tags'], true);
         }
 
-        $img['name'] = 'image';
-        $img['contents'] = '';
-        if($request->image != null) {
-            $img['contents'] = fopen($request->image,'r');
+        if ($request->has('image')) {
+            $img['name'] = 'image';
+            $img['contents'] = '';
+            $img['contents'] = fopen($request->image, 'r');
             $img['filename'] = 'photo.png';
+            $response = $this->postMulti(env('GATEWAY_URL') . 'article/update/' . $id, $data, $token, $img);
+        } else {
+            $response = $this->post(env('GATEWAY_URL') . 'article/update/' . $id, $data, $token);
         }
 
-        $response = $this->postMulti(env('GATEWAY_URL').'article/update/'.$id,$data,$token,$img,$tags);
-   
-        if($response['success'])
-        {
-            // LogActivity::addToLog('Updated Data City');
-            return redirect('general/article')->with('success','Data Updated');
-        }else {
-            return redirect('general/article')->with('failed','Data Doesnt Updated. '.$response['message']);
+        if ($response['success']) {
+            return redirect('general/article')->with('success', 'Data Updated');
         }
+        return redirect('general/article')->with('failed', 'Data Doesnt Updated. ' . $response['message']);
     }
 
     public function delete(Request $req)
     {
-        dd('hapus');
         $token = $req->session()->get('token');
-        $response = $this->post(env('GATEWAY_URL').'article/delete',$req->all(),$token);
+        $response = $this->post(env('GATEWAY_URL') . 'article/delete', $req->all(), $token);
 
-        if($response['success'])
-        {
+        if ($response['success']) {
             // LogActivity::addToLog('Deleted Data City');
-            return redirect('general/article')->with('success','Data Deleted');
-        }else {
-            return redirect('general/article')->with('failed','Data Doesnt Deleted');
+            return redirect('general/article')->with('success', 'Data Deleted');
         }
 
+        return redirect('general/article')->with('failed', 'Data Doesnt Deleted');
     }
 
 }
