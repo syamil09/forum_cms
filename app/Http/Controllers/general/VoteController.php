@@ -177,9 +177,10 @@ class VoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->except(['_token','_method']);
-        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($data['start_vote']));
-        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($data['end_vote']));
+        $data = $request->except(['_token','_method', 'voting_period']);
+        $votingPeriod =  explode(' - ', $request->voting_period);
+        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[0]));
+        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[1]));
 
         $token = Session::get('token');
         $vote = $this->post(env('GATEWAY_URL') . 'vote/update/' . $id, $data, $token);
