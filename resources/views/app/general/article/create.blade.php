@@ -19,6 +19,9 @@
                     <h4>Write Your Post</h4>
                 </div>
                 <div class="card-body">
+                    @if(session('failed'))
+                        <div class="alert alert-danger">{{session('failed')}}</div>
+                    @endif
                     <form method="POST" action="{{  url('general/article/store') }}" class="needs-validation"
                           novalidate="" enctype="multipart/form-data">
                         @csrf
