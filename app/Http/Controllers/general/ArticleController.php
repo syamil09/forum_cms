@@ -11,7 +11,7 @@ class ArticleController extends Controller
     public function index(Request $req)
     {
         $token = $req->session()->get('token');
-        $response = $this->get(env('GATEWAY_URL') . 'article', $token);
+        $response = $this->get(env('GATEWAY_URL') . 'article?sort=desc', $token);
         $articles = ($response['success']) ? $response['data'] : [];
         $message = $response['message'];
 
@@ -29,6 +29,11 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
+
+        $request->validate([
+          'title' => 'required',
+        ]);
+
         $data = $request->except('image', '_token');
         if (!empty($data['tags'])) {
             $data['tags'] = json_encode($data['tags'], true);
@@ -42,12 +47,12 @@ class ArticleController extends Controller
             $img['filename'] = 'photo.png';
         }
         $response = $this->postMulti(env('GATEWAY_URL') . 'article/add', $data, $token, $img);
-
+        // return $response;
         if ($response['success']) {
             return redirect('general/article')->with('success', 'Data created');
         }
 
-        return redirect('general/article')->with('failed', 'Data Doesnt Created ,' . $response['message']);
+        return redirect('general/article')->with('failed', 'Data Doesnt Created');
     }
 
     public function show(Request $req, $id)
