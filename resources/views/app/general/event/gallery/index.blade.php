@@ -50,6 +50,10 @@
           </div>
         </div>
       </div>
+      <div class="card-footer">
+        <!-- <h4>Basic DataTables</h4> -->
+        <a href="{{ url('general/event') }}" class="btn btn-lg btn-secondary">Back to Event List</a>
+      </div>
     </div>
   </div>
 </div>
