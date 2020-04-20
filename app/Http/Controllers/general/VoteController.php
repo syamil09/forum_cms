@@ -52,6 +52,8 @@ class VoteController extends Controller
         }
 
         $votes = $this->replaceExistData($votes);
+        // Descending
+        rsort($votes);
         return view('app.general.vote.index', compact('votes'));
     }
 
@@ -80,9 +82,10 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($data['start_vote']));
-        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($data['end_vote']));
+        $data = $request->except('voting_period');
+        $votingPeriod =  explode(' - ', $request->voting_period);
+        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[0]));
+        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[1]));
 
         $token = Session::get('token');
         $votes = $this->post(env('GATEWAY_URL') . 'vote/add', $data, $token);
@@ -106,11 +109,8 @@ class VoteController extends Controller
         $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
         $vote = $this->replaceExistData($vote);
         $candidates = $vote['candidates'];
+
         $votings = [];
-
-
-
-        $vote = collect($vote)->except(['candidates','voting']);
 
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
         $users = collect($this->replaceExistData($users));
@@ -177,9 +177,10 @@ class VoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->except(['_token','_method']);
-        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($data['start_vote']));
-        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($data['end_vote']));
+        $data = $request->except(['_token','_method', 'voting_period']);
+        $votingPeriod =  explode(' - ', $request->voting_period);
+        $data['start_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[0]));
+        $data['end_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[1]));
 
         $token = Session::get('token');
         $vote = $this->post(env('GATEWAY_URL') . 'vote/update/' . $id, $data, $token);
