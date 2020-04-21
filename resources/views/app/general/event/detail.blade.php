@@ -6,7 +6,8 @@
 <h1>Event</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item"><a href="#">General</a></div>
+  <div class="breadcrumb-item"><a href="{{ url('general/event') }}">General</a></div>
+  <div class="breadcrumb-item"><a href="{{ url('general/event') }}">Event</a></div>
   <div class="breadcrumb-item">DetailEvent</div>
 </div>
 @endsection
@@ -32,7 +33,7 @@
               </div>
             </div> -->
             <div class="col-sm-12 col-md-7">
-              <img src="{{$event['image'][0]}}" alt="Thumbnail" style="height:270px">
+              <img src="{{$event['image'][0]}}" alt="Thumbnail" class="img-fluid rounded">
             </div>
           </div>
           <div class="form-group row mb-4">

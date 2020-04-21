@@ -6,7 +6,8 @@
     <h1>Article</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">General</a></div>
+        <div class="breadcrumb-item"><a href="{{ url('general/article') }}">General</a></div>
+        <div class="breadcrumb-item"><a href="{{ url('general/article') }}">Article</a></div>
         <div class="breadcrumb-item">DetailArticle</div>
     </div>
 @endsection
@@ -43,21 +44,15 @@
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Thumbnail</label>
-                        <!-- <div class="col-sm-12 col-md-7">
-                          <div id="image-preview" class="image-preview">
-                            <label for="image-upload" id="image-label">Choose File</label>
-                            <input type="file" name="image" id="image-upload" />
-                          </div>
-                        </div> -->
                         <div class="col-sm-12 col-md-7">
-                            <img src="{{$article['image']}}" alt="Thumbnail" style="height:270px">
+                            <img src="{{$article['image']}}" alt="Thumbnail" class="rounded img-fluid">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Tags : </label>
-                        <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">
+                        <label class="col-form-label text-md-left col-12 col-md-5 col-lg-5">
                             @forelse ($article['tags'] as $tag)
-                                <span class="badge badge-primary">{{ $tag }}</span>
+                                <span class="badge badge-primary mb-1">{{ $tag }}</span>
                             @empty
                             @endforelse
                         </label>

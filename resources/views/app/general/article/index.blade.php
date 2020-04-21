@@ -50,14 +50,14 @@
                                         @endif
                                     </td>
                                     <td>{{ $article['category']['category'] }}</td>
-                                    <td>
+                                    <td width="40%">
                                         @forelse($article['tags'] as $tag)
                                             <span class="badge badge-primary mb-1">{{ $tag }}</span>
                                         @empty
                                         @endforelse
                                     </td>
-                                    <td class="text-center" width="150px">
-                                        <a href="article/detail/{{$article['id']}}" class="btn btn-info"><i class="fas fa-info"></i></a>
+                                    <td class="text-center" width="20%">
+                                        <a href="{{ url('general/article/detail').'/'.$article['id'] }}" class="btn btn-info"><i class="fas fa-info"></i></a>
                                         <a href="{{ url('general/article/edit/').'/'.$article['id'] }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
                                         <form action="{{ url('general/article/delete') }}" method="post" class="d-inline form-del">
                                             @csrf
