@@ -6,8 +6,9 @@
 <h1>Events</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">EditEvent</div>
+  <div class="breadcrumb-item"><a href="{{ url('general/event') }}">General</a></div>
+  <div class="breadcrumb-item"><a href="{{ url('general/event') }}">Event</a></div>
+  <div class="breadcrumb-item">Edit Event</div>
 </div>
 @endsection
 
@@ -48,9 +49,9 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview" style="background-image: url({{$edit['image']}});">
+              <div id="image-preview" class="image-preview" style="background-image: url({{ $edit['image'][0] }});">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload" />
+                <input type="file" name="image" id="image-upload" multiple />
               </div>
             </div>
           </div>
@@ -59,6 +60,14 @@
             <div class="col-sm-12 col-md-7">
               <input type="text" class="form-control" value="{{$edit['location']}}">
             </div>
+          </div>
+          <div class="form-group row mb-4">
+              <div class="col-sm-12 col-md-4 offset-2">
+                <input type="text" name="latitude" class="form-control" placeholder="Latitude..." value="{{ $edit['latitude'] }}">
+              </div>
+              <div class="col-sm-12 col-md-4">
+                <input type="text" name="longitude" class="form-control" placeholder="Longitude..." value="{{ $edit['longitude'] }}">
+              </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>

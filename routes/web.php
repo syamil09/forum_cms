@@ -148,7 +148,8 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::get('/','general\ContactController@index');
 		Route::post('/update','general\ContactController@update');
 	});
-
+    Route::get('/splashscreen', 'general\SplashScreenController@index')->name('SplashScreen.index');
+    Route::post('/splashscreen', 'general\SplashScreenController@store')->name('SplashScreen.store');
 });
 
 // ------------------ Company -------------------
