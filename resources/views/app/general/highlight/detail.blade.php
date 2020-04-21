@@ -38,7 +38,7 @@
                 <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Thumbnail</label>
                     <div class="col-sm-12 col-md-7">
-                        <img src="{{$event['image']}}" alt="Thumbnail" style="height:270px">
+                        <img src="{{$event['image'][0]}}" alt="Thumbnail" style="height:270px">
                     </div>
                 </div>
                 @endif
