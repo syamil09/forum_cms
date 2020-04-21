@@ -36,6 +36,7 @@
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Companies</span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{url('company/community')}}">Community</a></li>
+          <li><a class="nav-link" href="{{url('company/secretariat')}}">Secretariat</a></li>
           <li><a class="nav-link" href="{{url('company/shop')}}">Shop</a></li>
         </ul>
       </li>

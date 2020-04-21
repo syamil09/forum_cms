@@ -52,10 +52,17 @@ class CommunityController extends Controller
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
-        $data = $request->all();
+        $data = $request->except(['logo', 'background']);
 
-        // dd($data);
-        $response = $this->post(env('GATEWAY_URL').'company/add', $data, $token);
+        $img['name'] = 'logo';
+        $img['contents'] = '';
+        if ($request->has('logo')) {
+          $img['contents'] = fopen($request->logo, 'r');
+          $img['filename'] = 'company.png';
+        }
+
+        // dd($img);
+        $response = $this->postMulti(env('GATEWAY_URL').'company/add', $data, $token, $img);
         // return $response;
         if ($response['success']) {
             // LogActivity::addToLog('Added Data Mesjid');
@@ -95,6 +102,7 @@ class CommunityController extends Controller
       $token = $request->session()->get('token');
       $response = $this->get(env('GATEWAY_URL').'company/edit/'.$id,$token);
       $company = $response['data'];
+      
       return view('app.company.community.edit',compact('company'));
     }
 
@@ -109,10 +117,18 @@ class CommunityController extends Controller
     {
       $token = $request->session()->get('token');
 
-      $data = $request->all();
+      $data = $request->except(['logo', 'background']);
+        if ($request->has('logo')) {
+            $img['name'] = 'logo';
+            $img['contents'] = '';
+            $img['contents'] = fopen($request->logo, 'r');
+            $img['filename'] = 'company.png';
+            $response = $this->postMulti(env('GATEWAY_URL') . 'company/update/' . $id, $data, $token, $img);
+        } else {
+            $response = $this->post(env('GATEWAY_URL') . 'company/update/' . $id, $data, $token);
+        }
 
-      $response = $this->post(env('GATEWAY_URL').'company/update/'.$id,$data,$token);
-      // dd($response);
+      // dd($data);
       if($response['success'])
       {
         // LogActivity::addToLog('Updated Data Mesjid');
