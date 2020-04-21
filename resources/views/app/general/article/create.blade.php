@@ -37,7 +37,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                             <div class="col-sm-12 col-md-7">
-                                <select class="form-control selectric" name="category_id">
+                                <select class="form-control selectric @error('title') is-invalid @enderror" name="category_id">
                                     @foreach($categorys as $category)
                                         <option value="{{ $category['id'] }}">{{ $category['category'] }}</option>
                                     @endforeach

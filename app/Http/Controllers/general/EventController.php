@@ -68,7 +68,15 @@ class EventController extends Controller
     {
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'event/edit/'.$id,$token);
-        $edit       = ($response['success'])?$response['data']:null;
+        $edit       = $response['success'] ? $response['data'] : null;
+        if($edit != null) {
+            $start               = date_create($edit['event_start']);
+            $end                 = date_create($edit['event_end']);
+            $edit['event_start'] = date_format($start,"Y-m-d");
+            $edit['event_end']   = date_format($end,"Y-m-d");
+
+        }
+
         return view('app.general.event.edit',compact('edit'));
     }
 
