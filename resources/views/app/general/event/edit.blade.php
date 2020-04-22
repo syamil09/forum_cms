@@ -51,7 +51,7 @@
             <div class="col-sm-12 col-md-7">
               <div id="image-preview" class="image-preview" style="background-image: url({{ $edit['image'][0] }});">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload" multiple />
+                <input type="file" name="image[]" id="image-upload" multiple />
               </div>
             </div>
           </div>

@@ -11,6 +11,17 @@ use App\Helpers\LogActivity;
 
 class HighlightController extends Controller
 {
+    private function replaceExistData($datas, $multipe = true)
+    {
+        if (key_exists('data', $datas)) {
+            $datas = $datas['data'];
+        } else {
+            $multipe ? $datas = [] : $datas = new \stdClass();
+        }
+
+        return $datas;
+    }
+
     public function index(Request $req)
     {
         $token = $req->session()->get('token');
@@ -24,11 +35,12 @@ class HighlightController extends Controller
 
     public function create()
     {
-        $token = session()->get('token');
+        $token    = session()->get('token');
+        $articles = $this->get(env('GATEWAY_URL') . 'article', $token);
+        $events   = $this->get(env('GATEWAY_URL') . 'event', $token);
 
-        $articles = $this->get(env('GATEWAY_URL') . 'article', $token)['data'];
-
-        $events = $this->get(env('GATEWAY_URL') . 'event', $token)['data'];
+        $articles = $this->replaceExistData($articles);
+        $events   = $this->replaceExistData($events);
 
         return view('app.general.highlight.create', compact('articles', 'events'));
     }
