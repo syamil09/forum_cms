@@ -5,9 +5,8 @@
 @section('section_header')
 <h1>Member Company</h1>
 <div class="section-header-breadcrumb">
-  <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item"><a href="#">Modules</a></div>
-  <div class="breadcrumb-item">MemberCompany</div>
+  <div class="breadcrumb-item active"><a href="{{ url('/') }}">Dashboard</a></div>
+  <div class="breadcrumb-item"><a href="#">Member</a></div>
 </div>
 @endsection
 
@@ -22,7 +21,7 @@
         @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
         @elseif(session('failed'))
-        <div class="alert alert-success">{{ session('failed') }}</div>
+        <div class="alert alert-danger">{{ session('failed') }}</div>
         @endif
         <div class="table-responsive">
           <table class="table table-striped" id="table-1">
@@ -54,7 +53,7 @@
                 <td>{{ $member['name'] }}</td>
                 <td>{{ $member['email'] }}</td>
                 <td>
-                  <a href="{{ url('account/user/show').'/'.$member['id'] }}" class="btn btn-info btn-action" data-toggle="tooltip" data-original-title="Detail">
+                  <a href="{{ url('account/user/detail').'/'.$member['id'] }}" class="btn btn-info btn-action" data-toggle="tooltip" data-original-title="Detail">
                     <i class="fas fa-info"></i>
                   </a>
                   <a href="{{ url('account/user/edit').'/'.$member['id'] }}" class="btn btn-warning btn-action" data-toggle="tooltip" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>

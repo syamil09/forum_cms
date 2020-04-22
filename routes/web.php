@@ -37,6 +37,7 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 		Route::get('/create','account\UserController@create');
 		Route::post('/store','account\UserController@store');
 		Route::get('/edit/{id}','account\UserController@edit');
+		Route::get('/detail/{id}','account\UserController@show');
 		Route::post('/update/{id}','account\UserController@update');
 		Route::post('/delete','account\UserController@delete');
 	});
