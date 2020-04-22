@@ -22,6 +22,20 @@
         <form method="POST" action="{{  url('company/shop/store') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
           @csrf
           <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Store</label>
+            <div class="col-sm-12 col-md-7">
+              <select class="form-control selectric" name="store_id">
+                @if($store == null)
+                <option>Add Store First</option>
+                @else
+                @foreach ($store as $str)
+                  <option value="{{$str['id']}}">{{$str['name']}}</option>
+                @endforeach
+                @endif
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
             <div class="col-sm-12 col-md-7">
               <input type="text" class="form-control" name="name" value="{{old('name')}}">
@@ -60,18 +74,6 @@
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Price</label>
             <div class="col-sm-12 col-md-7">
               <input type="number" class="form-control" name="price" value="{{old('price')}}">
-            </div>
-          </div>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Contact</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="number" class="form-control" name="contact" value="{{old('contact')}}">
-            </div>
-          </div>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Location</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" name="location" value="{{old('location')}}">
             </div>
           </div>
           <div class="form-group row mb-4">

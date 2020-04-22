@@ -29,9 +29,11 @@ class ShopController extends Controller
         $shops = ($response['success'] == false)?null:$response['data'];
         $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
         $category = ($getcategory['success'] == false)?null:$getcategory['data'];
+        $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
+        $store = $getstore['success'] == false ? null : $getstore['data'];
         $message = $response['message'];
 
-        return view('app.company.shop.index', compact('shops', 'category', 'message'));
+        return view('app.company.shop.index', compact('shops', 'category', 'store', 'message'));
     }
 
     /**
@@ -44,7 +46,9 @@ class ShopController extends Controller
       $token = $request->session()->get('token');
       $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
       $category = ($getcategory['success'] == false)?null:$getcategory['data'];
-        return view('app.company.shop.create', compact('category'));
+      $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
+      $store = $getstore['success']  == false ? null : $getstore['data'];
+        return view('app.company.shop.create', compact('category', 'store'));
     }
 
     /**
