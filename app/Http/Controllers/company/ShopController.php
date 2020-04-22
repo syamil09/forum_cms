@@ -27,11 +27,9 @@ class ShopController extends Controller
         // return $response;
 
         $shops = ($response['success'] == false)?null:$response['data'];
-        $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
-        $category = ($getcategory['success'] == false)?null:$getcategory['data'];
         $message = $response['message'];
 
-        return view('app.company.shop.index', compact('shops', 'category', 'message'));
+        return view('app.company.shop.index', compact('shops', 'message'));
     }
 
     /**
@@ -44,7 +42,9 @@ class ShopController extends Controller
       $token = $request->session()->get('token');
       $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
       $category = ($getcategory['success'] == false)?null:$getcategory['data'];
-        return view('app.company.shop.create', compact('category'));
+      $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
+      $store = $getstore['success']  == false ? null : $getstore['data'];
+        return view('app.company.shop.create', compact('category', 'store'));
     }
 
     /**
@@ -57,6 +57,14 @@ class ShopController extends Controller
     {
       // return $request->all();
         $token = $request->session()->get('token');
+
+        $request->validate([
+          'name' => 'required',
+          'price' => 'required',
+          'image' => 'required',
+          'description' => 'required',
+        ]);
+
         $data = $request->except('image');
         $photo['name'] = 'photo';
         $photo['contents'] = '';
@@ -89,10 +97,8 @@ class ShopController extends Controller
 
       $response = $this->get(env('GATEWAY_URL').'shop/item/edit/'.$id, $token);
       $detail = $response['data'];
-      $category = $this->get(env('GATEWAY_URL').'shop/category',$token);
-      $category = ($category['success'])?$category['data']:null;
 
-      return view('app.company.shop.detail', compact('detail','category'));
+      return view('app.company.shop.detail', compact('detail'));
     }
 
     /**
@@ -108,7 +114,9 @@ class ShopController extends Controller
       $shop = $response['data'];
       $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
       $category = ($getcategory['success'] == false)?null:$getcategory['data'];
-      return view('app.company.shop.edit',compact('shop', 'category'));
+      $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
+      $store = $getstore['success']  == false ? null : $getstore['data'];
+      return view('app.company.shop.edit',compact('shop', 'category', 'store'));
     }
 
     /**

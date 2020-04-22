@@ -31,13 +31,7 @@
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Category : </label>
-            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">
-              @foreach ($category as $cat)
-              @if ($detail['category_id'] == $cat['id'])
-              {{$cat['category']}}
-              @endif
-              @endforeach
-            </label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['category']['category']}}</label>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Description : </label>
@@ -48,12 +42,18 @@
             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['price']}}</label>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Contact : </label>
-            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['contact']}}</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Phone : </label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['store']['phone']}}</label>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Location : </label>
-            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['location']}}</label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['store']['location']}}</label>
+          </div>
+          <div class="form-group row mb-4">
+            <div class="col-sm-12 col-md-4 text-md-right">
+              <img src="{{$detail['store']['logo']}}" alt="logo store" style="height:50px">
+            </div>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['store']['name']}}</label>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3"></label>

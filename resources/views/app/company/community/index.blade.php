@@ -16,7 +16,8 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <a href="{{ url('company/community/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Community</a>
+        <a href="{{ url('company/community/create') }}" class="btn btn-lg btn-primary text-white rounded"><i
+            class="fas fa-plus"></i>&nbsp Add Community</a>
       </div>
       <div class="card-body">
 
@@ -34,19 +35,21 @@
           @else
           @foreach ($community as $com)
           <div class="col-md-3 card">
-            <img src="" alt="logo" class="card-img-top">
+            <img src="{{ $com['logo'] }}" alt="logo" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">{{$com['company_name']}}</h5>
               <!-- <p class="card-text"></p> -->
             </div>
             <div class="card-footer text-center">
-              <a href="{{url('company/about/' .$com['id'])}}" class="btn btn-success btn-sm">About</a>
-              <a href="{{url('company/community/detail/'.$com['id'])}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
-              <a href="{{url('company/community/edit/'.$com['id'])}}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+              <a href="{{url('company/community/detail/'.$com['id'])}}" class="btn btn-info btn-sm"><i
+                  class="fas fa-info"></i></a>
+              <a href="{{url('company/community/edit/'.$com['id'])}}" class="btn btn-warning btn-sm"><i
+                  class="fas fa-pencil-alt"></i></a>
               <form action="{{ url('company/community/delete') }}" method="post" class="d-inline form-del">
                 @csrf
                 <input type="hidden" name="id" value="{{$com['id']}}">
-                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('delete this data?');"><i
+                    class="fas fa-trash"></i></button>
               </form>
             </div>
           </div>
@@ -55,6 +58,6 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
 
-@endsection
+  @endsection
