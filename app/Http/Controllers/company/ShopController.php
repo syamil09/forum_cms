@@ -89,10 +89,8 @@ class ShopController extends Controller
 
       $response = $this->get(env('GATEWAY_URL').'shop/item/edit/'.$id, $token);
       $detail = $response['data'];
-      $category = $this->get(env('GATEWAY_URL').'shop/category',$token);
-      $category = ($category['success'])?$category['data']:null;
 
-      return view('app.company.shop.detail', compact('detail','category'));
+      return view('app.company.shop.detail', compact('detail'));
     }
 
     /**
