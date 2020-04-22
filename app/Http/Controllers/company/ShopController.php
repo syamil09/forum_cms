@@ -61,7 +61,7 @@ class ShopController extends Controller
         $request->validate([
           'name' => 'required',
           'price' => 'required',
-          'image' => 'required',
+          'image' => 'required | mimes:png,jpeg,jpg | max:3072',
           'description' => 'required',
         ]);
 

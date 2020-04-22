@@ -19,6 +19,11 @@
         <h4>Create Item</h4>
       </div>
       <div class="card-body">
+        @error('image')
+        <div class="alert alert-danger">
+          {{$message}}
+        </div>
+        @enderror
         <form method="POST" action="{{  url('company/shop/store') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
           @csrf
           <div class="form-group row mb-4">
