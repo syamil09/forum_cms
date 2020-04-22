@@ -166,10 +166,13 @@ Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function (
 		Route::get('/detail/{id}','company\CommunityController@show');
 
 	});
-	Route::group(['prefix' => 'about'], function () {
-		Route::get('/{id}', 'company\AboutController@edit');
-		Route::post('/add', 'company\AboutController@store');
-		Route::post('/update/{id}', 'company\AboutController@update');
+	Route::group(['prefix' => 'secretariat'], function () {
+		Route::get('/','company\SecretariatController@index');
+		Route::get('/create','company\SecretariatController@create');
+		Route::get('edit/{id}', 'company\SecretariatController@edit');
+		Route::post('/add', 'company\SecretariatController@store');
+		Route::post('/update/{id}', 'company\SecretariatController@update');
+		Route::post('/delete', 'company\SecretariatController@delete');
 	});
 
 	// ------------------ shop -------------------
