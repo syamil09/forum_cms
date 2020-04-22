@@ -51,8 +51,7 @@ class ArticleController extends Controller
         if ($response['success']) {
             return redirect('general/article')->with('success', 'Data created');
         }
-
-        return redirect('general/article')->with('failed', 'Data Doesnt Created');
+        return redirect('general/article/create')->with('failed', 'Data Doesnt Created ,' . collect($response['message'])->first()[0]);
     }
 
     public function show(Request $req, $id)

@@ -31,13 +31,6 @@ class LoginController extends Controller
             $req->session()->put('data',$dataSession);
             $req->session()->put('menu','dashboard');
 
-            // $priv = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$response['data']['user_group_id'],$response['token']);
-            // $menuGroup = $this->get(env('GATEWAY_URL').'menu-group',$response['token']);
-            // $menu = $this->get(env('GATEWAY_URL').'menu',$response['token']);
-            // $req->session()->put('privileges',$priv['data']);
-            // $req->session()->put('menu_group_user',$menuGroup['data']);
-            // $req->session()->put('menu_user',$menu['data']);
-            // return session()->get('menu_user');
             return redirect('/')->with('success','You are login');
         }
         return redirect('/login')->with('failed','Invalid email / password');

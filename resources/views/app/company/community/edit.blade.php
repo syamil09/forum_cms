@@ -19,8 +19,9 @@
         <h4>Edit Community</h4>
       </div>
       <div class="card-body">
-        <form method="POST" action="{{  url('company/community/update/'.$company['id']) }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
-        @csrf
+        <form method="POST" action="{{  url('company/community/update/'.$company['id']) }}" class="needs-validation"
+          novalidate="" enctype="multipart/form-data">
+          @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Company Name</label>
             <div class="col-sm-12 col-md-7">
@@ -28,17 +29,35 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Current Key</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Company Full Name</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" value="" name="comp_key">
+              <input type="text" class="form-control" value="{{$company['full_name']}}" name="full_name">
             </div>
           </div>
-          <!-- <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">New Key</label>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Logo</label>
             <div class="col-sm-12 col-md-7">
-              <input type="password" class="form-control" value="" name="new_comp_key">
+              <div id="image-preview" class="image-preview">
+                <label for="image-upload" id="image-label">Choose File</label>
+                <input type="file" name="logo" id="image-upload" />
+              </div>
             </div>
-          </div> -->
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Background</label>
+            <div class="col-sm-12 col-md-7">
+              <div id="image-preview" class="image-preview">
+                <label for="image-upload" id="image-label">Choose File</label>
+                <input type="file" name="background" id="image-upload" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">History</label>
+            <div class="col-sm-12 col-md-7">
+              <textarea class="summernote-simple" name="history">{{$company['history']}}</textarea>
+            </div>
+          </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">
@@ -46,7 +65,7 @@
               <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
           </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>

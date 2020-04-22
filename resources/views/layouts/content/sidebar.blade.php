@@ -1,7 +1,7 @@
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="index.html">Stisla</a>
+      <a href="index.html">Forum</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
       <a href="index.html">St</a>
@@ -36,6 +36,7 @@
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Companies</span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{url('company/community')}}">Community</a></li>
+          <li><a class="nav-link" href="{{url('company/secretariat')}}">Secretariat</a></li>
           <li><a class="nav-link" href="{{url('company/shop')}}">Shop</a></li>
         </ul>
       </li>

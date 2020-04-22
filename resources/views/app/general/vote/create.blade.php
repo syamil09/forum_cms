@@ -66,7 +66,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
 
-                            <div class="text-md-left col-12 col-md-2 col-lg-2">
+                            <div class="col-sm-12 col-md-7">
                                 <a class="btn btn-secondary" href="{{ route('vote.index') }}">Cancel</a>
                                 <button id="btnSubmit" class="btn btn-primary">Create Vote</button>
                             </div>

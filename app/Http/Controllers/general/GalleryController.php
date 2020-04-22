@@ -33,15 +33,18 @@ class GalleryController extends Controller
         $token = $request->session()->get('token');
         $data = $request->except('image');
         $data['event_id'] = $event_id;
-
-        foreach ($request['image'] as $i => $value) {
+     
+        $img[0]['name'] = 'image[]';
+        $img[0]['contents'] = '';
+        if ($request->has('image')) {
+          foreach ($request['image'] as $i => $value) {
             $img[$i]['name'] = 'photo[]';
             $img[$i]['contents'] = fopen($value, 'r');
             $img[$i]['filename'] = 'photo.png';
+            }
         }
-        // dd($img);
         $response = $this->postMulti(env('GATEWAY_URL').'event/gallery/add',$data,$token,null,$img);
-        // return $response;
+     
         if($response['success'])
         {
             // LogActivity::addToLog('Added Data City');

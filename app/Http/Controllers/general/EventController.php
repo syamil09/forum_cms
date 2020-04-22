@@ -32,15 +32,18 @@ class EventController extends Controller
     {
         $token = $request->session()->get('token');
         $data = $request->except('image');
-
-        $img['name'] = 'image';
-        $img['contents'] = '';
+        
+        $img[0]['name'] = 'image[]';
+        $img[0]['contents'] = '';
         if ($request->has('image')) {
-          $img['contents'] = fopen($request->image, 'r');
-          $img['filename'] = 'event.png';
+          foreach ($request['image'] as $i => $value) {
+            $img[$i]['name'] = 'image[]';
+            $img[$i]['contents'] = fopen($value, 'r');
+            $img[$i]['filename'] = 'event.png';
+            }
         }
 
-        $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token, $img);
+        $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,$img);
         // return $response;
         if($response['success'])
         {
@@ -54,10 +57,9 @@ class EventController extends Controller
 
     public function show(Request $req, $id)
     {
-        $token = $req->session()->get('token');
-
+        $token    = $req->session()->get('token');
         $response = $this->get(env('GATEWAY_URL'). 'event/edit/'. $id, $token);
-        $event = ($response['success'])?$response['data']:null;
+        $event    = $response['success'] ? $response['data'] : null;
 
         return view('app.general.event.detail', compact('event'));
     }
@@ -66,7 +68,15 @@ class EventController extends Controller
     {
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'event/edit/'.$id,$token);
-        $edit       = ($response['success'])?$response['data']:null;
+        $edit       = $response['success'] ? $response['data'] : null;
+        if($edit != null) {
+            $start               = date_create($edit['event_start']);
+            $end                 = date_create($edit['event_end']);
+            $edit['event_start'] = date_format($start,"Y-m-d");
+            $edit['event_end']   = date_format($end,"Y-m-d");
+
+        }
+
         return view('app.general.event.edit',compact('edit'));
     }
 
@@ -77,14 +87,17 @@ class EventController extends Controller
         $token = session()->get('token');
         // return $data;
 
-        $img['name'] = 'image';
-        $img['contents'] = '';
+        $img[0]['name'] = 'image[]';
+        $img[0]['contents'] = '';
         if ($request->has('image')) {
-          $img['contents'] = fopen($request->image, 'r');
-          $img['filename'] = 'event.png';
+          foreach ($request['image'] as $i => $value) {
+            $img[$i]['name'] = 'image[]';
+            $img[$i]['contents'] = fopen($value, 'r');
+            $img[$i]['filename'] = 'event.png';
+            }
         }
 
-        $response = $this->postMulti(env('GATEWAY_URL').'event/update/'.$id,$data,$token, $img);
+        $response = $this->postMulti(env('GATEWAY_URL').'event/update/'.$id,$data,$token,null,$img);
         // return $response;
         if($response['success'])
         {
@@ -98,8 +111,8 @@ class EventController extends Controller
     public function delete(Request $req)
     {
         $token = $req->session()->get('token');
-        $response = $this->post(env('GATEWAY_URL').'event/delete',$req->all(),$token);
-
+        $response = $this->post(env('GATEWAY_URL').'event/delete',$req->only('id'),$token);
+        // dd($req->all());
         if($response['success'])
         {
             // LogActivity::addToLog('Deleted Data City');

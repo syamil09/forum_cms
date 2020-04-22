@@ -47,7 +47,7 @@
                                     </td>
                                     <td>{{ $vote['total_voter'] }}</td>
 
-                                    <td width="129px">
+                                    <td width="150px">
                                         <div class="btn-group">
                                             <a href="{{ route('vote.show', $vote['id']) }}" class="btn btn-info"><i class="fa fa-eye"></i></a>
                                         </div>

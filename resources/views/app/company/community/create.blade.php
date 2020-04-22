@@ -19,12 +19,19 @@
         <h4>Create Community</h4>
       </div>
       <div class="card-body">
-        <form method="POST" action="{{  url('company/community/store') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form method="POST" action="{{  url('company/community/store') }}" class="needs-validation" novalidate=""
+          enctype="multipart/form-data">
           @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Community Name</label>
             <div class="col-sm-12 col-md-7">
               <input type="text" class="form-control" name="company_name" value="{{old('company_name')}}">
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Community Full Name</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="text" class="form-control" name="full_name" value="{{old('full_name')}}">
             </div>
           </div>
           <div class="form-group row mb-4">
@@ -34,12 +41,27 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Spalsh Screen</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Logo</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview" style="background-image: {{url('UploadedFile/SplashScreen/default.jpg')}}">
+              <div id="image-preview" class="image-preview">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="spalsh_screen" id="image-upload" />
+                <input type="file" name="logo" id="image-upload" />
               </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Background</label>
+            <div class="col-sm-12 col-md-7">
+              <div id="image-preview" class="image-preview">
+                <label for="image-upload" id="image-label">Choose File</label>
+                <input type="file" name="background" id="image-upload" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">History</label>
+            <div class="col-sm-12 col-md-7">
+              <textarea class="summernote-simple" name="history">{{old('history')}}</textarea>
             </div>
           </div>
           <div class="form-group row mb-4">
