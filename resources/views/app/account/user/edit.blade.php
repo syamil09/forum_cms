@@ -22,6 +22,15 @@
 				<form action="{{ url('account/user/update').'/'.$member['id'] }}" method="POST" class="needs-validation" novalidate="">
 					@csrf
 					<div class="form-group">
+						<label>Photo</label>
+						<div class="col-sm-12 col-md-7">
+			              <div id="image-preview" class="image-preview" style="background-image: url({{ $member['photo'] }});">
+			                <label for="image-upload" id="image-label">Choose File</label>
+			                <input type="file" name="photo" id="image-upload" multiple />
+			              </div>
+			            </div>
+					</div>
+					<div class="form-group">
 						<label>Name</label>
 						<input type="text" class="form-control" name="name" value="{{ $member['name'] }}" required>
 					</div>
@@ -37,9 +46,22 @@
 						<label>Password</label>
 						<input type="password" class="form-control" name="password" required>
 				    </div> -->
+				    <div class="form-group">
+						<label>Date of birth</label>
+						<input type="text" class="form-control" name="date_birth" value="{{ $member['date_birth'] }}">
+					</div>
+					<div class="form-group">
+						<label>Phone number</label>
+						<input type="text" class="form-control" name="phone" value="{{ $member['phone'] }}">
+					</div>
+					<div class="form-group">
+						<label>City</label>
+						<input type="text" class="form-control" name="city" value="{{ $member['city'] }}">
+					</div>
 
-					<button type="submit" class="btn btn-primary">Save Change</button>
 					<a href="{{ url('account/user') }}" class="btn btn-secondary">Back</a>
+					<button type="submit" class="btn btn-primary">Save Change</button>
+					
 				</form>
 			</div>
 		</div>

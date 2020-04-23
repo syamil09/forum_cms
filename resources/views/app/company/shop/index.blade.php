@@ -37,12 +37,13 @@
             <img src="{{$shop['photo']}}" alt="photo" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">{{$shop['name']}}</h5>
-              <p class="card-text">
-                @foreach ($category as $cat)
-                @if ($shop['category_id'] == $cat['id']) {{ $cat['category'] }} @endif
-                @endforeach
-              </p>
-              <!-- <p class="card-text">{{$shop['price']}}</p> -->
+              <p class="card-text btn btn-outline-secondary btn-sm">{{$shop['category']['category']}}</p>
+              <div class="form-group row mb-4">
+                <div class="col-sm-12 col-md-1 text-md-right">
+                  <img src="{{$shop['store']['logo']}}" alt="logo store" style="height:20px">
+                </div>
+                <label class="col-form-label text-md-left col">{{$shop['store']['name']}}</label>
+              </div>
             </div>
             <div class="card-footer text-center">
               <a href="{{url('company/shop/detail/'.$shop['id'])}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
