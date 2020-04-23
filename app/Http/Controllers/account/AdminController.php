@@ -13,71 +13,57 @@ use App\Helpers\LogActivity;
 class AdminController extends Controller
 {
 
-    public function index(Request $req)
+    public function index(Request $request)
     {
-        return view('app.account.admin.index');
+      $token = $request->session()->get('token');
+      $getadmin = $this->get(env('GATEWAY_URL'). 'admin', $token);
+      $admin = $getadmin['success'] == false ? null : $getadmin['data'];
+      $message = $getadmin['message'];
+        return view('app.account.admin.index', compact('admin', 'message'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('app.account.admin.create');
+      $token = session()->get('token');
+      $getcompany = $this->get(env('GATEWAY_URL'). 'company', $token);
+      $company = $getcompany['success'] == false ? null : $getcompany['data'];
+        return view('app.account.admin.create', compact('company'));
     }
 
 
     public function store(Request $request)
-    {   
-
+    {
         $token = $request->session()->get('token');
+        $data = $request->except('confirm', 'image');
         $validator = Validator::make($request->all(),[
             'username'    => 'required',
             'password'    => 'required',
-            'repassword'  => 'required',
             'name'        => 'required',
             'email'       => 'required',
-            'privileges'  => 'required',
-            'photo' => 'required | mimes:png,jpeg,jpg, | max:3072',
+            'image' => 'required | mimes:png,jpeg,jpg, | max:3072',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('failed',$validator->getMessageBag()->first())->withInput();         
+            return redirect()->back()->with('failed',$validator->getMessageBag()->first());
         }
 
-        $userGroup = $this->get(env('GATEWAY_URL').'user-group/edit/'.$request['privileges'],$token);
-        $privileges = $userGroup['data']['name'];
-
-        if($request->password != $request->repassword)
+        if($request->password != $request->confirm)
         {
-            return redirect('account/user/create')->with('failed','Password Doesnt Match');
+            return redirect()->back()->with('failed','Password Doesnt Match');
         }
 
-        $file = $request->file('photo');
-
+        $file = $request->file('image');
         $name_file = time()."_".$file->getClientOriginalName();
-
         $loc_file = public_path('UploadedFile/UserPhoto');
-
         $file->move($loc_file,$name_file);
 
-
-        $data = [
-            'username' => $request['username'],
-            'email' => $request['email'],
-            'password' => $request['password'],
-            'name' => $request['email'],
-            'user_group_id' => $request['privileges'],
-            'privileges' => $privileges,
-            'photo' => $name_file
-        ];
-
-        
-        $response = $this->post(env('GATEWAY_URL').'user/add',$data,$token);
+        $response = $this->post(env('GATEWAY_URL').'admin/add',$data,$token);
 
         if($response['success'])
         {
-            LogActivity::addToLog('Added Data User');
-            return redirect('account/user')->with('success','Data '.$response['data']['username'].' Created');
+            return redirect('account/admin')->with('success','Data Admin Created');
         }else {
-            return redirect('account/user')->with('failed','Data '.$response['data']['username'].' Doesnt Created,'.$response['message']);
+            return redirect('account/admin')->with('failed','Data Admin Doesnt Created');
         }
 
     }
@@ -99,7 +85,7 @@ class AdminController extends Controller
         $data = $request->except('_token','repassword');
         $token = session()->get('token');
         $userGroup = $this->get(env('GATEWAY_URL').'user-group/edit/'.$request['privileges']    ,$token);
-        
+
         $privileges = $userGroup['data']['name'];
 
         // jika merubah password tapi tidak sama saat confirm password
@@ -128,7 +114,7 @@ class AdminController extends Controller
                 // return redirect()->back()->withInput()->with('failed','image must be have extension : jpg,jpeg,png');
                 return redirect()->back()->with('failed',$validator->getMessageBag()->first())->withInput();
             }
-            
+
             $img = $this->get(env('GATEWAY_URL').'user/edit/'.$id,$token)['data'];
             File::delete('UploadedFile/UserPhoto/'.$img['photo']);
 
@@ -141,7 +127,7 @@ class AdminController extends Controller
             $file->move($loc_file,$name_file);
 
             $data['photo'] = $name_file;
-            
+
         }
 
         // return $data;
