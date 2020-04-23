@@ -66,11 +66,14 @@ class ShopController extends Controller
         ]);
 
         $data = $request->except('image');
-        $photo['name'] = 'photo';
-        $photo['contents'] = '';
+        $photo[0]['name'] = 'photo[]';
+        $photo[0]['contents'] = '';
         if($request->has('image')) {
-            $photo['contents'] = fopen($request->image, 'r');
-            $photo['filename'] = 'shop.png';
+          foreach ($request['image'] as $key => $value) {
+            $photo[$key]['name'] = 'photo[]';
+            $photo[$key]['contents'] = fopen($value, 'r');
+            $photo[$key]['filename'] = 'shop.png';
+          }
         }
 
         // dd($photo);
@@ -132,11 +135,14 @@ class ShopController extends Controller
 
       $data = $request->except('_token','image');
 
-      $photo['name'] = "photo";
-      $photo['contents'] = '';
-      if ($request->image != null) {
-        $photo['contents'] = fopen($request->image,'r');
-        $photo['filename'] = 'shop.png';
+      $photo[0]['name'] = 'photo[]';
+      $photo[0]['contents'] = '';
+      if($request->has('image')) {
+        foreach ($request['image'] as $key => $value) {
+          $photo[$key]['name'] = 'photo[]';
+          $photo[$key]['contents'] = fopen($value, 'r');
+          $photo[$key]['filename'] = 'shop.png';
+        }
       }
 
       $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token,$photo);

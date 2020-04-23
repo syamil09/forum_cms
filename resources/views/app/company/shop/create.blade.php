@@ -43,7 +43,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name')}}">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name')}}" required>
               @error('name')
               <div class="invalid-feedback">{{$message}}</div>
               @enderror
@@ -68,7 +68,7 @@
             <div class="col-sm-12 col-md-7">
               <div id="image-preview" class="image-preview">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload" />
+                <input type="file" name="image[]" id="image-upload" multiple required />
               </div>
             </div>
           </div>
