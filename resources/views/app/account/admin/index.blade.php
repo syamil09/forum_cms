@@ -19,6 +19,9 @@
         <a href="{{url('account/admin/create')}}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i> Add Admin</a>
       </div>
       <div class="card-body">
+        @if(session('failed'))
+        <div class="alert alert-danger">{{session('failed')}}</div>
+        @endif
         <div class="table-responsive">
           <table class="table table-striped" id="table-1">
             <thead>
@@ -33,15 +36,15 @@
             <tbody>
               @foreach($admin as $adm)
               <tr>
-                <td>{{ $adm['company']['company_name'] }}</td>
+                <td>{{ $adm['company']['full_name'] }}</td>
                 <td>
                   <img src="{{ $adm['photo'] }}" alt="photo" style="width: 50px;">
                 </td>
                 <td>{{ $adm['username'] }}</td>
                 <td>{{ $adm['role'] }}</td>
                 <td>
-                  <a class="btn btn-info btn-sm text-white" href="{{url('account/admin/detail/'. $adm['id']) }}"><i class="fas fa-info"></i></a>
-                  <a title="" class="btn btn-warning btn-sm text-white" href="{{url('account/admin/edit/'. $adm['id']) }}"><i class="fas fa-pencil-alt"></i></a>
+                  <a class="btn btn-info btn-sm text-white" href="{{url('account/admin/detail/'. $adm['company_id']) }}"><i class="fas fa-info"></i></a>
+                  <a title="" class="btn btn-warning btn-sm text-white" href="{{url('account/admin/edit/'. $adm['company_id']) }}"><i class="fas fa-pencil-alt"></i></a>
                   <form action="{{ url('account/admin/delete') }}" method="post" class="d-inline form-del">
                       @csrf
                       <input type="hidden" name="id" value="{{$adm['id']}}">
