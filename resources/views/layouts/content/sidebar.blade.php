@@ -9,7 +9,7 @@
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
       <li class=" active">
-        <a href="{{ url('/') }}" class="nav-link><i class=" fas fa-fire"></i><span>Dashboard</span></a>
+        <a href="{{ url('/') }}" class="nav-link"><i class=" fas fa-fire"></i><span>Dashboard</span></a>
       </li>
       <li class="menu-header">Starter</li>
       <li class="nav-item dropdown">
@@ -27,7 +27,7 @@
           <li><a class="nav-link" href="{{ url('general/article_category/') }}">Article Category</a></li>
           <li><a class="nav-link" href="{{ url('general/event/') }}">Event</a></li>
           <li><a class="nav-link" href="{{ url('general/vote') }}">Vote</a></li>
-          <li><a class="nav-link" href="{{ url('general/splashscreen') }}">Splash Screen</a></li>
+          <!-- <li><a class="nav-link" href="{{ url('general/splashscreen') }}">Splash Screen</a></li> -->
           <li><a class="nav-link" href="{{ url('general/walkthrough') }}">Walk Through</a></li>
           <li><a class="nav-link" href="{{ url('general/highlight') }}">Highlight</a></li>
         </ul>
@@ -38,6 +38,7 @@
           <li><a class="nav-link" href="{{url('company/community')}}">Community</a></li>
           <li><a class="nav-link" href="{{url('company/secretariat')}}">Secretariat</a></li>
           <li><a class="nav-link" href="{{url('company/shop')}}">Shop</a></li>
+          <li><a class="nav-link" href="{{url('company/store')}}">Store</a></li>
         </ul>
       </li>
     </ul>

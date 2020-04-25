@@ -168,6 +168,8 @@ Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function (
 		Route::get('/detail/{id}','company\CommunityController@show');
 
 	});
+
+	// ------------------ secrtariat -------------------
 	Route::group(['prefix' => 'secretariat'], function () {
 		Route::get('/','company\SecretariatController@index');
 		Route::get('/create','company\SecretariatController@create');
@@ -186,6 +188,17 @@ Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function (
 		Route::post('/update/{id}','company\ShopController@update');
 		Route::post('/delete','company\ShopController@delete');
 		Route::get('/detail/{id}','company\ShopController@show');
+	});
+
+	// ------------------ store -------------------
+	Route::group(['prefix' => 'store'], function () {
+		Route::get('/','company\StoreController@index');
+		Route::get('/create','company\StoreController@create');
+		Route::post('/store','company\StoreController@store');
+		Route::get('/edit/{id}','company\StoreController@edit');
+		Route::post('/update/{id}','company\StoreController@update');
+		Route::post('/delete','company\StoreController@destroy');
+		Route::get('/detail/{id}','company\StoreController@show');
 	});
 
 });
