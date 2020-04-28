@@ -33,7 +33,12 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('app.company.store.create');
+      $token = session()->get('token');
+      $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+      $profile = $profile['success'] ? $profile['data'] : null;
+      $company = $this->get(env('GATEWAY_URL'). 'company', $token);
+      $company = $company['data'];
+        return view('app.company.store.create', compact('profile', 'company'));
     }
 
     /**
@@ -133,7 +138,7 @@ class StoreController extends Controller
         {
             return redirect('company/store')->with('success','Data Updated');
         }else {
-            return redirect('company/store')->with('failed','Data Doesnt Updated. ');
+            return redirect('company/store')->with('failed','Data Doesnt Updated. '. $response['message']);
         }
     }
 

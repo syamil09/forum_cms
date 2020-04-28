@@ -26,6 +26,22 @@
         @enderror
         <form method="POST" action="{{  url('company/shop/store') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
           @csrf
+          @if($profile['company_id'] == null)
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">company_id</label>
+            <div class="col-sm-12 col-md-7">
+              <select class="form-control selectric" name="company_id">
+                @if($company == null)
+                <option>Add Company First</option>
+                @else
+                @foreach ($company as $com)
+                  <option value="{{$com['id']}}">{{$com['company_name']}}</option>
+                @endforeach
+                @endif
+              </select>
+            </div>
+          </div>
+          @endif
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Store</label>
             <div class="col-sm-12 col-md-7">

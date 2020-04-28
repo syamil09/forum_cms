@@ -24,7 +24,12 @@ class EventController extends Controller
 
     public function create()
     {
-        return view('app.general.event.create');
+      $token = session()->get('token');
+      $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+      $profile = $profile['success'] ? $profile['data'] : null;
+      $company = $this->get(env('GATEWAY_URL'). 'company', $token);
+      $company = $company['data'];
+        return view('app.general.event.create', compact('profile', 'company'));
     }
 
 
@@ -32,7 +37,7 @@ class EventController extends Controller
     {
         $token = $request->session()->get('token');
         $data = $request->except('image');
-        
+
         $img[0]['name'] = 'image[]';
         $img[0]['contents'] = '';
         if ($request->has('image')) {

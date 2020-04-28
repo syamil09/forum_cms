@@ -22,7 +22,11 @@ class ArticleController extends Controller
     {
         $token = session()->get('token');
         $categorys = $this->get(env('GATEWAY_URL') . 'article_category', $token)['data'];
-        return view('app.general.article.create', compact('categorys'));
+        $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+        $profile = $profile['success'] ? $profile['data'] : null;
+        $company = $this->get(env('GATEWAY_URL'). 'company', $token);
+        $company = $company['data'];
+        return view('app.general.article.create', compact('categorys', 'profile', 'company'));
     }
 
 

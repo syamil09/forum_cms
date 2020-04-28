@@ -20,7 +20,7 @@ class CheckLogin
         {
             return redirect('login');
         }
-        $response = $this->get(env('GATEWAY_URL').'admin',session()->get('token'));
+        $response = $this->get(env('GATEWAY_URL').'admin/profile',session()->get('token'));
         // dd(session()->get('data')['user_id']);
         if($response['success'] == false)
         {
@@ -40,7 +40,7 @@ class CheckLogin
                 'Authorization' => $token == null?"":$token
             ]
         ]);
-        
+
         $result = json_decode($response->getBody(),true);
 
         return $result;

@@ -54,9 +54,9 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Photo</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview" style="background-image: url({{$shop['photo']}})">
+              <div id="image-preview" class="image-preview" style="background-image: url({{$shop['photo'][0]}})">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload" />
+                <input type="file" name="image[]" id="image-upload" multiple />
               </div>
             </div>
           </div>

@@ -44,7 +44,11 @@ class ShopController extends Controller
       $category = ($getcategory['success'] == false)?null:$getcategory['data'];
       $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
       $store = $getstore['success']  == false ? null : $getstore['data'];
-        return view('app.company.shop.create', compact('category', 'store'));
+      $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+      $profile = $profile['success'] ? $profile['data'] : null;
+      $company = $this->get(env('GATEWAY_URL'). 'company', $token);
+      $company = $company['data'];
+        return view('app.company.shop.create', compact('category', 'store', 'profile', 'company'));
     }
 
     /**

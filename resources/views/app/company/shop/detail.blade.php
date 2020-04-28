@@ -22,7 +22,11 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Photo</label>
             <div class="col-sm-12 col-md-7">
-              <img src="{{$detail['photo']}}" alt="photo" style="height:270px">
+              @foreach($detail['photo'] as $photo)
+              <div class="col-sm-4">
+                <img src="{{$photo}}" alt="photo" style="height:270px">
+              </div>
+              @endforeach
             </div>
           </div>
           <div class="form-group row mb-4">
