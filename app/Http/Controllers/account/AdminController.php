@@ -65,7 +65,7 @@ class AdminController extends Controller
         {
             return redirect('account/admin')->with('success','Data Admin Created');
         }else {
-            return redirect('account/admin')->with('failed','Data Admin Doesnt Created '. $response['message']);
+            return redirect('account/admin')->with('failed','Data Admin Doesnt Created, '. $response['message']);
         }
 
     }

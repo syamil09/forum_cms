@@ -75,7 +75,7 @@ class StoreController extends Controller
             return redirect('company/store')->with('success', 'Data Created');
         }
 
-        return redirect('company/store')->with('failed', 'Data Doesnt Created. ' .$response['message']);
+        return redirect('company/store')->with('failed', 'Data Doesnt Created, ' .$response['message']);
     }
 
     /**
@@ -138,7 +138,7 @@ class StoreController extends Controller
         {
             return redirect('company/store')->with('success','Data Updated');
         }else {
-            return redirect('company/store')->with('failed','Data Doesnt Updated. '. $response['message']);
+            return redirect('company/store')->with('failed','Data Doesnt Updated, '. $response['message']);
         }
     }
 

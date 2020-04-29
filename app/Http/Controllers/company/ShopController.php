@@ -87,7 +87,7 @@ class ShopController extends Controller
             // LogActivity::addToLog('Added Data Mesjid');
             return redirect('company/shop')->with('success', 'Data Created');
         } else {
-          return redirect('company/shop')->with('failed', 'Data Doesnt Created.');
+          return redirect('company/shop')->with('failed', 'Data Doesnt Created, '. $response['message']);
         }
 
     }
