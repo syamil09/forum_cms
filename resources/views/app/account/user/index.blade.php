@@ -28,7 +28,11 @@
             <thead>
               <tr>
                 <th class="text-center" width="5%">
+                  @if($id != null)
                   #
+                  @else
+                  company_id
+                  @endif
                 </th>
                 <th width="10%">Photo</th>
                 <th>Name</th>
@@ -44,8 +48,12 @@
               @else
               @foreach($members as $member)
               <tr>
-                <td>
+                <td class="text-center">
+                  @if($id != null)
                   {{$loop->iteration}}
+                  @else
+                  {{$member['company_id']}}
+                  @endif
                 </td>
                 <td>
                   <img alt="image" src="{{ $member['photo'] }}" class="rounded-circle" width="35" data-toggle="tooltip" title="{{$member['name']}}">
