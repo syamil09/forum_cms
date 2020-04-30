@@ -98,7 +98,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         // dd('ok');
-        $data = $request->except('_token','oldpassword', 'confirm', 'image');
+        $data = $request->except('_token','oldpassword', 'confirm', 'image', 'password');
         $token = session()->get('token');
         // $userGroup = $this->get(env('GATEWAY_URL').'user-group/edit/'.$request['privileges']    ,$token);
 
@@ -114,6 +114,7 @@ class AdminController extends Controller
           {
             return redirect('account/admin/edit/'.$request['company_id'])->with('failed','Password Doesnt Match');
           }
+          $data['password'] = $request->password;
         }
 
         // jika user ganti photo
@@ -122,7 +123,7 @@ class AdminController extends Controller
         if($request->hasFile('image'))
         {
             $validator = Validator::make($request->all(),[
-                'photo' => 'max:3072',
+                'image' => 'max:3072',
             ]);
             if($validator->fails())
             {
@@ -140,7 +141,7 @@ class AdminController extends Controller
         {
             return redirect('account/admin')->with('success','Data Updated');
         }else {
-            return redirect('account/admin')->with('failed','Data Doesnt Updated.');
+            return redirect('account/admin')->with('failed','Data Doesnt Updated.'. $response['message']);
         }
     }
 
@@ -156,6 +157,75 @@ class AdminController extends Controller
             return redirect('account/admin')->with('failed','Data Doesnt Deleted');
         }
 
+    }
+
+    public function profile(Request $request)
+    {
+      $token = session()->get('token');
+      $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+      $profile = $profile['data'];
+      $getcompany = $this->get(env('GATEWAY_URL'). 'company', $token);
+      $company = $getcompany['data'];
+
+      return view('app.account.admin.profile', compact('profile', 'company'));
+    }
+
+    public function uprof(Request $request, $id)
+    {
+        // dd('ok');
+        $data = $request->except('_token','oldpassword', 'confirm', 'image', 'password');
+        $token = session()->get('token');
+        // $userGroup = $this->get(env('GATEWAY_URL').'user-group/edit/'.$request['privileges']    ,$token);
+
+        // $privileges = $userGroup['data']['name'];
+
+        // jika merubah password tapi tidak sama saat confirm password
+        if ($request->oldpassword != null || $request->password != null || $request->confirm != null) {
+          $validate = Validator::make($request->all(), [
+            'oldpassword' => 'required',
+            'password' => 'required',
+            'confirm' => 'required',
+          ]);
+          if ($validate->fails()) {
+            return redirect()->back()->with('failed', $validate->getMessageBag()->first());
+          }
+          $cekpass = $this->post(env('GATEWAY_URL'). 'admin/'.$id. '/cekpass', $request->only('oldpassword'), $token);
+          if ($cekpass['success'] == false) {
+            return redirect('account/admin/profile')->with('failed','Old Password is Wrong');
+          }
+          if($request->password != $request->confirm)
+          {
+            return redirect('account/admin/profile')->with('failed','Password Doesnt Match');
+          }
+          $data['password'] = $request->password;
+        }
+
+        // jika user ganti photo
+        $photo['name'] = 'photo';
+        $photo['contents'] = '';
+        if($request->hasFile('image'))
+        {
+            $validator = Validator::make($request->all(),[
+                'image' => 'max:3072',
+            ]);
+            if($validator->fails())
+            {
+                // return redirect()->back()->withInput()->with('failed','image must be have extension : jpg,jpeg,png');
+                return redirect()->back()->with('failed',$validator->getMessageBag()->first())->withInput();
+            }
+            $photo['contents'] = fopen($request->image, 'r');
+            $photo['filename'] = 'photo.png';
+        }
+
+        // return $data;
+        $response = $this->postMulti(env('GATEWAY_URL').'admin/update/'.$id,$data,$token,$photo);
+        // return $response;
+        if($response['success'])
+        {
+            return redirect('account/admin/profile')->with('success','Data Updated');
+        }else {
+            return redirect('account/admin/profile')->with('failed','Data Doesnt Updated.'. $response['message']);
+        }
     }
 
 }

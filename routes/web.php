@@ -50,6 +50,8 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 		Route::get('/detail/{id}','account\AdminController@show');
 		Route::post('/update/{id}','account\AdminController@update');
 		Route::post('/delete','account\AdminController@delete');
+		Route::get('/profile','account\AdminController@profile');
+		Route::post('/uprof/{id}','account\AdminController@uprof');
 	});
 
 
