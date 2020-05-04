@@ -48,7 +48,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Voting Period</label>
                             <div class="col-sm-12 col-md-7">
-                                <input name="voting_period" type="text" class="form-control rangeDateTimes">
+                                <input name="voting_period" type="text" class="form-control rangeDateTimes" required>
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -113,13 +113,12 @@
         var disabledArr = [{!! $DateNotAvailable !!}]
 
         $(".rangeDateTimes").daterangepicker({
-                    timePicker: true,
-                    timePicker24Hour: true,
-                    startDate: moment().startOf('hour'),
-                    endDate: moment().startOf('hour').add(72, 'hour'),
-                    locale: {
-                        format: 'D-M-Y H:mm'
-                    },
+            timePicker: true,
+            timePicker24Hour: true,
+            autoUpdateInput: false,
+            locale: {
+                format: 'DD-MM-YYYY H:mm'
+            },
             isInvalidDate: function(arg){
                 // Prepare the date comparision
                 var thisMonth = arg._d.getMonth()+1;   // Months are 0 based
@@ -138,45 +137,27 @@
                     return true; //arg._pf = {userInvalidated: true};
                 }
             }
-
         }, function (start, end) {
             var startDateTime = start.format('YYYY-MM-DD H:m');
             var endDateTime = end.format('YYYY-MM-DD H:m');
+
             if (startDateTime === endDateTime) {
                 alert('Please don\'t set end time same value with start time');
                 $(this).reset();
             }
-        });
 
-        $(".rangeDateTimes").on("apply.daterangepicker",function(e,picker){
-
-            // Get the selected bound dates.
-            var startDate = picker.startDate.format('YYYY-MM-DD')
-            var endDate = picker.endDate.format('YYYY-MM-DD')
-
-            // Compare the dates again.
             var clearInput = false;
             for(i=0;i<disabledArr.length;i++){
-                if(startDate<disabledArr[i] && endDate>disabledArr[i]){
-                    clearInput = true;
+                if(startDateTime<disabledArr[i] && endDateTime>disabledArr[i]){
+                    alert("Your range selection includes not available date!");
+                    $(this).reset();
                 }
             }
+            $(".rangeDateTimes").val(start.format('DD-MM-YYYY H:mm') + "-" + end.format('DD-MM-YYYY H:mm'));
 
-            // If a disabled date is in between the bounds, clear the range.
-            if(clearInput){
-
-                // To clear selected range (on the calendar).
-                var today = new Date();
-                $(this).data('daterangepicker').setStartDate(today);
-                $(this).data('daterangepicker').setEndDate(today);
-
-                // To clear input field and keep calendar opened.
-                $(this).val("").focus();
-
-                // Alert user!
-                alert("Your range selection includes not available date!");
-            }
+            $('#createVote').valid();
         });
+
 
         $(".select2").select2({
             templateResult: formatStateResult,
@@ -189,6 +170,7 @@
             $(this).trigger("change");
             $(this).valid();
         });
+
         function formatStateResult(opt) {
             if (!opt.id) {
                 return opt.text;
