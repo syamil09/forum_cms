@@ -69,9 +69,10 @@ class VoteController extends Controller
         $company = session()->get('data')['company_id'];
 
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
+        $DateNotAvailable = $this->get(env('GATEWAY_URL') . 'vote/notAvailableDate', $token);
         $users = $this->replaceExistData($users);
-
-        return view('app.general.vote.create', compact('users'));
+        $DateNotAvailable = '"'. implode('","',$this->replaceExistData($DateNotAvailable)) . '"';
+        return view('app.general.vote.create', compact('users', 'DateNotAvailable'));
     }
 
     /**

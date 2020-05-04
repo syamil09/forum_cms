@@ -110,21 +110,71 @@
     </script>
     {{-- End Valiidatoor --}}
     <script>
+        var disabledArr = [{!! $DateNotAvailable !!}]
 
-        $('.rangeDateTimes').daterangepicker({
-            timePicker: true,
-            timePicker24Hour: true,
-            startDate: moment().startOf('hour'),
-            endDate: moment().startOf('hour').add(72, 'hour'),
-            locale: {
-                format: 'D-M-Y H:mm'
-            },
+        $(".rangeDateTimes").daterangepicker({
+                    timePicker: true,
+                    timePicker24Hour: true,
+                    startDate: moment().startOf('hour'),
+                    endDate: moment().startOf('hour').add(72, 'hour'),
+                    locale: {
+                        format: 'D-M-Y H:mm'
+                    },
+            isInvalidDate: function(arg){
+                // Prepare the date comparision
+                var thisMonth = arg._d.getMonth()+1;   // Months are 0 based
+                if (thisMonth<10){
+                    thisMonth = "0"+thisMonth; // Leading 0
+                }
+                var thisDate = arg._d.getDate();
+                if (thisDate<10){
+                    thisDate = "0"+thisDate; // Leading 0
+                }
+                var thisYear = arg._d.getYear()+1900;   // Years are 1900 based
+
+                var thisCompare = thisYear +"-"+ thisMonth +"-"+ thisDate;
+
+                if($.inArray(thisCompare,disabledArr)!=-1){
+                    return true; //arg._pf = {userInvalidated: true};
+                }
+            }
+
         }, function (start, end) {
             var startDateTime = start.format('YYYY-MM-DD H:m');
             var endDateTime = end.format('YYYY-MM-DD H:m');
             if (startDateTime === endDateTime) {
                 alert('Please don\'t set end time same value with start time');
                 $(this).reset();
+            }
+        });
+
+        $(".rangeDateTimes").on("apply.daterangepicker",function(e,picker){
+
+            // Get the selected bound dates.
+            var startDate = picker.startDate.format('YYYY-MM-DD')
+            var endDate = picker.endDate.format('YYYY-MM-DD')
+
+            // Compare the dates again.
+            var clearInput = false;
+            for(i=0;i<disabledArr.length;i++){
+                if(startDate<disabledArr[i] && endDate>disabledArr[i]){
+                    clearInput = true;
+                }
+            }
+
+            // If a disabled date is in between the bounds, clear the range.
+            if(clearInput){
+
+                // To clear selected range (on the calendar).
+                var today = new Date();
+                $(this).data('daterangepicker').setStartDate(today);
+                $(this).data('daterangepicker').setEndDate(today);
+
+                // To clear input field and keep calendar opened.
+                $(this).val("").focus();
+
+                // Alert user!
+                alert("Your range selection includes not available date!");
             }
         });
 
