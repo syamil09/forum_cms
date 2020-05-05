@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -60,6 +61,7 @@ class LoginController extends Controller
     public function logout(Request $req)
     {
         $req->session()->flush();
+        Cache::flush();
          return redirect('/');
     }
 

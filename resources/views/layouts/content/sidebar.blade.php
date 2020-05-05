@@ -12,6 +12,17 @@
         <a href="{{ url('/') }}" class="nav-link"><i class=" fas fa-fire"></i><span>Dashboard</span></a>
       </li>
       <li class="menu-header">Starter</li>
+        {{--@php($GroupMenus = new \App\Helpers\Menu())--}}
+        {{--@foreach($GroupMenus->list() as $GroupMenu)--}}
+            {{--<li class="nav-item dropdown">--}}
+                {{--<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"> {!! $GroupMenu['icon'] !!} <span>{{ $GroupMenu['name'] }}</span></a>--}}
+                {{--<ul class="dropdown-menu">--}}
+                    {{--@foreach($GroupMenu['menu'] as $menu)--}}
+                        {{--<li><a class="nav-link" href="{{ url($menu['url']) }}">{{ $menu['name'] }}</a></li>--}}
+                    {{--@endforeach--}}
+                {{--</ul>--}}
+            {{--</li>--}}
+        {{--@endforeach--}}
       <li class="nav-item dropdown">
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Manage
             Users</span></a>
