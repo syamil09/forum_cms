@@ -55,7 +55,7 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 	});
 
 
-	Route::get('activity','account\LogActivityController@index');
+//	Route::get('activity','account\LogActivityController@index');
 });
 
 Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () {
@@ -141,19 +141,22 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::post('/update','general\HomeContentController@update');
 	});
 
-	// ------------------ about us -------------------
-	Route::group(['prefix' => 'about'],function () {
-		Route::get('/','general\AboutController@index');
-		Route::post('/update','general\AboutController@update');
-	});
+//	// ------------------ about us -------------------
+//	Route::group(['prefix' => 'about'],function () {
+//		Route::get('/','general\AboutController@index');
+//		Route::post('/update','general\AboutController@update');
+//	});
 
 	// ------------------ contact -------------------
-	Route::group(['prefix' => 'contact'],function () {
-		Route::get('/','general\ContactController@index');
-		Route::post('/update','general\ContactController@update');
-	});
+//	Route::group(['prefix' => 'contact'],function () {
+//		Route::get('/','general\ContactController@index');
+//		Route::post('/update','general\ContactController@update');
+//	});
     Route::get('/splashscreen', 'general\SplashScreenController@index')->name('SplashScreen.index');
     Route::post('/splashscreen', 'general\SplashScreenController@store')->name('SplashScreen.store');
+});
+Route::group(['prefix' => 'menu','middleware' => ['CheckLogin']],function () {
+    Route::resource('/group-menu', 'menu\MenuGroupController');
 });
 
 // ------------------ Company -------------------
