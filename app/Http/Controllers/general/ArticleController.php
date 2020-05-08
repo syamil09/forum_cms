@@ -34,10 +34,6 @@ class ArticleController extends Controller
     {
         $token = $request->session()->get('token');
 
-        $request->validate([
-          'title' => 'required',
-        ]);
-
         $data = $request->except('image', '_token');
         if (!empty($data['tags'])) {
             $data['tags'] = json_encode($data['tags'], true);

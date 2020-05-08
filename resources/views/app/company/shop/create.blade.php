@@ -12,6 +12,13 @@
 @endsection
 
 @section('wrap_content')
+{{-- Style Validation --}}
+    <style>
+        .is-invalid {
+            color: red;
+        }
+    </style>
+{{-- End Style Validation --}}
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -19,12 +26,7 @@
         <h4>Create Item</h4>
       </div>
       <div class="card-body">
-        @error('image')
-        <div class="alert alert-danger">
-          {{$message}}
-        </div>
-        @enderror
-        <form method="POST" action="{{  url('company/shop/store') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form method="POST" action="{{  url('company/shop/store') }}" id="createShop" novalidate="" enctype="multipart/form-data">
           @csrf
           @if($profile['company_id'] == null)
           <div class="form-group row mb-4">
@@ -87,20 +89,27 @@
                 <input type="file" name="image[]" id="image-upload" multiple required />
               </div>
             </div>
+            <div class="col-sm-12 col-md-7">
+              @error('image')
+              <div class="invalid-feedback">{{$message}}</div>
+              @enderror
+            </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple @error('description') is-invalid @enderror" name="description">{{old('description')}}</textarea>
+              <textarea class="summernote-simple @error('description') is-invalid @enderror" name="description" required>{{old('description')}}</textarea>
             </div>
-            @error('description')
-            <div class="invalid-feedback">{{$message}}</div>
-            @enderror
+            <div class="col-sm-12 col-md-7">
+              @error('description')
+              <div class="invalid-feedback">{{$message}}</div>
+              @enderror
+            </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Price</label>
             <div class="col-sm-12 col-md-7">
-              <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{old('price')}}">
+              <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" value="{{old('price')}}" required>
               @error('price')
               <div class="invalid-feedback">{{$message}}</div>
               @enderror
@@ -122,5 +131,45 @@
 @endsection
 
 @section('script_page')
-<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+  <script type="text/javascript">
+    $.uploadPreview({
+        input_field: "#image-upload",   // Default: .image-upload
+        preview_box: "#image-preview",  // Default: .image-preview
+        label_field: "#image-label",    // Default: .image-label
+        label_default: "Choose File",   // Default: Choose File
+        label_selected: "Change File",  // Default: Change File
+        no_label: false,                // Default: false
+        success_callback: null          // Default: null
+    });
+  </script>
+{{-- Valiidatoor --}}
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
+    <script>
+         $.validator.setDefaults({
+            errorElement: "span",
+            errorClass: "is-invalid",
+            //  validClass: 'stay',
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass(errorClass);
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass(errorClass);
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else if (element.hasClass('select2')) {
+                    error.insertAfter(element.next('span'));
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+        $('#createShop').validate();
+        $('#createShop').valid();
+    </script>
+    {{-- End Valiidatoor --}}
+<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
 @endsection

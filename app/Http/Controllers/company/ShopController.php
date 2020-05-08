@@ -59,15 +59,7 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-      // return $request->all();
         $token = $request->session()->get('token');
-
-        $request->validate([
-          'name' => 'required',
-          'price' => 'required',
-          'image' => 'required | mimes:png,jpeg,jpg | max:3072',
-          'description' => 'required',
-        ]);
 
         $data = $request->except('image');
         $photo[0]['name'] = 'photo[]';
