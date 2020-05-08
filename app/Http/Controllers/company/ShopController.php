@@ -59,6 +59,7 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
+      // return $request->all();
         $token = $request->session()->get('token');
 
         $data = $request->except('image');
@@ -73,7 +74,7 @@ class ShopController extends Controller
         }
 
         // dd($photo);
-        $response = $this->postMulti(env('GATEWAY_URL').'shop/item/add', $data, $token, $photo);
+        $response = $this->postMulti(env('GATEWAY_URL').'shop/item/add', $data, $token, null, $photo);
         // return $response;
         if ($response['success']) {
             // LogActivity::addToLog('Added Data Mesjid');

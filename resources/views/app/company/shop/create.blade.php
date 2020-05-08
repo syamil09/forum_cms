@@ -49,7 +49,7 @@
             <div class="col-sm-12 col-md-7">
               <select class="form-control selectric" name="store_id">
                 @if($store == null)
-                <option>Add Store First</option>
+                <option disabled value="">Add Store First</option>
                 @else
                 @foreach ($store as $str)
                   <option value="{{$str['id']}}">{{$str['name']}}</option>
@@ -72,7 +72,7 @@
             <div class="col-sm-12 col-md-7">
               <select class="form-control selectric" name="category_id">
                 @if($category == null)
-                <option>Add Category First</option>
+                <option disabled value="">Add Category First</option>
                 @else
                 @foreach ($category as $cat)
                   <option value="{{$cat['id']}}">{{$cat['category']}}</option>
