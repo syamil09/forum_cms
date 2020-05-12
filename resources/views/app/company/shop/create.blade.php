@@ -83,7 +83,7 @@
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Photo</label>
-            <div class="col-sm-1 col-md-1">
+            <div class="col-sm-12 col-md-7">
               <a href="#" class="btn btn-success add_btn btn-action"> <i class="fas fa-plus"></i> </a>
             </div>
             <div class="col-sm-12 col-md-7">
