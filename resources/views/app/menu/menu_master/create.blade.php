@@ -56,7 +56,7 @@
                                 <select class="form-control select2-icon" name="group_id" required>
                                     <option value="" data-icon=""> -- Select One -- </option>
                                     @foreach($GroupMenus as $groupMenu)
-                                        <option value="{{ $groupMenu['id'] }}" data-icon="{!! $groupMenu['icon'] !!}">{{ $groupMenu['name'] }}</option>
+                                        <option value="{{ $groupMenu['id'] }}" data-icon="{{ $groupMenu['icon'] }}">{{ $groupMenu['name'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
