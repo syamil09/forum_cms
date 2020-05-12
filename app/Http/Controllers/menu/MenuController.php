@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class MenuGroupController extends Controller
+class MenuController extends Controller
 {
     /**
      * Checking key data exist and replace them to other main variable
@@ -35,10 +35,9 @@ class MenuGroupController extends Controller
     public function index()
     {
         $token = Session::get('token');
-
-        $GroupMenus = $this->get(env('GATEWAY_URL'). 'group-menu', $token);
-        $GroupMenus = $this->replaceExistData($GroupMenus);
-        return view('app.menu.menu_group.index', compact('GroupMenus'));
+        $Menus = $this->get(env('GATEWAY_URL') . 'menu', $token);
+        $Menus = $this->replaceExistData($Menus);
+        return view('app.menu.menu_master.index', compact('Menus'));
     }
 
     /**
@@ -48,7 +47,12 @@ class MenuGroupController extends Controller
      */
     public function create()
     {
-        return view('app.menu.menu_group.create', compact('users', 'DateNotAvailable'));
+        $token = Session::get('token');
+
+        $GroupMenus = $this->get(env('GATEWAY_URL'). 'group-menu', $token);
+        $GroupMenus = $this->replaceExistData($GroupMenus);
+
+        return view('app.menu.menu_master.create', compact('GroupMenus'));
     }
 
     /**
@@ -62,8 +66,9 @@ class MenuGroupController extends Controller
         $data = $request->except('_token');
 
         $token = Session::get('token');
-        $GroupMenu = $this->post(env('GATEWAY_URL') . 'group-menu/add', $data, $token);
-        if ($GroupMenu['success']) {
+        $Menu = $this->post(env('GATEWAY_URL') . 'menu/add', $data, $token);
+
+        if ($Menu['success']) {
             return redirect()->route('group-menu.index')->with('success', 'Success creating group menu');
         }
     }
@@ -78,9 +83,9 @@ class MenuGroupController extends Controller
     {
         $token = Session::get('token');
 
-        $GroupMenu = $this->get(env('GATEWAY_URL'). 'group-menu/edit/'.$id, $token);
-        $GroupMenu = $this->replaceExistData($GroupMenu);
-        return view('app.menu.menu_group.detail', compact('GroupMenu'));
+        $Menu = $this->get(env('GATEWAY_URL') . 'menu/edit/' . $id, $token);
+        $Menu = $this->replaceExistData($Menu);
+        return view('app.menu.menu_master.detail', compact('Menu'));
     }
 
     /**
@@ -93,10 +98,13 @@ class MenuGroupController extends Controller
     {
         $token = Session::get('token');
 
-        $GroupMenu = $this->get(env('GATEWAY_URL'). 'group-menu/edit/'.$id, $token);
-        $GroupMenu = $this->replaceExistData($GroupMenu);
+        $Menu = $this->get(env('GATEWAY_URL') . 'menu/edit/' . $id, $token);
+        $Menu = $this->replaceExistData($Menu);
 
-        return view('app.menu.menu_group.edit', compact('GroupMenu'));
+        $GroupMenus = $this->get(env('GATEWAY_URL'). 'group-menu', $token);
+        $GroupMenus = $this->replaceExistData($GroupMenus);
+
+        return view('app.menu.menu_master.edit', compact('Menu', 'GroupMenus'));
 
     }
 
@@ -109,11 +117,12 @@ class MenuGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->except(['_token','_method']);
+        $data = $request->except(['_token', '_method']);
         $token = Session::get('token');
 
-        $GroupMenu = $this->post(env('GATEWAY_URL') . 'group-menu/update/'. $id, $data, $token);
-        return redirect(route('group-menu.index'))->with('success', 'Success update group menu');
+        $Menu = $this->post(env('GATEWAY_URL') . 'menu/update/' . $id, $data, $token);
+        return $Menu;
+        return redirect(route('master-menu.index'))->with('success', 'Success update menu');
     }
 
     /**
@@ -127,7 +136,7 @@ class MenuGroupController extends Controller
         $data['id'] = $id;
         $token = Session::get('token');
 
-        $votes = $this->post(env('GATEWAY_URL') . 'group-menu/delete', $data, $token);
+        $votes = $this->post(env('GATEWAY_URL') . 'menu/delete', $data, $token);
         return $votes;
     }
 }

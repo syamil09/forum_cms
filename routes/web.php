@@ -157,6 +157,7 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 });
 Route::group(['prefix' => 'menu','middleware' => ['CheckLogin']],function () {
     Route::resource('/group-menu', 'menu\MenuGroupController');
+    Route::resource('/master-menu', 'menu\MenuController');
 });
 
 // ------------------ Company -------------------

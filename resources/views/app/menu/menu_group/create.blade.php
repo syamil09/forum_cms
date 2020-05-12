@@ -103,10 +103,10 @@
                                     <option value="<i class='fas fa-backspace'></i>" data-icon="fa-backspace">backspace</option>
                                     <option value="<i class='fas fa-backward'></i>" data-icon="fa-backward">backward</option>
                                     <option value="<i class='fas fa-bacon'></i>" data-icon="fa-bacon">bacon</option>
-                                    <option value="<i class='fas fa-bahai'></i>" data-icon="fa-bahai">bahai</option>
+                                    {{--<option value="<i class='fas fa-bahai'></i>" data-icon="fa-bahai">bahai</option>--}}
                                     <option value="<i class='fas fa-balance-scale'></i>" data-icon="fa-balance-scale">balance-scale</option>
-                                    <option value="<i class='fas fa-balance-scale-left'></i>" data-icon="fa-balance-scale-left">balance-scale-left</option>
-                                    <option value="<i class='fas fa-balance-scale-right'></i>" data-icon="fa-balance-scale-right">balance-scale-right</option>
+                                    {{--<option value="<i class='fas fa-balance-scale-left'></i>" data-icon="fa-balance-scale-left">balance-scale-left</option>--}}
+                                    {{--<option value="<i class='fas fa-balance-scale-right'></i>" data-icon="fa-balance-scale-right">balance-scale-right</option>--}}
                                     <option value="<i class='fas fa-ban'></i>" data-icon="fa-ban">ban</option>
                                     <option value="<i class='fas fa-band-aid'></i>" data-icon="fa-band-aid">band-aid</option>
                                     <option value="<i class='fas fa-barcode'></i>" data-icon="fa-barcode">barcode</option>
@@ -126,7 +126,7 @@
                                     <option value="<i class='fas fa-bezier-curve'></i>" data-icon="fa-bezier-curve">bezier-curve</option>
                                     <option value="<i class='fas fa-bible'></i>" data-icon="fa-bible">bible</option>
                                     <option value="<i class='fas fa-bicycle'></i>" data-icon="fa-bicycle">bicycle</option>
-                                    <option value="<i class='fas fa-biking'></i>" data-icon="fa-biking">biking</option>
+                                    {{--<option value="<i class='fas fa-biking'></i>" data-icon="fa-biking">biking</option>--}}
                                     <option value="<i class='fas fa-binoculars'></i>" data-icon="fa-binoculars">binoculars</option>
                                     <option value="<i class='fas fa-biohazard'></i>" data-icon="fa-biohazard">biohazard</option>
                                     <option value="<i class='fas fa-birthday-cake'></i>" data-icon="fa-birthday-cake">birthday-cake</option>
@@ -145,13 +145,13 @@
                                     <option value="<i class='fas fa-book-open'></i>" data-icon="fa-book-open">book-open</option>
                                     <option value="<i class='fas fa-book-reader'></i>" data-icon="fa-book-reader">book-reader</option>
                                     <option value="<i class='fas fa-bookmark'></i>" data-icon="fa-bookmark">bookmark</option>
-                                    <option value="<i class='fas fa-border-all'></i>" data-icon="fa-border-all">border-all</option>
-                                    <option value="<i class='fas fa-border-none'></i>" data-icon="fa-border-none">border-none</option>
-                                    <option value="<i class='fas fa-border-style'></i>" data-icon="fa-border-style">border-style</option>
+                                    {{--<option value="<i class='fas fa-border-all'></i>" data-icon="fa-border-all">border-all</option>--}}
+                                    {{--<option value="<i class='fas fa-border-none'></i>" data-icon="fa-border-none">border-none</option>--}}
+                                    {{--<option value="<i class='fas fa-border-style'></i>" data-icon="fa-border-style">border-style</option>--}}
                                     <option value="<i class='fas fa-bowling-ball'></i>" data-icon="fa-bowling-ball">bowling-ball</option>
                                     <option value="<i class='fas fa-box'></i>" data-icon="fa-box">box</option>
                                     <option value="<i class='fas fa-box-open'></i>" data-icon="fa-box-open">box-open</option>
-                                    <option value="<i class='fas fa-box-tissue'></i>" data-icon="fa-box-tissue">box-tissue</option>
+                                    {{--<option value="<i class='fas fa-box-tissue'></i>" data-icon="fa-box-tissue">box-tissue</option>--}}
                                     <option value="<i class='fas fa-boxes'></i>" data-icon="fa-boxes">boxes</option>
                                     <option value="<i class='fas fa-braille'></i>" data-icon="fa-braille">braille</option>
                                     <option value="<i class='fas fa-brain'></i>" data-icon="fa-brain">brain</option>
@@ -189,7 +189,7 @@
                                     <option value="<i class='fas fa-car-battery'></i>" data-icon="fa-car-battery">car-battery</option>
                                     <option value="<i class='fas fa-car-crash'></i>" data-icon="fa-car-crash">car-crash</option>
                                     <option value="<i class='fas fa-car-side'></i>" data-icon="fa-car-side">car-side</option>
-                                    <option value="<i class='fas fa-caravan'></i>" data-icon="fa-caravan">caravan</option>
+                                    {{--<option value="<i class='fas fa-caravan'></i>" data-icon="fa-caravan">caravan</option>--}}
                                     <option value="<i class='fas fa-caret-down'></i>" data-icon="fa-caret-down">caret-down</option>
                                     <option value="<i class='fas fa-caret-left'></i>" data-icon="fa-caret-left">caret-left</option>
                                     <option value="<i class='fas fa-caret-right'></i>" data-icon="fa-caret-right">caret-right</option>
@@ -274,7 +274,7 @@
                                     <option value="<i class='fas fa-compact-disc'></i>" data-icon="fa-compact-disc">compact-disc</option>
                                     <option value="<i class='fas fa-compass'></i>" data-icon="fa-compass">compass</option>
                                     <option value="<i class='fas fa-compress'></i>" data-icon="fa-compress">compress</option>
-                                    <option value="<i class='fas fa-compress-alt'></i>" data-icon="fa-compress-alt">compress-alt</option>
+                                    {{--<option value="<i class='fas fa-compress-alt'></i>" data-icon="fa-compress-alt">compress-alt</option>--}}
                                     <option value="<i class='fas fa-compress-arrows-alt'></i>" data-icon="fa-compress-arrows-alt">compress-arrows-alt</option>
                                     <option value="<i class='fas fa-concierge-bell'></i>" data-icon="fa-concierge-bell">concierge-bell</option>
                                     <option value="<i class='fas fa-cookie'></i>" data-icon="fa-cookie">cookie</option>
@@ -310,7 +310,7 @@
                                     <option value="<i class='fas fa-dice-two'></i>" data-icon="fa-dice-two">dice-two</option>
                                     <option value="<i class='fas fa-digital-tachograph'></i>" data-icon="fa-digital-tachograph">digital-tachograph</option>
                                     <option value="<i class='fas fa-directions'></i>" data-icon="fa-directions">directions</option>
-                                    <option value="<i class='fas fa-disease'></i>" data-icon="fa-disease">disease</option>
+                                    {{--<option value="<i class='fas fa-disease'></i>" data-icon="fa-disease">disease</option>--}}
                                     <option value="<i class='fas fa-divide'></i>" data-icon="fa-divide">divide</option>
                                     <option value="<i class='fas fa-dizzy'></i>" data-icon="fa-dizzy">dizzy</option>
                                     <option value="<i class='fas fa-dna'></i>" data-icon="fa-dna">dna</option>
@@ -352,17 +352,17 @@
                                     <option value="<i class='fas fa-exclamation-circle'></i>" data-icon="fa-exclamation-circle">exclamation-circle</option>
                                     <option value="<i class='fas fa-exclamation-triangle'></i>" data-icon="fa-exclamation-triangle">exclamation-triangle</option>
                                     <option value="<i class='fas fa-expand'></i>" data-icon="fa-expand">expand</option>
-                                    <option value="<i class='fas fa-expand-alt'></i>" data-icon="fa-expand-alt">expand-alt</option>
+                                    {{--<option value="<i class='fas fa-expand-alt'></i>" data-icon="fa-expand-alt">expand-alt</option>--}}
                                     <option value="<i class='fas fa-expand-arrows-alt'></i>" data-icon="fa-expand-arrows-alt">expand-arrows-alt</option>
                                     <option value="<i class='fas fa-external-link-alt'></i>" data-icon="fa-external-link-alt">external-link-alt</option>
                                     <option value="<i class='fas fa-external-link-square-alt'></i>" data-icon="fa-external-link-square-alt">external-link-square-alt</option>
                                     <option value="<i class='fas fa-eye'></i>" data-icon="fa-eye">eye</option>
                                     <option value="<i class='fas fa-eye-dropper'></i>" data-icon="fa-eye-dropper">eye-dropper</option>
                                     <option value="<i class='fas fa-eye-slash'></i>" data-icon="fa-eye-slash">eye-slash</option>
-                                    <option value="<i class='fas fa-fan'></i>" data-icon="fa-fan">fan</option>
+                                    {{--<option value="<i class='fas fa-fan'></i>" data-icon="fa-fan">fan</option>--}}
                                     <option value="<i class='fas fa-fast-backward'></i>" data-icon="fa-fast-backward">fast-backward</option>
                                     <option value="<i class='fas fa-fast-forward'></i>" data-icon="fa-fast-forward">fast-forward</option>
-                                    <option value="<i class='fas fa-faucet'></i>" data-icon="fa-faucet">faucet</option>
+                                    {{--<option value="<i class='fas fa-faucet'></i>" data-icon="fa-faucet">faucet</option>--}}
                                     <option value="<i class='fas fa-fax'></i>" data-icon="fa-fax">fax</option>
                                     <option value="<i class='fas fa-feather'></i>" data-icon="fa-feather">feather</option>
                                     <option value="<i class='fas fa-feather-alt'></i>" data-icon="fa-feather-alt">feather-alt</option>
@@ -459,9 +459,9 @@
                                     <option value="<i class='fas fa-hamsa'></i>" data-icon="fa-hamsa">hamsa</option>
                                     <option value="<i class='fas fa-hand-holding'></i>" data-icon="fa-hand-holding">hand-holding</option>
                                     <option value="<i class='fas fa-hand-holding-heart'></i>" data-icon="fa-hand-holding-heart">hand-holding-heart</option>
-                                    <option value="<i class='fas fa-hand-holding-medical'></i>" data-icon="fa-hand-holding-medical">hand-holding-medical</option>
+                                    {{--<option value="<i class='fas fa-hand-holding-medical'></i>" data-icon="fa-hand-holding-medical">hand-holding-medical</option>--}}
                                     <option value="<i class='fas fa-hand-holding-usd'></i>" data-icon="fa-hand-holding-usd">hand-holding-usd</option>
-                                    <option value="<i class='fas fa-hand-holding-water'></i>" data-icon="fa-hand-holding-water">hand-holding-water</option>
+                                    {{--<option value="<i class='fas fa-hand-holding-water'></i>" data-icon="fa-hand-holding-water">hand-holding-water</option>--}}
                                     <option value="<i class='fas fa-hand-lizard'></i>" data-icon="fa-hand-lizard">hand-lizard</option>
                                     <option value="<i class='fas fa-hand-middle-finger'></i>" data-icon="fa-hand-middle-finger">hand-middle-finger</option>
                                     <option value="<i class='fas fa-hand-paper'></i>" data-icon="fa-hand-paper">hand-paper</option>
@@ -473,25 +473,25 @@
                                     <option value="<i class='fas fa-hand-pointer'></i>" data-icon="fa-hand-pointer">hand-pointer</option>
                                     <option value="<i class='fas fa-hand-rock'></i>" data-icon="fa-hand-rock">hand-rock</option>
                                     <option value="<i class='fas fa-hand-scissors'></i>" data-icon="fa-hand-scissors">hand-scissors</option>
-                                    <option value="<i class='fas fa-hand-sparkles'></i>" data-icon="fa-hand-sparkles">hand-sparkles</option>
+                                    {{--<option value="<i class='fas fa-hand-sparkles'></i>" data-icon="fa-hand-sparkles">hand-sparkles</option>--}}
                                     <option value="<i class='fas fa-hand-spock'></i>" data-icon="fa-hand-spock">hand-spock</option>
                                     <option value="<i class='fas fa-hands'></i>" data-icon="fa-hands">hands</option>
                                     <option value="<i class='fas fa-hands-helping'></i>" data-icon="fa-hands-helping">hands-helping</option>
-                                    <option value="<i class='fas fa-hands-wash'></i>" data-icon="fa-hands-wash">hands-wash</option>
+                                    {{--<option value="<i class='fas fa-hands-wash'></i>" data-icon="fa-hands-wash">hands-wash</option>--}}
                                     <option value="<i class='fas fa-handshake'></i>" data-icon="fa-handshake">handshake</option>
-                                    <option value="<i class='fas fa-handshake-alt-slash'></i>" data-icon="fa-handshake-alt-slash">handshake-alt-slash</option>
-                                    <option value="<i class='fas fa-handshake-slash'></i>" data-icon="fa-handshake-slash">handshake-slash</option>
+                                    {{--<option value="<i class='fas fa-handshake-alt-slash'></i>" data-icon="fa-handshake-alt-slash">handshake-alt-slash</option>--}}
+                                    {{--<option value="<i class='fas fa-handshake-slash'></i>" data-icon="fa-handshake-slash">handshake-slash</option>--}}
                                     <option value="<i class='fas fa-hanukiah'></i>" data-icon="fa-hanukiah">hanukiah</option>
                                     <option value="<i class='fas fa-hard-hat'></i>" data-icon="fa-hard-hat">hard-hat</option>
                                     <option value="<i class='fas fa-hashtag'></i>" data-icon="fa-hashtag">hashtag</option>
-                                    <option value="<i class='fas fa-hat-cowboy'></i>" data-icon="fa-hat-cowboy">hat-cowboy</option>
-                                    <option value="<i class='fas fa-hat-cowboy-side'></i>" data-icon="fa-hat-cowboy-side">hat-cowboy-side</option>
+                                    {{--<option value="<i class='fas fa-hat-cowboy'></i>" data-icon="fa-hat-cowboy">hat-cowboy</option>--}}
+                                    {{--<option value="<i class='fas fa-hat-cowboy-side'></i>" data-icon="fa-hat-cowboy-side">hat-cowboy-side</option>--}}
                                     <option value="<i class='fas fa-hat-wizard'></i>" data-icon="fa-hat-wizard">hat-wizard</option>
                                     <option value="<i class='fas fa-hdd'></i>" data-icon="fa-hdd">hdd</option>
-                                    <option value="<i class='fas fa-head-side-cough'></i>" data-icon="fa-head-side-cough">head-side-cough</option>
-                                    <option value="<i class='fas fa-head-side-cough-slash'></i>" data-icon="fa-head-side-cough-slash">head-side-cough-slash</option>
-                                    <option value="<i class='fas fa-head-side-mask'></i>" data-icon="fa-head-side-mask">head-side-mask</option>
-                                    <option value="<i class='fas fa-head-side-virus'></i>" data-icon="fa-head-side-virus">head-side-virus</option>
+                                    {{--<option value="<i class='fas fa-head-side-cough'></i>" data-icon="fa-head-side-cough">head-side-cough</option>--}}
+                                    {{--<option value="<i class='fas fa-head-side-cough-slash'></i>" data-icon="fa-head-side-cough-slash">head-side-cough-slash</option>--}}
+                                    {{--<option value="<i class='fas fa-head-side-mask'></i>" data-icon="fa-head-side-mask">head-side-mask</option>--}}
+                                    {{--<option value="<i class='fas fa-head-side-virus'></i>" data-icon="fa-head-side-virus">head-side-virus</option>--}}
                                     <option value="<i class='fas fa-heading'></i>" data-icon="fa-heading">heading</option>
                                     <option value="<i class='fas fa-headphones'></i>" data-icon="fa-headphones">headphones</option>
                                     <option value="<i class='fas fa-headphones-alt'></i>" data-icon="fa-headphones-alt">headphones-alt</option>
@@ -512,7 +512,7 @@
                                     <option value="<i class='fas fa-hospital'></i>" data-icon="fa-hospital">hospital</option>
                                     <option value="<i class='fas fa-hospital-alt'></i>" data-icon="fa-hospital-alt">hospital-alt</option>
                                     <option value="<i class='fas fa-hospital-symbol'></i>" data-icon="fa-hospital-symbol">hospital-symbol</option>
-                                    <option value="<i class='fas fa-hospital-user'></i>" data-icon="fa-hospital-user">hospital-user</option>
+                                    {{--<option value="<i class='fas fa-hospital-user'></i>" data-icon="fa-hospital-user">hospital-user</option>--}}
                                     <option value="<i class='fas fa-hot-tub'></i>" data-icon="fa-hot-tub">hot-tub</option>
                                     <option value="<i class='fas fa-hotdog'></i>" data-icon="fa-hotdog">hotdog</option>
                                     <option value="<i class='fas fa-hotel'></i>" data-icon="fa-hotel">hotel</option>
@@ -521,12 +521,12 @@
                                     <option value="<i class='fas fa-hourglass-half'></i>" data-icon="fa-hourglass-half">hourglass-half</option>
                                     <option value="<i class='fas fa-hourglass-start'></i>" data-icon="fa-hourglass-start">hourglass-start</option>
                                     <option value="<i class='fas fa-house-damage'></i>" data-icon="fa-house-damage">house-damage</option>
-                                    <option value="<i class='fas fa-house-user'></i>" data-icon="fa-house-user">house-user</option>
+                                    {{--<option value="<i class='fas fa-house-user'></i>" data-icon="fa-house-user">house-user</option>--}}
                                     <option value="<i class='fas fa-hryvnia'></i>" data-icon="fa-hryvnia">hryvnia</option>
                                     <option value="<i class='fas fa-i-cursor'></i>" data-icon="fa-i-cursor">i-cursor</option>
                                     <option value="<i class='fas fa-ice-cream'></i>" data-icon="fa-ice-cream">ice-cream</option>
                                     <option value="<i class='fas fa-icicles'></i>" data-icon="fa-icicles">icicles</option>
-                                    <option value="<i class='fas fa-icons'></i>" data-icon="fa-icons">icons</option>
+                                    {{--<option value="<i class='fas fa-icons'></i>" data-icon="fa-icons">icons</option>--}}
                                     <option value="<i class='fas fa-id-badge'></i>" data-icon="fa-id-badge">id-badge</option>
                                     <option value="<i class='fas fa-id-card'></i>" data-icon="fa-id-card">id-card</option>
                                     <option value="<i class='fas fa-id-card-alt'></i>" data-icon="fa-id-card-alt">id-card-alt</option>
@@ -555,7 +555,7 @@
                                     <option value="<i class='fas fa-language'></i>" data-icon="fa-language">language</option>
                                     <option value="<i class='fas fa-laptop'></i>" data-icon="fa-laptop">laptop</option>
                                     <option value="<i class='fas fa-laptop-code'></i>" data-icon="fa-laptop-code">laptop-code</option>
-                                    <option value="<i class='fas fa-laptop-house'></i>" data-icon="fa-laptop-house">laptop-house</option>
+                                    {{--<option value="<i class='fas fa-laptop-house'></i>" data-icon="fa-laptop-house">laptop-house</option>--}}
                                     <option value="<i class='fas fa-laptop-medical'></i>" data-icon="fa-laptop-medical">laptop-medical</option>
                                     <option value="<i class='fas fa-laugh'></i>" data-icon="fa-laugh">laugh</option>
                                     <option value="<i class='fas fa-laugh-beam'></i>" data-icon="fa-laugh-beam">laugh-beam</option>
@@ -585,8 +585,8 @@
                                     <option value="<i class='fas fa-long-arrow-alt-up'></i>" data-icon="fa-long-arrow-alt-up">long-arrow-alt-up</option>
                                     <option value="<i class='fas fa-low-vision'></i>" data-icon="fa-low-vision">low-vision</option>
                                     <option value="<i class='fas fa-luggage-cart'></i>" data-icon="fa-luggage-cart">luggage-cart</option>
-                                    <option value="<i class='fas fa-lungs'></i>" data-icon="fa-lungs">lungs</option>
-                                    <option value="<i class='fas fa-lungs-virus'></i>" data-icon="fa-lungs-virus">lungs-virus</option>
+                                    {{--<option value="<i class='fas fa-lungs'></i>" data-icon="fa-lungs">lungs</option>--}}
+                                    {{--<option value="<i class='fas fa-lungs-virus'></i>" data-icon="fa-lungs-virus">lungs-virus</option>--}}
                                     <option value="<i class='fas fa-magic'></i>" data-icon="fa-magic">magic</option>
                                     <option value="<i class='fas fa-magnet'></i>" data-icon="fa-magnet">magnet</option>
                                     <option value="<i class='fas fa-mail-bulk'></i>" data-icon="fa-mail-bulk">mail-bulk</option>
@@ -638,7 +638,7 @@
                                     <option value="<i class='fas fa-mosque'></i>" data-icon="fa-mosque">mosque</option>
                                     <option value="<i class='fas fa-motorcycle'></i>" data-icon="fa-motorcycle">motorcycle</option>
                                     <option value="<i class='fas fa-mountain'></i>" data-icon="fa-mountain">mountain</option>
-                                    <option value="<i class='fas fa-mouse'></i>" data-icon="fa-mouse">mouse</option>
+                                    {{--<option value="<i class='fas fa-mouse'></i>" data-icon="fa-mouse">mouse</option>--}}
                                     <option value="<i class='fas fa-mouse-pointer'></i>" data-icon="fa-mouse-pointer">mouse-pointer</option>
                                     <option value="<i class='fas fa-mug-hot'></i>" data-icon="fa-mug-hot">mug-hot</option>
                                     <option value="<i class='fas fa-music'></i>" data-icon="fa-music">music</option>
@@ -677,19 +677,19 @@
                                     <option value="<i class='fas fa-pen-square'></i>" data-icon="fa-pen-square">pen-square</option>
                                     <option value="<i class='fas fa-pencil-alt'></i>" data-icon="fa-pencil-alt">pencil-alt</option>
                                     <option value="<i class='fas fa-pencil-ruler'></i>" data-icon="fa-pencil-ruler">pencil-ruler</option>
-                                    <option value="<i class='fas fa-people-arrows'></i>" data-icon="fa-people-arrows">people-arrows</option>
+                                    {{--<option value="<i class='fas fa-people-arrows'></i>" data-icon="fa-people-arrows">people-arrows</option>--}}
                                     <option value="<i class='fas fa-people-carry'></i>" data-icon="fa-people-carry">people-carry</option>
                                     <option value="<i class='fas fa-pepper-hot'></i>" data-icon="fa-pepper-hot">pepper-hot</option>
                                     <option value="<i class='fas fa-percent'></i>" data-icon="fa-percent">percent</option>
                                     <option value="<i class='fas fa-percentage'></i>" data-icon="fa-percentage">percentage</option>
                                     <option value="<i class='fas fa-person-booth'></i>" data-icon="fa-person-booth">person-booth</option>
                                     <option value="<i class='fas fa-phone'></i>" data-icon="fa-phone">phone</option>
-                                    <option value="<i class='fas fa-phone-alt'></i>" data-icon="fa-phone-alt">phone-alt</option>
+                                    {{--<option value="<i class='fas fa-phone-alt'></i>" data-icon="fa-phone-alt">phone-alt</option>--}}
                                     <option value="<i class='fas fa-phone-slash'></i>" data-icon="fa-phone-slash">phone-slash</option>
                                     <option value="<i class='fas fa-phone-square'></i>" data-icon="fa-phone-square">phone-square</option>
-                                    <option value="<i class='fas fa-phone-square-alt'></i>" data-icon="fa-phone-square-alt">phone-square-alt</option>
+                                    {{--<option value="<i class='fas fa-phone-square-alt'></i>" data-icon="fa-phone-square-alt">phone-square-alt</option>--}}
                                     <option value="<i class='fas fa-phone-volume'></i>" data-icon="fa-phone-volume">phone-volume</option>
-                                    <option value="<i class='fas fa-photo-video'></i>" data-icon="fa-photo-video">photo-video</option>
+                                    {{--<option value="<i class='fas fa-photo-video'></i>" data-icon="fa-photo-video">photo-video</option>--}}
                                     <option value="<i class='fas fa-piggy-bank'></i>" data-icon="fa-piggy-bank">piggy-bank</option>
                                     <option value="<i class='fas fa-pills'></i>" data-icon="fa-pills">pills</option>
                                     <option value="<i class='fas fa-pizza-slice'></i>" data-icon="fa-pizza-slice">pizza-slice</option>
@@ -697,7 +697,7 @@
                                     <option value="<i class='fas fa-plane'></i>" data-icon="fa-plane">plane</option>
                                     <option value="<i class='fas fa-plane-arrival'></i>" data-icon="fa-plane-arrival">plane-arrival</option>
                                     <option value="<i class='fas fa-plane-departure'></i>" data-icon="fa-plane-departure">plane-departure</option>
-                                    <option value="<i class='fas fa-plane-slash'></i>" data-icon="fa-plane-slash">plane-slash</option>
+                                    {{--<option value="<i class='fas fa-plane-slash'></i>" data-icon="fa-plane-slash">plane-slash</option>--}}
                                     <option value="<i class='fas fa-play'></i>" data-icon="fa-play">play</option>
                                     <option value="<i class='fas fa-play-circle'></i>" data-icon="fa-play-circle">play-circle</option>
                                     <option value="<i class='fas fa-plug'></i>" data-icon="fa-plug">plug</option>
@@ -721,8 +721,8 @@
                                     <option value="<i class='fas fa-print'></i>" data-icon="fa-print">print</option>
                                     <option value="<i class='fas fa-procedures'></i>" data-icon="fa-procedures">procedures</option>
                                     <option value="<i class='fas fa-project-diagram'></i>" data-icon="fa-project-diagram">project-diagram</option>
-                                    <option value="<i class='fas fa-pump-medical'></i>" data-icon="fa-pump-medical">pump-medical</option>
-                                    <option value="<i class='fas fa-pump-soap'></i>" data-icon="fa-pump-soap">pump-soap</option>
+                                    {{--<option value="<i class='fas fa-pump-medical'></i>" data-icon="fa-pump-medical">pump-medical</option>--}}
+                                    {{--<option value="<i class='fas fa-pump-soap'></i>" data-icon="fa-pump-soap">pump-soap</option>--}}
                                     <option value="<i class='fas fa-puzzle-piece'></i>" data-icon="fa-puzzle-piece">puzzle-piece</option>
                                     <option value="<i class='fas fa-qrcode'></i>" data-icon="fa-qrcode">qrcode</option>
                                     <option value="<i class='fas fa-question'></i>" data-icon="fa-question">question</option>
@@ -736,12 +736,12 @@
                                     <option value="<i class='fas fa-rainbow'></i>" data-icon="fa-rainbow">rainbow</option>
                                     <option value="<i class='fas fa-random'></i>" data-icon="fa-random">random</option>
                                     <option value="<i class='fas fa-receipt'></i>" data-icon="fa-receipt">receipt</option>
-                                    <option value="<i class='fas fa-record-vinyl'></i>" data-icon="fa-record-vinyl">record-vinyl</option>
+                                    {{--<option value="<i class='fas fa-record-vinyl'></i>" data-icon="fa-record-vinyl">record-vinyl</option>--}}
                                     <option value="<i class='fas fa-recycle'></i>" data-icon="fa-recycle">recycle</option>
                                     <option value="<i class='fas fa-redo'></i>" data-icon="fa-redo">redo</option>
                                     <option value="<i class='fas fa-redo-alt'></i>" data-icon="fa-redo-alt">redo-alt</option>
                                     <option value="<i class='fas fa-registered'></i>" data-icon="fa-registered">registered</option>
-                                    <option value="<i class='fas fa-remove-format'></i>" data-icon="fa-remove-format">remove-format</option>
+                                    {{--<option value="<i class='fas fa-remove-format'></i>" data-icon="fa-remove-format">remove-format</option>--}}
                                     <option value="<i class='fas fa-reply'></i>" data-icon="fa-reply">reply</option>
                                     <option value="<i class='fas fa-reply-all'></i>" data-icon="fa-reply-all">reply-all</option>
                                     <option value="<i class='fas fa-republican'></i>" data-icon="fa-republican">republican</option>
@@ -785,7 +785,7 @@
                                     <option value="<i class='fas fa-share-square'></i>" data-icon="fa-share-square">share-square</option>
                                     <option value="<i class='fas fa-shekel-sign'></i>" data-icon="fa-shekel-sign">shekel-sign</option>
                                     <option value="<i class='fas fa-shield-alt'></i>" data-icon="fa-shield-alt">shield-alt</option>
-                                    <option value="<i class='fas fa-shield-virus'></i>" data-icon="fa-shield-virus">shield-virus</option>
+                                    {{--<option value="<i class='fas fa-shield-virus'></i>" data-icon="fa-shield-virus">shield-virus</option>--}}
                                     <option value="<i class='fas fa-ship'></i>" data-icon="fa-ship">ship</option>
                                     <option value="<i class='fas fa-shipping-fast'></i>" data-icon="fa-shipping-fast">shipping-fast</option>
                                     <option value="<i class='fas fa-shoe-prints'></i>" data-icon="fa-shoe-prints">shoe-prints</option>
@@ -821,27 +821,27 @@
                                     <option value="<i class='fas fa-snowflake'></i>" data-icon="fa-snowflake">snowflake</option>
                                     <option value="<i class='fas fa-snowman'></i>" data-icon="fa-snowman">snowman</option>
                                     <option value="<i class='fas fa-snowplow'></i>" data-icon="fa-snowplow">snowplow</option>
-                                    <option value="<i class='fas fa-soap'></i>" data-icon="fa-soap">soap</option>
+                                    {{--<option value="<i class='fas fa-soap'></i>" data-icon="fa-soap">soap</option>--}}
                                     <option value="<i class='fas fa-socks'></i>" data-icon="fa-socks">socks</option>
                                     <option value="<i class='fas fa-solar-panel'></i>" data-icon="fa-solar-panel">solar-panel</option>
                                     <option value="<i class='fas fa-sort'></i>" data-icon="fa-sort">sort</option>
                                     <option value="<i class='fas fa-sort-alpha-down'></i>" data-icon="fa-sort-alpha-down">sort-alpha-down</option>
-                                    <option value="<i class='fas fa-sort-alpha-down-alt'></i>" data-icon="fa-sort-alpha-down-alt">sort-alpha-down-alt</option>
+                                    {{--<option value="<i class='fas fa-sort-alpha-down-alt'></i>" data-icon="fa-sort-alpha-down-alt">sort-alpha-down-alt</option>--}}
                                     <option value="<i class='fas fa-sort-alpha-up'></i>" data-icon="fa-sort-alpha-up">sort-alpha-up</option>
-                                    <option value="<i class='fas fa-sort-alpha-up-alt'></i>" data-icon="fa-sort-alpha-up-alt">sort-alpha-up-alt</option>
+                                    {{--<option value="<i class='fas fa-sort-alpha-up-alt'></i>" data-icon="fa-sort-alpha-up-alt">sort-alpha-up-alt</option>--}}
                                     <option value="<i class='fas fa-sort-amount-down'></i>" data-icon="fa-sort-amount-down">sort-amount-down</option>
-                                    <option value="<i class='fas fa-sort-amount-down-alt'></i>" data-icon="fa-sort-amount-down-alt">sort-amount-down-alt</option>
+                                    {{--<option value="<i class='fas fa-sort-amount-down-alt'></i>" data-icon="fa-sort-amount-down-alt">sort-amount-down-alt</option>--}}
                                     <option value="<i class='fas fa-sort-amount-up'></i>" data-icon="fa-sort-amount-up">sort-amount-up</option>
                                     <option value="<i class='fas fa-sort-amount-up-alt'></i>" data-icon="fa-sort-amount-up-alt">sort-amount-up-alt</option>
                                     <option value="<i class='fas fa-sort-down'></i>" data-icon="fa-sort-down">sort-down</option>
                                     <option value="<i class='fas fa-sort-numeric-down'></i>" data-icon="fa-sort-numeric-down">sort-numeric-down</option>
-                                    <option value="<i class='fas fa-sort-numeric-down-alt'></i>" data-icon="fa-sort-numeric-down-alt">sort-numeric-down-alt</option>
+                                    {{--<option value="<i class='fas fa-sort-numeric-down-alt'></i>" data-icon="fa-sort-numeric-down-alt">sort-numeric-down-alt</option>--}}
                                     <option value="<i class='fas fa-sort-numeric-up'></i>" data-icon="fa-sort-numeric-up">sort-numeric-up</option>
-                                    <option value="<i class='fas fa-sort-numeric-up-alt'></i>" data-icon="fa-sort-numeric-up-alt">sort-numeric-up-alt</option>
+                                    {{--<option value="<i class='fas fa-sort-numeric-up-alt'></i>" data-icon="fa-sort-numeric-up-alt">sort-numeric-up-alt</option>--}}
                                     <option value="<i class='fas fa-sort-up'></i>" data-icon="fa-sort-up">sort-up</option>
                                     <option value="<i class='fas fa-spa'></i>" data-icon="fa-spa">spa</option>
                                     <option value="<i class='fas fa-space-shuttle'></i>" data-icon="fa-space-shuttle">space-shuttle</option>
-                                    <option value="<i class='fas fa-spell-check'></i>" data-icon="fa-spell-check">spell-check</option>
+                                    {{--<option value="<i class='fas fa-spell-check'></i>" data-icon="fa-spell-check">spell-check</option>--}}
                                     <option value="<i class='fas fa-spider'></i>" data-icon="fa-spider">spider</option>
                                     <option value="<i class='fas fa-spinner'></i>" data-icon="fa-spinner">spinner</option>
                                     <option value="<i class='fas fa-splotch'></i>" data-icon="fa-splotch">splotch</option>
@@ -863,11 +863,11 @@
                                     <option value="<i class='fas fa-stop'></i>" data-icon="fa-stop">stop</option>
                                     <option value="<i class='fas fa-stop-circle'></i>" data-icon="fa-stop-circle">stop-circle</option>
                                     <option value="<i class='fas fa-stopwatch'></i>" data-icon="fa-stopwatch">stopwatch</option>
-                                    <option value="<i class='fas fa-stopwatch-20'></i>" data-icon="fa-stopwatch-20">stopwatch-20</option>
+                                    {{--<option value="<i class='fas fa-stopwatch-20'></i>" data-icon="fa-stopwatch-20">stopwatch-20</option>--}}
                                     <option value="<i class='fas fa-store'></i>" data-icon="fa-store">store</option>
                                     <option value="<i class='fas fa-store-alt'></i>" data-icon="fa-store-alt">store-alt</option>
-                                    <option value="<i class='fas fa-store-alt-slash'></i>" data-icon="fa-store-alt-slash">store-alt-slash</option>
-                                    <option value="<i class='fas fa-store-slash'></i>" data-icon="fa-store-slash">store-slash</option>
+                                    {{--<option value="<i class='fas fa-store-alt-slash'></i>" data-icon="fa-store-alt-slash">store-alt-slash</option>--}}
+                                    {{--<option value="<i class='fas fa-store-slash'></i>" data-icon="fa-store-slash">store-slash</option>--}}
                                     <option value="<i class='fas fa-stream'></i>" data-icon="fa-stream">stream</option>
                                     <option value="<i class='fas fa-street-view'></i>" data-icon="fa-street-view">street-view</option>
                                     <option value="<i class='fas fa-strikethrough'></i>" data-icon="fa-strikethrough">strikethrough</option>
@@ -928,7 +928,7 @@
                                     <option value="<i class='fas fa-toggle-on'></i>" data-icon="fa-toggle-on">toggle-on</option>
                                     <option value="<i class='fas fa-toilet'></i>" data-icon="fa-toilet">toilet</option>
                                     <option value="<i class='fas fa-toilet-paper'></i>" data-icon="fa-toilet-paper">toilet-paper</option>
-                                    <option value="<i class='fas fa-toilet-paper-slash'></i>" data-icon="fa-toilet-paper-slash">toilet-paper-slash</option>
+                                    {{--<option value="<i class='fas fa-toilet-paper-slash'></i>" data-icon="fa-toilet-paper-slash">toilet-paper-slash</option>--}}
                                     <option value="<i class='fas fa-toolbox'></i>" data-icon="fa-toolbox">toolbox</option>
                                     <option value="<i class='fas fa-tools'></i>" data-icon="fa-tools">tools</option>
                                     <option value="<i class='fas fa-tooth'></i>" data-icon="fa-tooth">tooth</option>
@@ -937,7 +937,7 @@
                                     <option value="<i class='fas fa-tractor'></i>" data-icon="fa-tractor">tractor</option>
                                     <option value="<i class='fas fa-trademark'></i>" data-icon="fa-trademark">trademark</option>
                                     <option value="<i class='fas fa-traffic-light'></i>" data-icon="fa-traffic-light">traffic-light</option>
-                                    <option value="<i class='fas fa-trailer'></i>" data-icon="fa-trailer">trailer</option>
+                                    {{--<option value="<i class='fas fa-trailer'></i>" data-icon="fa-trailer">trailer</option>--}}
                                     <option value="<i class='fas fa-train'></i>" data-icon="fa-train">train</option>
                                     <option value="<i class='fas fa-tram'></i>" data-icon="fa-tram">tram</option>
                                     <option value="<i class='fas fa-transgender'></i>" data-icon="fa-transgender">transgender</option>
@@ -1004,10 +1004,10 @@
                                     <option value="<i class='fas fa-video'></i>" data-icon="fa-video">video</option>
                                     <option value="<i class='fas fa-video-slash'></i>" data-icon="fa-video-slash">video-slash</option>
                                     <option value="<i class='fas fa-vihara'></i>" data-icon="fa-vihara">vihara</option>
-                                    <option value="<i class='fas fa-virus'></i>" data-icon="fa-virus">virus</option>
-                                    <option value="<i class='fas fa-virus-slash'></i>" data-icon="fa-virus-slash">virus-slash</option>
-                                    <option value="<i class='fas fa-viruses'></i>" data-icon="fa-viruses">viruses</option>
-                                    <option value="<i class='fas fa-voicemail'></i>" data-icon="fa-voicemail">voicemail</option>
+                                    {{--<option value="<i class='fas fa-virus'></i>" data-icon="fa-virus">virus</option>--}}
+                                    {{--<option value="<i class='fas fa-virus-slash'></i>" data-icon="fa-virus-slash">virus-slash</option>--}}
+                                    {{--<option value="<i class='fas fa-viruses'></i>" data-icon="fa-viruses">viruses</option>--}}
+                                    {{--<option value="<i class='fas fa-voicemail'></i>" data-icon="fa-voicemail">voicemail</option>--}}
                                     <option value="<i class='fas fa-volleyball-ball'></i>" data-icon="fa-volleyball-ball">volleyball-ball</option>
                                     <option value="<i class='fas fa-volume-down'></i>" data-icon="fa-volume-down">volume-down</option>
                                     <option value="<i class='fas fa-volume-mute'></i>" data-icon="fa-volume-mute">volume-mute</option>
@@ -1019,7 +1019,7 @@
                                     <option value="<i class='fas fa-wallet'></i>" data-icon="fa-wallet">wallet</option>
                                     <option value="<i class='fas fa-warehouse'></i>" data-icon="fa-warehouse">warehouse</option>
                                     <option value="<i class='fas fa-water'></i>" data-icon="fa-water">water</option>
-                                    <option value="<i class='fas fa-wave-square'></i>" data-icon="fa-wave-square">wave-square</option>
+                                    {{--<option value="<i class='fas fa-wave-square'></i>" data-icon="fa-wave-square">wave-square</option>--}}
                                     <option value="<i class='fas fa-weight'></i>" data-icon="fa-weight">weight</option>
                                     <option value="<i class='fas fa-weight-hanging'></i>" data-icon="fa-weight-hanging">weight-hanging</option>
                                     <option value="<i class='fas fa-wheelchair'></i>" data-icon="fa-wheelchair">wheelchair</option>
@@ -1038,13 +1038,13 @@
                                     <option value="<i class='fas fa-yen-sign'></i>" data-icon="fa-yen-sign">yen-sign</option>
                                     <option value="<i class='fas fa-yin-yang'></i>" data-icon="fa-yin-yang">yin-yang</option>
                                     <option value="<i class='fas fa-address-book'></i>" data-icon="fa-address-book">address-book</option>
-                                    <option value="<i class='fas fa-f2b9'></i>" data-icon="fa-f2b9">f2b9</option>
+                                    {{--<option value="<i class='fas fa-f2b9'></i>" data-icon="fa-f2b9">f2b9</option>--}}
                                     <option value="<i class='fas fa-address-card'></i>" data-icon="fa-address-card">address-card</option>
                                     <option value="<i class='fas fa-angry'></i>" data-icon="fa-angry">angry</option>
-                                    <option value="<i class='fas fa-arrow-alt-circle-down'></i>" data-icon="fa-circle-down">circle-down</option>
-                                    <option value="<i class='fas fa-arrow-alt-circle-left'></i>" data-icon="fa-circle-left">circle-left</option>
-                                    <option value="<i class='fas fa-arrow-alt-circle-right'></i>" data-icon="fa-circle-right">circle-right</option>
-                                    <option value="<i class='fas fa-arrow-alt-circle-up'></i>" data-icon="fa-circle-up">circle-up</option>
+                                    {{--<option value="<i class='fas fa-arrow-alt-circle-down'></i>" data-icon="fa-circle-down">circle-down</option>--}}
+                                    {{--<option value="<i class='fas fa-arrow-alt-circle-left'></i>" data-icon="fa-circle-left">circle-left</option>--}}
+                                    {{--<option value="<i class='fas fa-arrow-alt-circle-right'></i>" data-icon="fa-circle-right">circle-right</option>--}}
+                                    {{--<option value="<i class='fas fa-arrow-alt-circle-up'></i>" data-icon="fa-circle-up">circle-up</option>--}}
                                     <option value="<i class='fas fa-bell'></i>" data-icon="fa-bell">bell</option>
                                     <option value="<i class='fas fa-bell-slash'></i>" data-icon="fa-bell-slash">bell-slash</option>
                                     <option value="<i class='fas fa-bookmark'></i>" data-icon="fa-bookmark">bookmark</option>
@@ -1055,10 +1055,10 @@
                                     <option value="<i class='fas fa-calendar-minus'></i>" data-icon="fa-calendar-minus">calendar-minus</option>
                                     <option value="<i class='fas fa-calendar-plus'></i>" data-icon="fa-calendar-plus">calendar-plus</option>
                                     <option value="<i class='fas fa-calendar-times'></i>" data-icon="fa-calendar-times">calendar-times</option>
-                                    <option value="<i class='fas fa-caret-square-down'></i>" data-icon="fa-square-down">square-down</option>
-                                    <option value="<i class='fas fa-caret-square-left'></i>" data-icon="fa-square-left">square-left</option>
-                                    <option value="<i class='fas fa-caret-square-right'></i>" data-icon="fa-square-right">square-right</option>
-                                    <option value="<i class='fas fa-caret-square-up'></i>" data-icon="fa-square-up">square-up</option>
+                                    {{--<option value="<i class='fas fa-caret-square-down'></i>" data-icon="fa-square-down">square-down</option>--}}
+                                    {{--<option value="<i class='fas fa-caret-square-left'></i>" data-icon="fa-square-left">square-left</option>--}}
+                                    {{--<option value="<i class='fas fa-caret-square-right'></i>" data-icon="fa-square-right">square-right</option>--}}
+                                    {{--<option value="<i class='fas fa-caret-square-up'></i>" data-icon="fa-square-up">square-up</option>--}}
                                     <option value="<i class='fas fa-chart-bar'></i>" data-icon="fa-chart-bar">chart-bar</option>
                                     <option value="<i class='fas fa-check-circle'></i>" data-icon="fa-check-circle">check-circle</option>
                                     <option value="<i class='fas fa-check-square'></i>" data-icon="fa-check-square">check-square</option>
@@ -1081,16 +1081,16 @@
                                     <option value="<i class='fas fa-envelope'></i>" data-icon="fa-envelope">envelope</option>
                                     <option value="<i class='fas fa-envelope-open'></i>" data-icon="fa-envelope-open">envelope-open</option>
                                     <option value="<i class='fas fa-eye'></i>" data-icon="fa-eye">eye</option>
-                                    <option value="<i class='fas fa-eye-slash-alt-archive-audio-code-excel-image-pdf-powerpoint-video-wordhederer-opennn-openol'></i>" data-icon="fa-opennn-openol">opennn-openol</option>
+                                        {{--<option value="<i class='fas fa-eye-slash-alt-archive-audio-code-excel-image-pdf-powerpoint-video-wordhederer-opennn-openol'></i>" data-icon="fa-opennn-openol">opennn-openol</option>--}}
                                     <option value="<i class='fas fa-gem'></i>" data-icon="fa-gem">gem</option>
                                     <option value="<i class='fas fa-grimace'></i>" data-icon="fa-grimace">grimace</option>
                                     <option value="<i class='fas fa-grin'></i>" data-icon="fa-grin">grin</option>
                                     <option value="<i class='fas fa-grin-alt'></i>" data-icon="fa-grin-alt">grin-alt</option>
                                     <option value="<i class='fas fa-grin-beam'></i>" data-icon="fa-grin-beam">grin-beam</option>
-                                    <option value="<i class='fas fa-grin-beam-sweat'></i>" data-icon="fa-beam-sweat">beam-sweat</option>
+                                    {{--<option value="<i class='fas fa-grin-beam-sweat'></i>" data-icon="fa-beam-sweat">beam-sweat</option>--}}
                                     <option value="<i class='fas fa-grin-hearts'></i>" data-icon="fa-grin-hearts">grin-hearts</option>
                                     <option value="<i class='fas fa-grin-squint'></i>" data-icon="fa-grin-squint">grin-squint</option>
-                                    <option value="<i class='fas fa-grin-squint-tears'></i>" data-icon="fa-squint-tears">squint-tears</option>
+                                    {{--<option value="<i class='fas fa-grin-squint-tears'></i>" data-icon="fa-squint-tears">squint-tears</option>--}}
                                     <option value="<i class='fas fa-grin-stars'></i>" data-icon="fa-grin-stars">grin-stars</option>
                                     <option value="<i class='fas fa-grin-tears'></i>" data-icon="fa-grin-tears">grin-tears</option>
                                     <option value="<i class='fas fa-grin-tongue'></i>" data-icon="fa-grin-tongue">grin-tongue</option>
@@ -1100,10 +1100,10 @@
                                     <option value="<i class='fas fa-hand-lizard'></i>" data-icon="fa-hand-lizard">hand-lizard</option>
                                     <option value="<i class='fas fa-hand-paper'></i>" data-icon="fa-hand-paper">hand-paper</option>
                                     <option value="<i class='fas fa-hand-peace'></i>" data-icon="fa-hand-peace">hand-peace</option>
-                                    <option value="<i class='fas fa-hand-point-down'></i>" data-icon="fa-point-down">point-down</option>
-                                    <option value="<i class='fas fa-hand-point-left'></i>" data-icon="fa-point-left">point-left</option>
-                                    <option value="<i class='fas fa-hand-point-right'></i>" data-icon="fa-point-right">point-right</option>
-                                    <option value="<i class='fas fa-hand-point-up'></i>" data-icon="fa-point-up">point-up</option>
+                                    {{--<option value="<i class='fas fa-hand-point-down'></i>" data-icon="fa-point-down">point-down</option>--}}
+                                    {{--<option value="<i class='fas fa-hand-point-left'></i>" data-icon="fa-point-left">point-left</option>--}}
+                                    {{--<option value="<i class='fas fa-hand-point-right'></i>" data-icon="fa-point-right">point-right</option>--}}
+                                    {{--<option value="<i class='fas fa-hand-point-up'></i>" data-icon="fa-point-up">point-up</option>--}}
                                     <option value="<i class='fas fa-hand-pointer'></i>" data-icon="fa-hand-pointer">hand-pointer</option>
                                     <option value="<i class='fas fa-hand-rock'></i>" data-icon="fa-hand-rock">hand-rock</option>
                                     <option value="<i class='fas fa-hand-scissors'></i>" data-icon="fa-hand-scissors">hand-scissors</option>
@@ -1120,7 +1120,7 @@
                                     <option value="<i class='fas fa-keyboard'></i>" data-icon="fa-keyboard">keyboard</option>
                                     <option value="<i class='fas fa-kiss'></i>" data-icon="fa-kiss">kiss</option>
                                     <option value="<i class='fas fa-kiss-beam'></i>" data-icon="fa-kiss-beam">kiss-beam</option>
-                                    <option value="<i class='fas fa-kiss-wink-heart'></i>" data-icon="fa-wink-heart">wink-heart</option>
+                                    {{--<option value="<i class='fas fa-kiss-wink-heart'></i>" data-icon="fa-wink-heart">wink-heart</option>--}}
                                     <option value="<i class='fas fa-laugh'></i>" data-icon="fa-laugh">laugh</option>
                                     <option value="<i class='fas fa-laugh-beam'></i>" data-icon="fa-laugh-beam">laugh-beam</option>
                                     <option value="<i class='fas fa-laugh-squint'></i>" data-icon="fa-laugh-squint">laugh-squint</option>
@@ -1132,9 +1132,9 @@
                                     <option value="<i class='fas fa-map'></i>" data-icon="fa-map">map</option>
                                     <option value="<i class='fas fa-meh'></i>" data-icon="fa-meh">meh</option>
                                     <option value="<i class='fas fa-meh-blank'></i>" data-icon="fa-meh-blank">meh-blank</option>
-                                    <option value="<i class='fas fa-meh-rolling-eyes'></i>" data-icon="fa-rolling-eyes">rolling-eyes</option>
+                                    {{--<option value="<i class='fas fa-meh-rolling-eyes'></i>" data-icon="fa-rolling-eyes">rolling-eyes</option>--}}
                                     <option value="<i class='fas fa-minus-square'></i>" data-icon="fa-minus-square">minus-square</option>
-                                    <option value="<i class='fas fa-money-bill-alt'></i>" data-icon="fa-bill-alt">bill-alt</option>
+                                    {{--<option value="<i class='fas fa-money-bill-alt'></i>" data-icon="fa-bill-alt">bill-alt</option>--}}
                                     <option value="<i class='fas fa-moon'></i>" data-icon="fa-moon">moon</option>
                                     <option value="<i class='fas fa-newspaper'></i>" data-icon="fa-newspaper">newspaper</option>
                                     <option value="<i class='fas fa-object-group'></i>" data-icon="fa-object-group">object-group</option>
@@ -1235,8 +1235,8 @@
                                     <option value="<i class='fas fa-grin-stars'></i>" data-icon="fa-grin-squint-tears">grin-stars</option>
                                     <option value="<i class='fas fa-grin-tears'></i>" data-icon="fa-grin-stars">grin-tears</option>
                                     <option value="<i class='fas fa-grin-tongue'></i>" data-icon="fa-grin-tears">grin-tongue</option>
-                                    <option value="<i class='fas fa-grin-tongue-squint'></i>" data-icon="fa-grin-tongue">grin-tongue-squint</option>
-                                    <option value="<i class='fas fa-grin-tongue-wink'></i>" data-icon="fa-grin-tongue-squint">grin-tongue-wink</option>
+                                    {{--<option value="<i class='fas fa-grin-tongue-squint'></i>" data-icon="fa-grin-tongue">grin-tongue-squint</option>--}}
+                                    {{--<option value="<i class='fas fa-grin-tongue-wink'></i>" data-icon="fa-grin-tongue-squint">grin-tongue-wink</option>--}}
                                     <option value="<i class='fas fa-grin-wink'></i>" data-icon="fa-grin-tongue-wink">grin-wink</option>
                                     <option value="<i class='fas fa-hand-lizard'></i>" data-icon="fa-grin-wink">hand-lizard</option>
                                     <option value="<i class='fas fa-hand-paper'></i>" data-icon="fa-hand-lizard">hand-paper</option>
