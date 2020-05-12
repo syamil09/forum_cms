@@ -121,7 +121,7 @@ class MenuController extends Controller
         $token = Session::get('token');
 
         $Menu = $this->post(env('GATEWAY_URL') . 'menu/update/' . $id, $data, $token);
-        return $Menu;
+
         return redirect(route('master-menu.index'))->with('success', 'Success update menu');
     }
 
