@@ -54,8 +54,8 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 		Route::post('/uprof/{id}','account\AdminController@uprof');
 	});
 
-
-//	Route::get('activity','account\LogActivityController@index');
+	Route::get('activity','account\LogActivityController@index');
+	Route::post('activity/delete','account\LogActivityController@delete');
 });
 
 Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () {
