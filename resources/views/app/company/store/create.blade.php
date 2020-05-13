@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Store')
 
 @section('section_header')
-<h1>Create Event</h1>
+<h1>Create Store</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item"><a href="#">General</a></div>
-  <div class="breadcrumb-item">CreateEvent</div>
+  <div class="breadcrumb-item"><a href="#">Company</a></div>
+  <div class="breadcrumb-item">CreateStore</div>
 </div>
 @endsection
 
@@ -23,10 +23,10 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4>Create Event</h4>
+        <h4>Create Store</h4>
       </div>
       <div class="card-body">
-        <form id="createEvent" class="" action="{{url('general/event/store')}}" method="post" enctype="multipart/form-data">
+        <form id="createEvent" class="" action="{{url('company/store/store')}}" method="post" enctype="multipart/form-data">
           @csrf
           @if($profile['company_id'] == null)
           <div class="form-group row mb-4">
@@ -45,36 +45,24 @@
           </div>
           @endif
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" name="title" value="{{old('title')}}" required>
+              <input type="text" class="form-control" name="name" value="{{old('name')}}" required>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event Start</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="date" class="form-control" name="event_start" value="{{old('event_start')}}" required>
-            </div>
-          </div>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event End</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="date" class="form-control" name="event_end" value="{{old('event_end')}}" required>
-            </div>
-          </div>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-            <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple" name="description" required>{{old('description')}}</textarea>
-            </div>
-          </div>
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Logo</label>
             <div class="col-sm-12 col-md-7">
               <div id="image-preview" class="image-preview">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image[]" id="image-upload" multiple required />
+                <input type="file" name="image" id="image-upload" />
               </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="tel" class="form-control" name="phone" value="{{old('phone')}}" required>
             </div>
           </div>
           <div class="form-group row mb-4">
@@ -94,8 +82,8 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">
-              <a href="{{url('general/event')}}" class="btn btn-secondary">Cancel</a>
-              <button type="submit" class="btn btn-primary">Create Event</button>
+              <a href="{{url('company/store')}}" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">Create Store</button>
             </div>
           </div>
         </form>
@@ -107,17 +95,6 @@
 @endsection
 
 @section('script_page')
-<script type="text/javascript">
-  $.uploadPreview({
-      input_field: "#image-upload",   // Default: .image-upload
-      preview_box: "#image-preview",  // Default: .image-preview
-      label_field: "#image-label",    // Default: .image-label
-      label_default: "Choose File",   // Default: Choose File
-      label_selected: "Change File",  // Default: Change File
-      no_label: false,                // Default: false
-      success_callback: null          // Default: null
-  });
-</script>
 {{-- Valiidatoor --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script>

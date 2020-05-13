@@ -16,69 +16,43 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <a href="#" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i> Add Member</a>
+        <a href="{{url('account/admin/create')}}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i> Add Admin</a>
       </div>
       <div class="card-body">
+        @if(session('failed'))
+        <div class="alert alert-danger">{{session('failed')}}</div>
+        @endif
         <div class="table-responsive">
           <table class="table table-striped" id="table-1">
             <thead>
               <tr>
-                <th class="text-center" width="5%">
-                  #
-                </th>
+                <th>Company / Community</th>
                 <th width="10%">Photo</th>
-                <th>Name</th>
-                <th>Email</th>
+                <th>Userame</th>
+                <th>Role</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
+              @foreach($admin as $adm)
               <tr>
+                <td>{{ $adm['company']['full_name'] }}</td>
                 <td>
-                  1
+                  <img src="{{ $adm['photo'] }}" alt="photo" style="width: 50px;">
                 </td>
+                <td>{{ $adm['username'] }}</td>
+                <td>{{ $adm['role'] }}</td>
                 <td>
-                  <img alt="image" src="{{ asset('stisla/assets/img/avatar/avatar-5.png') }}" class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian">
-                </td>
-                <td>Create a mobile app</td>
-                <td>2018-01-20</td>
-                <td>
-                  <a title="" class="btn btn-info btn-action" data-toggle="tooltip" data-original-title="Detail"><i class="fas fa-info"></i></a>
-                  <a title="" class="btn btn-warning btn-action" data-toggle="tooltip" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                  <a title="" class="btn btn-danger btn-action" data-toggle="tooltip" data-original-title="Delete"><i class="fas fa-trash"></i></a>
+                  <a class="btn btn-info btn-sm text-white" href="{{url('account/admin/detail/'. $adm['company_id']) }}"><i class="fas fa-info"></i></a>
+                  <a title="" class="btn btn-warning btn-sm text-white" href="{{url('account/admin/edit/'. $adm['company_id']) }}"><i class="fas fa-pencil-alt"></i></a>
+                  <form action="{{ url('account/admin/delete') }}" method="post" class="d-inline form-del">
+                      @csrf
+                      <input type="hidden" name="id" value="{{$adm['id']}}">
+                      <button type="submit" class="btn btn-danger btn-sm delete" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                  </form>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  2
-                </td>
-                <td>
-                  <img alt="image" src="{{ asset('stisla/assets/img/avatar/avatar-5.png') }}" class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian">
-                </td>
-                <td>Redesign homepage</td>
-                <td>2018-04-10</td>
-                <td>
-                  <a title="" class="btn btn-info btn-action" data-toggle="tooltip" data-original-title="Detail"><i class="fas fa-info"></i></a>
-                  <a title="" class="btn btn-warning btn-action" data-toggle="tooltip" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                  <a title="" class="btn btn-danger btn-action" data-toggle="tooltip" data-original-title="Delete"><i class="fas fa-trash"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  3
-                </td>
-                <td>
-                  <img alt="image" src="{{ asset('stisla/assets/img/avatar/avatar-1.png') }}" class="rounded-circle" width="35" data-toggle="tooltip" title="Rizal Fakhri">
-                </td>
-                <td>Backup database</td>
-                <td>2018-01-29</td>
-                <td>
-                  <a title="" class="btn btn-info btn-action" data-toggle="tooltip" data-original-title="Detail"><i class="fas fa-info"></i></a>
-                  <a title="" class="btn btn-warning btn-action" data-toggle="tooltip" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                  <a title="" class="btn btn-danger btn-action" data-toggle="tooltip" data-original-title="Delete"><i class="fas fa-trash"></i></a>
-                </td>
-              </tr>
-
+              @endforeach
             </tbody>
           </table>
         </div>

@@ -22,17 +22,17 @@ class ArticleController extends Controller
     {
         $token = session()->get('token');
         $categorys = $this->get(env('GATEWAY_URL') . 'article_category', $token)['data'];
-        return view('app.general.article.create', compact('categorys'));
+        $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+        $profile = $profile['success'] ? $profile['data'] : null;
+        $company = $this->get(env('GATEWAY_URL'). 'company', $token);
+        $company = $company['data'];
+        return view('app.general.article.create', compact('categorys', 'profile', 'company'));
     }
 
 
     public function store(Request $request)
     {
         $token = $request->session()->get('token');
-
-        $request->validate([
-          'title' => 'required',
-        ]);
 
         $data = $request->except('image', '_token');
         if (!empty($data['tags'])) {
@@ -51,7 +51,7 @@ class ArticleController extends Controller
         if ($response['success']) {
             return redirect('general/article')->with('success', 'Data created');
         }
-        return redirect('general/article/create')->with('failed', 'Data Doesnt Created ,' . collect($response['message'])->first()[0]);
+        return redirect()->back()->with('failed', 'Data Doesnt Created ,' . collect($response['message'])->first()[0]);
     }
 
     public function show(Request $req, $id)

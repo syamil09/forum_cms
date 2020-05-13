@@ -37,7 +37,8 @@
           <div class="col-md-3 card">
             <img src="{{ $com['logo'] }}" alt="logo" class="card-img-top">
             <div class="card-body">
-              <h5 class="card-title">{{$com['company_name']}}</h5>
+              <h5 class="card-title">{{$com['full_name']}}</h5>
+              <p class="card-subtitle">{{$com['company_name']}}</p>
               <!-- <p class="card-text"></p> -->
             </div>
             <div class="card-footer text-center">

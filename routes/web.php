@@ -47,12 +47,15 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 		Route::get('/create','account\AdminController@create');
 		Route::post('/store','account\AdminController@store');
 		Route::get('/edit/{id}','account\AdminController@edit');
+		Route::get('/detail/{id}','account\AdminController@show');
 		Route::post('/update/{id}','account\AdminController@update');
 		Route::post('/delete','account\AdminController@delete');
+		Route::get('/profile','account\AdminController@profile');
+		Route::post('/uprof/{id}','account\AdminController@uprof');
 	});
 
 
-	Route::get('activity','account\LogActivityController@index');
+//	Route::get('activity','account\LogActivityController@index');
 });
 
 Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () {
@@ -138,19 +141,23 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::post('/update','general\HomeContentController@update');
 	});
 
-	// ------------------ about us -------------------
-	Route::group(['prefix' => 'about'],function () {
-		Route::get('/','general\AboutController@index');
-		Route::post('/update','general\AboutController@update');
-	});
+//	// ------------------ about us -------------------
+//	Route::group(['prefix' => 'about'],function () {
+//		Route::get('/','general\AboutController@index');
+//		Route::post('/update','general\AboutController@update');
+//	});
 
 	// ------------------ contact -------------------
-	Route::group(['prefix' => 'contact'],function () {
-		Route::get('/','general\ContactController@index');
-		Route::post('/update','general\ContactController@update');
-	});
+//	Route::group(['prefix' => 'contact'],function () {
+//		Route::get('/','general\ContactController@index');
+//		Route::post('/update','general\ContactController@update');
+//	});
     Route::get('/splashscreen', 'general\SplashScreenController@index')->name('SplashScreen.index');
     Route::post('/splashscreen', 'general\SplashScreenController@store')->name('SplashScreen.store');
+});
+Route::group(['prefix' => 'menu','middleware' => ['CheckLogin']],function () {
+    Route::resource('/group-menu', 'menu\MenuGroupController');
+    Route::resource('/master-menu', 'menu\MenuController');
 });
 
 // ------------------ Company -------------------
@@ -167,6 +174,8 @@ Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function (
 		Route::get('/detail/{id}','company\CommunityController@show');
 
 	});
+
+	// ------------------ secrtariat -------------------
 	Route::group(['prefix' => 'secretariat'], function () {
 		Route::get('/','company\SecretariatController@index');
 		Route::get('/create','company\SecretariatController@create');
@@ -185,6 +194,17 @@ Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function (
 		Route::post('/update/{id}','company\ShopController@update');
 		Route::post('/delete','company\ShopController@delete');
 		Route::get('/detail/{id}','company\ShopController@show');
+	});
+
+	// ------------------ store -------------------
+	Route::group(['prefix' => 'store'], function () {
+		Route::get('/','company\StoreController@index');
+		Route::get('/create','company\StoreController@create');
+		Route::post('/store','company\StoreController@store');
+		Route::get('/edit/{id}','company\StoreController@edit');
+		Route::post('/update/{id}','company\StoreController@update');
+		Route::post('/delete','company\StoreController@destroy');
+		Route::get('/detail/{id}','company\StoreController@show');
 	});
 
 });

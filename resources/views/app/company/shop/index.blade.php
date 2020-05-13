@@ -34,11 +34,11 @@
           @else
           @foreach ($shops as $shop)
           <div class="col-md-3 card">
-            <img src="{{$shop['photo']}}" alt="photo" class="card-img-top">
+            <img src="{{$shop['photo'][0]}}" alt="photo" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">{{$shop['name']}}</h5>
               <p class="card-text btn btn-outline-secondary btn-sm">{{$shop['category']['category']}}</p>
-              <div class="form-group row mb-4">
+              <div class="form-group row mb-1">
                 <div class="col-sm-12 col-md-1 text-md-right">
                   <img src="{{$shop['store']['logo']}}" alt="logo store" style="height:20px">
                 </div>

@@ -48,7 +48,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Voting Period</label>
                             <div class="col-sm-12 col-md-7">
-                                <input name="voting_period" type="text" class="form-control rangeDateTimes">
+                                <input name="voting_period" type="text" class="form-control rangeDateTimes" required>
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -110,23 +110,54 @@
     </script>
     {{-- End Valiidatoor --}}
     <script>
+        var disabledArr = [{!! $DateNotAvailable !!}]
 
-        $('.rangeDateTimes').daterangepicker({
+        $(".rangeDateTimes").daterangepicker({
             timePicker: true,
             timePicker24Hour: true,
-            startDate: moment().startOf('hour'),
-            endDate: moment().startOf('hour').add(72, 'hour'),
+            autoUpdateInput: false,
             locale: {
-                format: 'D-M-Y H:mm'
+                format: 'DD-MM-YYYY H:mm'
             },
+            isInvalidDate: function(arg){
+                // Prepare the date comparision
+                var thisMonth = arg._d.getMonth()+1;   // Months are 0 based
+                if (thisMonth<10){
+                    thisMonth = "0"+thisMonth; // Leading 0
+                }
+                var thisDate = arg._d.getDate();
+                if (thisDate<10){
+                    thisDate = "0"+thisDate; // Leading 0
+                }
+                var thisYear = arg._d.getYear()+1900;   // Years are 1900 based
+
+                var thisCompare = thisYear +"-"+ thisMonth +"-"+ thisDate;
+
+                if($.inArray(thisCompare,disabledArr)!=-1){
+                    return true; //arg._pf = {userInvalidated: true};
+                }
+            }
         }, function (start, end) {
             var startDateTime = start.format('YYYY-MM-DD H:m');
             var endDateTime = end.format('YYYY-MM-DD H:m');
+
             if (startDateTime === endDateTime) {
                 alert('Please don\'t set end time same value with start time');
                 $(this).reset();
             }
+
+            var clearInput = false;
+            for(i=0;i<disabledArr.length;i++){
+                if(startDateTime<disabledArr[i] && endDateTime>disabledArr[i]){
+                    alert("Your range selection includes not available date!");
+                    $(this).reset();
+                }
+            }
+            $(".rangeDateTimes").val(start.format('DD-MM-YYYY H:mm') + "-" + end.format('DD-MM-YYYY H:mm'));
+
+            $('#createVote').valid();
         });
+
 
         $(".select2").select2({
             templateResult: formatStateResult,
@@ -139,6 +170,7 @@
             $(this).trigger("change");
             $(this).valid();
         });
+
         function formatStateResult(opt) {
             if (!opt.id) {
                 return opt.text;

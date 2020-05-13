@@ -34,22 +34,14 @@
         <div class="form-group row mb-4">
           <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Logo</label>
           <div class="col-sm-12 col-md-7">
-            <img src="{{$detail['logo']}}" alt="image" style="height:270px">
+            <img src="{{$detail['logo']}}" alt="image" style="height:150px">
           </div>
         </div>
         <div class="form-group row mb-4">
           <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Background</label>
           <div class="col-sm-12 col-md-7">
-            <img src="{{$detail['background']}}" alt="image" style="height:270px">
+            <img src="{{$detail['background']}}" alt="image" style="height:200px">
           </div>
-        </div>
-        <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Address : </label>
-          <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3"></label>
-        </div>
-        <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Maps : </label>
-          <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3"></label>
         </div>
         <div class="form-group row mb-4">
           <label class="col-form-label text-md-right col-12 col-md-3"></label>

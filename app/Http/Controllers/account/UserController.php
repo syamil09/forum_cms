@@ -17,10 +17,12 @@ class UserController extends Controller
     {
         $id = session()->get('data')['company_id'];
         $token = session()->get('token');
-        $response = $this->get(env('GATEWAY_URL').'user/member?company_id='.$id,$token);
+        $route = 'user/';
+        $route = $id != null ? $route.'member?company_id='.$id : $route;
+        $response = $this->get(env('GATEWAY_URL'). $route, $token);
         $members  = ($response['success'])?$response['data']:null;
 
-        return view('app.account.user.index',compact('members'));
+        return view('app.account.user.index',compact('members', 'id'));
     }
 
     public function create()
@@ -30,7 +32,7 @@ class UserController extends Controller
 
 
     public function store(Request $request)
-    {   
+    {
         $data = $request->all();
         $token = $request->session()->get('token');
         $com_id = $request->session()->get('data')['company_id'];
@@ -45,7 +47,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('failed',$validator->getMessageBag()->first())->withInput();         
+            return redirect()->back()->with('failed',$validator->getMessageBag()->first())->withInput();
         }
 
         // if($request->password != $request->repassword)
@@ -54,7 +56,7 @@ class UserController extends Controller
         // }
 
         $response = $this->post(env('GATEWAY_URL').'user/add',$data,$token);
-    
+
         if($response['success'])
         {
             return redirect('account/user')->with('success','Data '.$response['data']['username'].' Created');
@@ -90,7 +92,7 @@ class UserController extends Controller
             'username'    => 'required',
             'email'       => 'required|email',
         ]);
- 
+
         $img['name'] = 'photo';
         $img['contents'] = '';
         if ($request->has('photo')) {

@@ -54,11 +54,16 @@ class CommunityController extends Controller
         $token = $request->session()->get('token');
         $data = $request->except(['logo', 'background']);
 
-        $img['name'] = 'logo';
-        $img['contents'] = '';
         if ($request->has('logo')) {
-          $img['contents'] = fopen($request->logo, 'r');
-          $img['filename'] = 'company.png';
+          $img[0]['name'] = 'logo';
+          $img[0]['contents'] = fopen($request->logo, 'r');
+          $img[0]['filename'] = 'company.png';
+        }
+
+        if ($request->has('background')) {
+          $img[1]['name'] = 'background';
+          $img[1]['contents'] = fopen($request->background, 'r');
+          $img[1]['filename'] = 'company_background.png';
         }
 
         // dd($img);

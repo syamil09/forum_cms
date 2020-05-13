@@ -44,7 +44,11 @@ class ShopController extends Controller
       $category = ($getcategory['success'] == false)?null:$getcategory['data'];
       $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
       $store = $getstore['success']  == false ? null : $getstore['data'];
-        return view('app.company.shop.create', compact('category', 'store'));
+      $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+      $profile = $profile['success'] ? $profile['data'] : null;
+      $company = $this->get(env('GATEWAY_URL'). 'company', $token);
+      $company = $company['data'];
+        return view('app.company.shop.create', compact('category', 'store', 'profile', 'company'));
     }
 
     /**
@@ -58,29 +62,25 @@ class ShopController extends Controller
       // return $request->all();
         $token = $request->session()->get('token');
 
-        $request->validate([
-          'name' => 'required',
-          'price' => 'required',
-          'image' => 'required',
-          'description' => 'required',
-        ]);
-
         $data = $request->except('image');
-        $photo['name'] = 'photo';
-        $photo['contents'] = '';
+        $photo[0]['name'] = 'photo[]';
+        $photo[0]['contents'] = '';
         if($request->has('image')) {
-            $photo['contents'] = fopen($request->image, 'r');
-            $photo['filename'] = 'shop.png';
+          foreach ($request['image'] as $key => $value) {
+            $photo[$key]['name'] = 'photo[]';
+            $photo[$key]['contents'] = fopen($value, 'r');
+            $photo[$key]['filename'] = 'shop.png';
+          }
         }
 
         // dd($photo);
-        $response = $this->postMulti(env('GATEWAY_URL').'shop/item/add', $data, $token, $photo);
+        $response = $this->postMulti(env('GATEWAY_URL').'shop/item/add', $data, $token, null, $photo);
         // return $response;
         if ($response['success']) {
             // LogActivity::addToLog('Added Data Mesjid');
             return redirect('company/shop')->with('success', 'Data Created');
         } else {
-          return redirect('company/shop')->with('failed', 'Data Doesnt Created.');
+          return redirect()->back()->with('failed', 'Data Doesnt Created, '. collect($response['message'])->first()[0]);
         }
 
     }
@@ -132,11 +132,14 @@ class ShopController extends Controller
 
       $data = $request->except('_token','image');
 
-      $photo['name'] = "photo";
-      $photo['contents'] = '';
-      if ($request->image != null) {
-        $photo['contents'] = fopen($request->image,'r');
-        $photo['filename'] = 'shop.png';
+      $photo[0]['name'] = 'photo[]';
+      $photo[0]['contents'] = '';
+      if($request->has('image')) {
+        foreach ($request['image'] as $key => $value) {
+          $photo[$key]['name'] = 'photo[]';
+          $photo[$key]['contents'] = fopen($value, 'r');
+          $photo[$key]['filename'] = 'shop.png';
+        }
       }
 
       $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token,$photo);

@@ -37,7 +37,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Logo</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview">
+              <div id="image-preview" class="image-preview" style="background-image: url({{$company['logo']}})">
                 <label for="image-upload" id="image-label">Choose File</label>
                 <input type="file" name="logo" id="image-upload" />
               </div>
@@ -46,7 +46,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Background</label>
             <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview">
+              <div id="image-preview" class="image-preview" style="background-image: url({{$company['background']}})">
                 <label for="image-upload" id="image-label">Choose File</label>
                 <input type="file" name="background" id="image-upload" />
               </div>
