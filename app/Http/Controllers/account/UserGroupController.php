@@ -9,37 +9,26 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 
-class UserPrivilegesController extends Controller
+class UserGroupController extends Controller
 {
 
     public function index(Request $req)
     {
-        session()->put('menu','User Privileges');
-        session()->put('group','Manage User');
         // return session()->get('data-user')['user_group_id'];
         $token      = $req->session()->get('token');    
         $response   = $this->get(env('GATEWAY_URL').'user-group',$token);
-        $privileges = $response['data'];
-
-        return view('app.account.privileges.index',compact('privileges'));
+        $datas      = $response['success'] ? $response['data'] : null;
+ 
+        return view('app.account.user_group.index',compact('datas'));
     }
 
     public function create()
     {
-        return view('app.account.privileges.create');
+        return view('app.account.user_group.create');
     }
 
     public function store(Request $request)
     {
-        // $validate = Validator::make($request->all(),[
-        //     'name' => 'required',
-        //     'description' => 'required'
-        // ]);
-
-        // if($validate->fails())
-        // {
-        //     return redirect()->back()->with('failed','Please, fill in all the fields');
-        // }
         $request->validate([
             'name' => 'required',
             'description' => 'required'
@@ -47,30 +36,29 @@ class UserPrivilegesController extends Controller
 
         $token = $request->session()->get('token');
         $response = $this->post(env('GATEWAY_URL').'user-group/add',$request->except('_token'),$token);
-        // return $validate;
 
-        if($response['success'])
-        {
-            return redirect()->back()->with('success','Data '.$response['data']['name'].' Created');
+        if ($response['success']) {
+            return redirect('account/privileges')->with('success','Data '.$response['data']['name'].' Created');
         }
             return redirect('account/privileges')->with('failed','Data '.$response['data']['name'].' Doesnt Created,'.$response['message']);
     
     }
     public function storePrivileges(Request $request)
     {
-        // return $request->all();
         $token    = $request->session()->get('token');
-        $id       = $request['user_id'];
+        $id       = $request['user_group_id'];
 
-        $request['view']    = (Arr::exists($request,'view'))?$request['view']:[];
-        $request['add']     = (Arr::exists($request,'add'))?$request['add']:[];
-        $request['edit']    = (Arr::exists($request,'edit'))?$request['edit']:[];
-        $request['delete']  = (Arr::exists($request,'delete'))?$request['delete']:[];
-        $request['other']   = (Arr::exists($request,'other'))?$request['other']:[];
-        // return $request->all();
+        $request['view']    = Arr::exists($request,'view')   ? $request['view']   : [];
+        $request['add']     = Arr::exists($request,'add')    ? $request['add']    : [];
+        $request['edit']    = Arr::exists($request,'edit')   ? $request['edit']   : [];
+        $request['delete']  = Arr::exists($request,'delete') ? $request['delete'] : [];
+        $request['other']   = Arr::exists($request,'other')  ? $request['other']  : [];
+
         $user = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$id,$token);
-        
-        for($i=0;$i<14;$i++)
+        $user = $user['success'] ? $user['data'] : []; 
+        $menu = $this->get(env('GATEWAY_URL').'menu',$token);
+
+        foreach($menu['data'] as $i => $val)
         {
             if(!Arr::exists($request['add'],$i)) {
                 $request['add'] = array_add($request['add'],$i,'0');
@@ -95,10 +83,10 @@ class UserPrivilegesController extends Controller
         // dd($request->all());
         $data = $request->except('_token');
         
-        for($i=0;$i<14;$i++)
+        foreach($menu['data'] as $i => $val)
         {
             $data = [
-                'user_id' => $id,
+                'user_group_id' => $id,
                 'menu_id' => $request['menu_id'][$i],
                 'view'    => $request['view'][$i],
                 'add'     => $request['add'][$i],
@@ -108,28 +96,25 @@ class UserPrivilegesController extends Controller
 
             ];
 
-            if($user['success'] == true)
-            {
-                $response = $this->post(env('GATEWAY_URL').'user-privileges/update/'.$user['data'][$i]['id'],$data,$token);
-                // return $user['data'][$i]['id'];
+            $checkExist = collect($user)->where('menu_id',$val['id'])->first();
+            if (!empty($user) && !empty($checkExist)) {
+                $response = $this->post(env('GATEWAY_URL').'user-privileges/update/'.$checkExist['id'],$data,$token);
+                $newMenu[] = $response['data'];
             }
             else {
                 $response = $this->post(env('GATEWAY_URL').'user-privileges/add',$data,$token);
+                $newMenu[] = $response['data'];
             }
             
         }
-        
-        // return $request->all();
-
-        if($response['success'])
-        {
-            // if(session()->get('data-user')['user_group_id'] == $id )
-            // {
-            //     session()->put('privileges',$response['data']);
-                
+   
+        if ($response['success']) {
+            // if (session()->get('data-user')['user_group_id'] == $request['user_group_id']) {
+            //     $request->session()->put('privileges',$newMenu);
             // }
+            
             return redirect('account/privileges')->with('success','Data Saved');
-        }else {
+        } else {
             return redirect('account/privileges')->with('failed','Data Doesnt Saved,'.$response['message']);
         }
         
@@ -138,14 +123,13 @@ class UserPrivilegesController extends Controller
     public function show($id)
     {
         $token = session()->get('token');
-        $response = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$id,$token);
-        $data = ($response['success'] == false)?null:$response['data'];
-        // return $data;
-        // if($response['success'])
-        // {
-        //     return redirect('account/privileges');
-        // }
-        return view('app.account.privileges.privileges',compact('data','id'));
+        $userPrivileges = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$id,$token);
+        $menuPrivileges = $this->get(env('GATEWAY_URL').'menu/privileges',$token);
+
+        $data = $userPrivileges['success'] == false ? null : $userPrivileges['data'];
+        $menu = $menuPrivileges['success'] == false ? null : $menuPrivileges['data'];
+
+        return view('app.account.privileges.privileges',compact('data','menu','id'));
     }
 
     public function edit(Request $req,$id)
@@ -153,7 +137,7 @@ class UserPrivilegesController extends Controller
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'user-group/edit/'.$id,$token);
         $privileges = $response['data'];
-        // return $response;
+
         return view('app.account.privileges.edit',compact('privileges'));
     }
 
@@ -162,10 +146,9 @@ class UserPrivilegesController extends Controller
     {
         $data = $request->except('_token');
 
-        if($request['name'])
         $token = $request->session()->get('token');
         $response = $this->post(env('GATEWAY_URL').'user-group/update/'.$id,$data,$token);
-        // dd($response);
+      
         if($response['success'])
         {
             return redirect('account/privileges')->with('success','Data '.$response['data']['name'].' Updated');
@@ -178,12 +161,12 @@ class UserPrivilegesController extends Controller
     {
         $token = $req->session()->get('token');
         $response = $this->post(env('GATEWAY_URL').'user-group/delete',$req->all(),$token);
-        return $response;
+   
         if($response['success'])
         {
-            return redirect('privileges/user')->with('success','Data '.$response['data']['name'].' Deleted');
+            return redirect()->back()->with('success','Data '.$response['data']['name'].' Deleted');
         }else {
-            return redirect('privileges/user')->with('failed','Data Doesnt Deleted');
+            return redirect()->back()->with('failed','Data Doesnt Deleted');
         }
 
     }

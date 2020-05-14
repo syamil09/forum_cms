@@ -20,12 +20,12 @@ class LoginController extends Controller
         if($response['success'])
         {
             $dataSession = [
-                'company_id' => $response['data']['company_id'],
-                'user_id'    => $response['data']['id'],
-                'username'   => $response['data']['username'],
-                'email'      => $response['data']['email'],
-                'photo'      => $response['data']['photo'],
-                'role'       => $response['data']['role']
+                'company_id'    => $response['data']['company_id'],
+                'user_id'       => $response['data']['id'],
+                'username'      => $response['data']['username'],
+                'email'         => $response['data']['email'],
+                'photo'         => $response['data']['photo'],
+                'user_group_id' => $response['data']['user_group_id']
             ];
             // $req->session()->flush();
             $req->session()->put('token',$response['token']);

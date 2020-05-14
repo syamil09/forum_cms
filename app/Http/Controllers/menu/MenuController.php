@@ -69,7 +69,7 @@ class MenuController extends Controller
         $Menu = $this->post(env('GATEWAY_URL') . 'menu/add', $data, $token);
 
         if ($Menu['success']) {
-            return redirect()->route('group-menu.index')->with('success', 'Success creating group menu');
+            return redirect()->route('master-menu.index')->with('success', 'Success creating group menu');
         }
     }
 
