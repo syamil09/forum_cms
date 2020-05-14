@@ -67,7 +67,7 @@ class CommunityController extends Controller
         }
 
         // dd($img);
-        $response = $this->postMulti(env('GATEWAY_URL').'company/add', $data, $token, $img);
+        $response = $this->postMulti(env('GATEWAY_URL').'company/add', $data, $token, null, $img);
         // return $response;
         if ($response['success']) {
             // LogActivity::addToLog('Added Data Mesjid');
@@ -107,7 +107,7 @@ class CommunityController extends Controller
       $token = $request->session()->get('token');
       $response = $this->get(env('GATEWAY_URL').'company/edit/'.$id,$token);
       $company = $response['data'];
-      
+
       return view('app.company.community.edit',compact('company'));
     }
 
