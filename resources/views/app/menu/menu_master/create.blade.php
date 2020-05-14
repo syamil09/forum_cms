@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Forum | Menu')
+@section('title','Forum | Menu Master')
 
 @section('section_header')
     <h1>Create Menu Master</h1>
@@ -34,6 +34,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
+                    <h4>Create Menu Master</h4>
                 </div>
                 <div class="card-body">
                     <form id="createMenu" method="POST" action="{{  route('master-menu.store') }}">

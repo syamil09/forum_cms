@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Forum | Menu')
+@section('title','Forum | Menu Master')
 
 @section('section_header')
     <h1>Menu Master</h1>

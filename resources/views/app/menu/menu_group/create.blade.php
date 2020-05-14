@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Forum | Vote')
+@section('title','Forum | Group Menu')
 
 @section('section_header')
     <h1>Create Group Menu</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">General</a></div>
-        <div class="breadcrumb-item"><a href="{{ route('group-menu.index') }}">Vote</a></div>
+        <div class="breadcrumb-item"><a href="#">Menu</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('group-menu.index') }}">Group Menu</a></div>
         <div class="breadcrumb-item">Create</div>
     </div>
 @endsection
@@ -34,7 +34,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Set up voting</h4>
+                    <h4>Create Group Menu</h4>
                 </div>
                 <div class="card-body">
                     <form id="createVote" method="POST" action="{{  route('group-menu.store') }}">
