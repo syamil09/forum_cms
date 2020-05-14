@@ -19,6 +19,17 @@
                     <a href="{{ route('vote.create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Voting</a>
                 </div>
                 <div class="card-body">
+                    @if(session('success'))
+                        <div class="container alert alert-success alert-dismissible" role="alert">
+                            {{session('success')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session('failed'))
+                        <div class="alert alert-danger">{{session('failed')}}</div>
+                    @endif
                     <div class="table-responsive">
                         <table id="tableVote" class="table table-striped" style="width:100%">
                             <thead>
@@ -75,6 +86,10 @@
 @endsection
 @section('script_page')
     <script>
+        $(".alert").delay(5000).slideUp(200, function() {
+            $(this).alert('close');
+        });
+
         $("#tableVote").dataTable({
             "paging": true,
             "lengthChange": true,
