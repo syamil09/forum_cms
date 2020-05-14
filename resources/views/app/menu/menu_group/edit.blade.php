@@ -2625,7 +2625,7 @@
             $(this).valid();
         });
 
-        $('.select2-icon').val("{!! $GroupMenu['icon'] !!}").trigger('change');
+        $('.select2-icon').val("{{ $GroupMenu['icon'] }}").trigger('change');
         $('#createVote').valid();
     </script>
 @endsection
