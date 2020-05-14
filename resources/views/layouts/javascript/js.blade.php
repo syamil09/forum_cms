@@ -50,5 +50,8 @@
       'You do not have access rights to this menu',
       'error'
     );
+    $(".alert").delay(5000).slideUp(200, function() {
+            $(this).alert('close');
+        });
   </script>
   @endif

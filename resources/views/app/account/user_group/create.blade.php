@@ -23,14 +23,14 @@
 					@csrf
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" name="name" required>
+						<input type="text" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" name="name" required>
 					</div>
 					<div class="form-group">
 						<label>Description</label>
-						<textarea name="escription" id="" cols="30" rows="30" class="form-control" required></textarea>
+						<textarea name="description" id="" value=""  class="summernote-simple form-control @error('description') is-invalid @enderror" required>{{old('description')}}</textarea>
 					</div>
 
-					<button type="submit" class="btn btn-primary">Add Member</button>
+					<button type="submit" class="btn btn-primary">Add User Group</button>
 					<a href="{{ route('user-group.index') }}" class="btn btn-secondary">Back</a>
 				</form>
 			</div>
@@ -55,6 +55,9 @@
           event.preventDefault();
           event.stopPropagation();
         }
+        if(str.replace(/\s/g,"") == ""){
+
+		}
         form.classList.add('was-validated');
       }, false);
     });

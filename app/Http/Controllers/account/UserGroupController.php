@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Session;
 
 class UserGroupController extends Controller
 {
@@ -33,14 +34,14 @@ class UserGroupController extends Controller
             'name' => 'required',
             'description' => 'required'
         ]);
-
+        // dd($request->all());
         $token = $request->session()->get('token');
         $response = $this->post(env('GATEWAY_URL').'user-group/add',$request->except('_token'),$token);
 
         if ($response['success']) {
-            return redirect('account/privileges')->with('success','Data '.$response['data']['name'].' Created');
+            return redirect()->route('user-group.index')->with('success','Data '.$response['data']['name'].' Created');
         }
-            return redirect('account/privileges')->with('failed','Data '.$response['data']['name'].' Doesnt Created,'.$response['message']);
+            return redirect('account/privileges')->with('failed','Data Doesnt Created,'.$response['message']);
     
     }
     public function storePrivileges(Request $request)
@@ -136,36 +137,35 @@ class UserGroupController extends Controller
     {
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'user-group/edit/'.$id,$token);
-        $privileges = $response['data'];
+        $data       = $response['success'] ? $response['data'] : null;
 
-        return view('app.account.privileges.edit',compact('privileges'));
+        return view('app.account.user_group.edit',compact('data'));
     }
 
 
     public function update(Request $request, $id)
     {
-        $data = $request->except('_token');
-
+        $data = $request->except('_token','_method');
+       
         $token = $request->session()->get('token');
         $response = $this->post(env('GATEWAY_URL').'user-group/update/'.$id,$data,$token);
       
-        if($response['success'])
-        {
-            return redirect('account/privileges')->with('success','Data '.$response['data']['name'].' Updated');
-        }else {
-            return redirect('account/privileges')->with('failed','Data '.$response['data']['name'].' Doesnt Updated. '.$response['message']);
+        if ($response['success']) {
+           return redirect()->route('user-group.index')->with('success','Data '.$response['data']['name'].' Updated');
+        } else {
+            return redirect()->back()->with('failed','Data Doesnt Updated. '.$response['message']);
         }
     }
 
-    public function delete(Request $req)
+    public function destroy($id)
     {
-        $token = $req->session()->get('token');
-        $response = $this->post(env('GATEWAY_URL').'user-group/delete',$req->all(),$token);
+        $token = Session::get('token');
+        $data['id'] = $id;
+        $response = $this->post(env('GATEWAY_URL').'user-group/delete',$data,$token);
    
-        if($response['success'])
-        {
-            return redirect()->back()->with('success','Data '.$response['data']['name'].' Deleted');
-        }else {
+        if ($response['success']) {
+            return redirect()->route('user-group.index')->with('success','Data '.$response['data']['name'].' Deleted');
+        } else {
             return redirect()->back()->with('failed','Data Doesnt Deleted');
         }
 
