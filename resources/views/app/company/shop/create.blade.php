@@ -83,7 +83,7 @@
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Photo</label>
-            <div class="col-sm-1 col-md-1">
+            <div class="col-sm-12 col-md-7">
               <a href="#" class="btn btn-success add_btn btn-action"> <i class="fas fa-plus"></i> </a>
             </div>
             <div class="col-sm-12 col-md-7">
@@ -135,9 +135,11 @@
   </div>
 </div>
 
+
 @endsection
 
 @section('script_page')
+
   <script type="text/javascript">
     $(document).ready(function () {
       var wrapper = $(".photos");
@@ -145,16 +147,18 @@
 
       var x = 1;
       $(add_btn).click(function(e) {
+
         e.preventDefault();
         $(wrapper).append(`
           <div class="col-sm-12 col-md-3 mt-3">
-            <div id="image-preview" class="image-preview">
-              <label for="image-upload" id="image-label">Choose File</label>
-              <input type="file" name="image[${x}]" id="image-upload" multiple required />
+            <div id="image-preview${x}" class="image-preview">
+              <label for="image-upload" id="image-label${x}">Choose File</label>
+              <input type="file" name="image[${x}]" id="image-upload${x}" multiple required />
             </div>
             <a href="#" class="btn btn-sm btn-danger btn_remove px-2">X</a>
           </div>
           `);
+
         x++;
 
       });
@@ -198,17 +202,5 @@
     </script>
     {{-- End Valiidatoor --}}
 
-    <script type="text/javascript">
-      $.uploadPreview({
-          input_field: "#image-upload",   // Default: .image-upload
-          preview_box: "#image-preview",  // Default: .image-preview
-          label_field: "#image-label",    // Default: .image-label
-          label_default: "Choose File",   // Default: Choose File
-          label_selected: "Change File",  // Default: Change File
-          no_label: false,                // Default: false
-          success_callback: null          // Default: null
-      });
-    </script>
-
-<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
+<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
 @endsection

@@ -53,13 +53,23 @@
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Photo</label>
-            <div class="col-sm-12 col-md-7">
-              <div id="image-preview" class="image-preview" style="background-image: url({{$shop['photo'][0]}})">
-                <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image[]" id="image-upload" multiple />
-              </div>
+            <div class="col-sm-12 col-md-7 row">
+              <a href="#" class="btn btn-success btn-action add_btn"> <i class="fas fa-plus"></i> </a>
             </div>
           </div>
+          <hr>
+          <div class="form-group row photos">
+            @foreach ($shop['photo'] as $i => $poto)
+            <div class="col-sm-12 col-md-3 mb-2" data-idx="{{$i}}">
+              <div id="image-preview" class="image-preview" style="background-image: url({{$poto}})">
+                <label for="image-upload" id="image-label">Choose File</label>
+                <input type="file" name="image[{{$i}}]" id="image-upload" multiple />
+              </div>
+              @if($i > 0)<a href="#" class="btn btn-sm btn-danger btn_remove px-2">X</a>@endif
+            </div>
+            @endforeach
+          </div>
+          <hr>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
             <div class="col-sm-12 col-md-7">
@@ -88,5 +98,36 @@
 @endsection
 
 @section('script_page')
+<script type="text/javascript">
+  $(document).ready(function () {
+    var wrapper = $(".photos");
+    var add_btn = $(".add_btn");
+    var last_idx = wrapper.children('div').last().data('idx');
+
+    var x = last_idx + 1;
+    $(add_btn).click(function(e) {
+      e.preventDefault();
+      $(wrapper).append(`
+        <div class="col-sm-12 col-md-3 mb-2" data-idx="${x}">
+          <div id="image-preview" class="image-preview">
+            <label for="image-upload" id="image-label">Choose File</label>
+            <input type="file" name="image[${x}]" id="image-upload" multiple required />
+          </div>
+          <a href="#" class="btn btn-sm btn-danger btn_remove px-2">X</a>
+        </div>
+        `);
+      x++;
+
+    });
+
+    $(wrapper).on('click','.btn_remove',function(e) {
+      e.preventDefault();
+      $(this).parent('div').remove();
+      x--;
+    });
+
+  });
+</script>
+
 <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
 @endsection

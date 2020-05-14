@@ -136,20 +136,20 @@ class ShopController extends Controller
       $photo[0]['contents'] = '';
       if($request->has('image')) {
         foreach ($request['image'] as $key => $value) {
-          $photo[$key]['name'] = 'photo[]';
+          $photo[$key]['name'] = 'photo['.$key.']';
           $photo[$key]['contents'] = fopen($value, 'r');
           $photo[$key]['filename'] = 'shop.png';
         }
       }
 
-      $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token,$photo);
+      $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token, null, $photo);
       // return $response;
       if($response['success'])
       {
         // LogActivity::addToLog('Updated Data Mesjid');
         return redirect('company/shop')->with('success','Data Updated');
       }else {
-          return redirect('company/shop')->with('failed','Data Doesnt Updated.');
+          return redirect('company/shop')->with('failed','Data Doesnt Updated.'. collect($response['message'])->first());
       }
     }
 

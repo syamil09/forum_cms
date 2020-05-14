@@ -56,8 +56,8 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 
 	Route::resource('/user-group','account\UserGroupController');
 
-
-//	Route::get('activity','account\LogActivityController@index');
+	Route::get('activity','account\LogActivityController@index');
+	Route::post('activity/delete','account\LogActivityController@delete');
 });
 
 Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () {

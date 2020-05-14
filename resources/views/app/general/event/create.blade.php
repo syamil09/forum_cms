@@ -71,12 +71,19 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
             <div class="col-sm-12 col-md-7">
+              <a href="#" class="btn btn-success btn-action add_btn"> <i class="fas fa-plus"></i> </a>
+            </div>
+          </div>
+          <hr>
+          <div class="form-group row photos">
+            <div class="col-sm-12 col-md-3 mt-3">
               <div id="image-preview" class="image-preview">
                 <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image[]" id="image-upload" multiple required />
+                <input type="file" name="image[0]" id="image-upload" multiple required />
               </div>
             </div>
           </div>
+          <hr>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Location</label>
             <div class="col-sm-12 col-md-7">
@@ -107,17 +114,39 @@
 @endsection
 
 @section('script_page')
+
 <script type="text/javascript">
-  $.uploadPreview({
-      input_field: "#image-upload",   // Default: .image-upload
-      preview_box: "#image-preview",  // Default: .image-preview
-      label_field: "#image-label",    // Default: .image-label
-      label_default: "Choose File",   // Default: Choose File
-      label_selected: "Change File",  // Default: Change File
-      no_label: false,                // Default: false
-      success_callback: null          // Default: null
+  $(document).ready(function () {
+    var wrapper = $(".photos");
+    var add_btn = $(".add_btn");
+
+    var x = 1;
+    $(add_btn).click(function(e) {
+
+      e.preventDefault();
+      $(wrapper).append(`
+        <div class="col-sm-12 col-md-3 mt-3">
+          <div id="image-preview${x}" class="image-preview">
+            <label for="image-upload" id="image-label${x}">Choose File</label>
+            <input type="file" name="image[${x}]" id="image-upload${x}" multiple required />
+          </div>
+          <a href="#" class="btn btn-sm btn-danger btn_remove px-2">X</a>
+        </div>
+        `);
+
+      x++;
+
+    });
+
+    $(wrapper).on('click','.btn_remove',function(e) {
+      e.preventDefault();
+      $(this).parent('div').remove();
+      x--;
+    });
+
   });
 </script>
+
 {{-- Valiidatoor --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script>
@@ -147,5 +176,6 @@
         $('#createEvent').valid();
     </script>
     {{-- End Valiidatoor --}}
-<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
+
+<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
 @endsection
