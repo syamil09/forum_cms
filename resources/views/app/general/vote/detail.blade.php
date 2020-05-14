@@ -26,7 +26,7 @@
                                     @forelse($votings as $voting)
                                         <li class="media">
                                             <img class="mr-3 rounded" src="{{ $voting['user']['photo'] }}" alt="product"
-                                                 width="55">
+                                                 width="50px" height="50px">
                                             <div class="media-body">
                                                 <div class="float-right">
                                                     <div
@@ -58,7 +58,7 @@
                                     @endif
                                     <li class="media">
                                         <img alt="image" class="mr-3 rounded-circle"
-                                             src="{{ $candidate['user']['photo'] }}" width="50">
+                                             src="{{ $candidate['user']['photo'] }}" width="50px" height="50px">
                                         <div class="media-body">
                                             <div class="media-title">{{ $candidate['user']['name'] }}</div>
                                             <div class="progress-text">{{ $percentage . '%' }}</div>
@@ -113,7 +113,7 @@
                                 @foreach($data as $voting)
                                     <div class="col-md-6">
                                         <li class="media mt-2">
-                                            <img class="mr-4 rounded" src="{{ $voting['user']['photo'] }}" alt="product" width="55px">
+                                            <img class="mr-4 rounded" src="{{ $voting['user']['photo'] }}" alt="product" width="50px" height="50px">
                                             <div class="media-body">
                                                 <div class="media-title">{{ $voting['user']['name'] }}</div>
                                                 <div class="small">
