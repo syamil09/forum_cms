@@ -180,7 +180,7 @@
                 return opt.text;
             } else {
                 var $opt = $(
-                    '<span><img class="rounded-circle" src="' + DataImage + '" alt="avatar" width="32px"> ' + opt.text + '</span>'
+                    '<span><img class="rounded-circle" src="' + DataImage + '" alt="avatar" width="32px" height="32px"> ' + opt.text + '</span>'
                 );
                 return $opt;
             }
@@ -194,7 +194,7 @@
                 return opt.text;
             } else {
                 var $opt = $(
-                    '<span><img class="mr-2 rounded-circle" src="' + DataImage + '" alt="avatar" width="16px"> ' + opt.text + '</span>'
+                    '<span><img class="mr-2 rounded-circle" src="' + DataImage + '" alt="avatar" width="16px" height="16px"> ' + opt.text + '</span>'
                 );
                 return $opt;
             }

@@ -52,7 +52,7 @@
                                     <td>{{ date('d-m-Y H:i', strtotime($vote['end_vote'])) }}</td>
                                     <td>
                                         @foreach($vote['candidates'] as $candidate)
-                                            <img class="mr-2 rounded-circle" src="{{$candidate['user']['photo']}}" alt="" width="16px">
+                                            <img class="mr-2 rounded-circle" src="{{$candidate['user']['photo']}}" alt="" width="16px" height="16px">
                                             {{$candidate['user']['name']}} ({{ $candidate['voter'] }}) <br>
                                         @endforeach
                                     </td>

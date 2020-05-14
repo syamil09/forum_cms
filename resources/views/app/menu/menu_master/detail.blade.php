@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title','Forum | Article')
+@section('title','Forum | Menu Master')
 
 @section('section_header')
-    <h1>Article</h1>
+    <h1>Menu Master</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="{{ url('general/article') }}">General</a></div>
-        <div class="breadcrumb-item"><a href="{{ url('general/article') }}">Article</a></div>
-        <div class="breadcrumb-item">DetailArticle</div>
+        <div class="breadcrumb-item"><a href="#">Menu</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('master-menu.index') }}">Menu Master</a></div>
+        <div class="breadcrumb-item">Detail Menu</div>
     </div>
 @endsection
 
@@ -17,8 +17,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Detail</h4>
-                </div>
                 <div class="card-body">
                     <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Name : </label>

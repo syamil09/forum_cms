@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title','Forum | Vote')
+@section('title','Forum | Group Menu')
 
 @section('section_header')
     <h1>Group Menu</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">General</a></div>
-        <div class="breadcrumb-item">Votes</div>
+        <div class="breadcrumb-item"><a href="#">Menu</a></div>
+        <div class="breadcrumb-item">Group Menu</div>
     </div>
 @endsection
 
