@@ -21,7 +21,7 @@ class CheckLogin
             return redirect('login');
         }
         $response = $this->get(env('GATEWAY_URL').'admin/profile',session()->get('token'));
-        // dd(session()->get('data')['user_id']);
+        // dd($response);
         if($response['success'] == false)
         {
             session()->forget('token','menu','group');

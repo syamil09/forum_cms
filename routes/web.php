@@ -54,6 +54,8 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 		Route::post('/uprof/{id}','account\AdminController@uprof');
 	});
 
+	Route::resource('/user-group','account\UserGroupController');
+
 	Route::get('activity','account\LogActivityController@index');
 	Route::post('activity/delete','account\LogActivityController@delete');
 });
@@ -141,17 +143,7 @@ Route::group(['prefix' => 'general','middleware' => ['CheckLogin']],function () 
 		Route::post('/update','general\HomeContentController@update');
 	});
 
-//	// ------------------ about us -------------------
-//	Route::group(['prefix' => 'about'],function () {
-//		Route::get('/','general\AboutController@index');
-//		Route::post('/update','general\AboutController@update');
-//	});
 
-	// ------------------ contact -------------------
-//	Route::group(['prefix' => 'contact'],function () {
-//		Route::get('/','general\ContactController@index');
-//		Route::post('/update','general\ContactController@update');
-//	});
     Route::get('/splashscreen', 'general\SplashScreenController@index')->name('SplashScreen.index');
     Route::post('/splashscreen', 'general\SplashScreenController@store')->name('SplashScreen.store');
 });
