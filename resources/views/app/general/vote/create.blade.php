@@ -153,7 +153,7 @@
                     $(this).reset();
                 }
             }
-            $(".rangeDateTimes").val(start.format('DD-MM-YYYY H:mm') + "-" + end.format('DD-MM-YYYY H:mm'));
+            $(".rangeDateTimes").val(start.format('DD-MM-YYYY H:mm') + " - " + end.format('DD-MM-YYYY H:mm'));
 
             $('#createVote').valid();
         });
