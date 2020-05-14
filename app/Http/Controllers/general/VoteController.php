@@ -90,10 +90,10 @@ class VoteController extends Controller
 
         $token = Session::get('token');
         $votes = $this->post(env('GATEWAY_URL') . 'vote/add', $data, $token);
-
         if ($votes['success']) {
-            return redirect()->route('vote.index');
+            return redirect()->route('vote.index')->with('success', $votes['message']);
         }
+        return redirect()->route('vote.index')->with('failed', $votes['message']);
     }
 
     /**
@@ -186,7 +186,10 @@ class VoteController extends Controller
         $token = Session::get('token');
         $vote = $this->post(env('GATEWAY_URL') . 'vote/update/' . $id, $data, $token);
 
-        return redirect(route('vote.index'));
+        if ($vote['success']) {
+            return redirect()->route('vote.index')->with('success', $vote['message']);
+        }
+        return redirect()->route('vote.index')->with('failed', $vote['message']);
     }
 
     /**
