@@ -14,12 +14,17 @@
       <li class="menu-header">Starter</li>
         @php($GroupMenus = new \App\Helpers\Menu())
         @foreach($GroupMenus->list() as $GroupMenu)
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown wrap-menu">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"> {!! $GroupMenu['icon'] !!} <span>{{ $GroupMenu['name'] }}</span></a>
                 <ul class="dropdown-menu">
-                    @foreach($GroupMenu['menu'] as $menu)
-                        <li><a class="nav-link" href="{{ url($menu['url']) }}">{{ $menu['name'] }}</a></li>
-                    @endforeach
+                  @foreach($GroupMenu['menu'] as $key => $menu)
+                  <?php $menu_priv = collect(session()->get('privileges'))->where('menu_id',$menu['id'])->first(); ?>
+                  
+                    @if($menu_priv['view'] == "1")
+                    <li><a class="submenu nav-link" href="{{ url($menu['url']) }}">{{ $menu['name'] }}</a></li>
+                    @endif
+                  @endforeach
+  
                 </ul>
             </li>
         @endforeach
@@ -61,3 +66,18 @@
     </div>
   </aside>
 </div>
+
+@section('script_page')
+    <script>
+      $(document).ready(function () {
+
+        $('.wrap-menu').each(function(idx,item) {
+          var count_menu = $(item).find('.submenu').length;
+          if (count_menu === 0) {
+            $(item).css({"display":"none"});
+          }
+        });
+        
+      });
+    </script>
+@endsection

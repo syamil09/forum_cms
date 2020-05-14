@@ -44,82 +44,7 @@ class UserGroupController extends Controller
             return redirect('account/privileges')->with('failed','Data Doesnt Created,'.$response['message']);
     
     }
-    public function storePrivileges(Request $request)
-    {
-        $token    = $request->session()->get('token');
-        $id       = $request['user_group_id'];
-
-        $request['view']    = Arr::exists($request,'view')   ? $request['view']   : [];
-        $request['add']     = Arr::exists($request,'add')    ? $request['add']    : [];
-        $request['edit']    = Arr::exists($request,'edit')   ? $request['edit']   : [];
-        $request['delete']  = Arr::exists($request,'delete') ? $request['delete'] : [];
-        $request['other']   = Arr::exists($request,'other')  ? $request['other']  : [];
-
-        $user = $this->get(env('GATEWAY_URL').'user-privileges/info-user/'.$id,$token);
-        $user = $user['success'] ? $user['data'] : []; 
-        $menu = $this->get(env('GATEWAY_URL').'menu',$token);
-
-        foreach($menu['data'] as $i => $val)
-        {
-            if(!Arr::exists($request['add'],$i)) {
-                $request['add'] = array_add($request['add'],$i,'0');
-            }
-
-            if(!Arr::exists($request['view'],$i)) {
-                $request['view'] = array_add($request['view'],$i,'0');
-            }
-
-            if(!Arr::exists($request['edit'],$i)) {
-                $request['edit'] = array_add($request['edit'],$i,'0');
-            }
-
-            if(!Arr::exists($request['delete'],$i)) {
-                $request['delete'] = array_add($request['delete'],$i,'0');
-            }
-
-            if(!Arr::exists($request['other'],$i)) {
-                $request['other'] = array_add($request['other'],$i,'0');
-            }
-        }
-        // dd($request->all());
-        $data = $request->except('_token');
-        
-        foreach($menu['data'] as $i => $val)
-        {
-            $data = [
-                'user_group_id' => $id,
-                'menu_id' => $request['menu_id'][$i],
-                'view'    => $request['view'][$i],
-                'add'     => $request['add'][$i],
-                'edit'    => $request['edit'][$i],
-                'delete'  => $request['delete'][$i],
-                'other'   => $request['other'][$i]
-
-            ];
-
-            $checkExist = collect($user)->where('menu_id',$val['id'])->first();
-            if (!empty($user) && !empty($checkExist)) {
-                $response = $this->post(env('GATEWAY_URL').'user-privileges/update/'.$checkExist['id'],$data,$token);
-                $newMenu[] = $response['data'];
-            }
-            else {
-                $response = $this->post(env('GATEWAY_URL').'user-privileges/add',$data,$token);
-                $newMenu[] = $response['data'];
-            }
-            
-        }
-   
-        if ($response['success']) {
-            // if (session()->get('data-user')['user_group_id'] == $request['user_group_id']) {
-            //     $request->session()->put('privileges',$newMenu);
-            // }
-            
-            return redirect('account/privileges')->with('success','Data Saved');
-        } else {
-            return redirect('account/privileges')->with('failed','Data Doesnt Saved,'.$response['message']);
-        }
-        
-    }
+    
 
     public function show($id)
     {
@@ -170,5 +95,93 @@ class UserGroupController extends Controller
         }
 
     }
+
+    public function privileges(Request $req,$id)
+    {
+        $menus = new \App\Helpers\Menu();
+        $groupMenu = $menus->list();
+        $privileges = $this->get(env('GATEWAY_URL').'user-privileges/show/'.$id,session()->get('token'));
+        $privileges = $privileges['success'] ? $privileges['data'] : [];
+     
+        return view('app.account.user_group.privileges',compact('groupMenu','privileges','id'));
+    }
+
+    public function storePrivileges(Request $request)
+    {
+        $token    = $request->session()->get('token');
+        $id       = $request['user_group_id'];
+    
+        $request['view']    = array_key_exists('view', $request->all())   ? $request['view']   : [];
+        $request['add']     = array_key_exists('add', $request->all())    ? $request['add']    : [];
+        $request['edit']    = array_key_exists('edit', $request->all())   ? $request['edit']   : [];
+        $request['delete']  = array_key_exists('delete', $request->all()) ? $request['delete'] : [];
+        $request['other']   = array_key_exists('other', $request->all())  ? $request['other']  : [];
+
+        $user = $this->get(env('GATEWAY_URL').'user-privileges/show/'.$id,$token);
+        $user = $user['success'] ? $user['data'] : []; 
+        $menu = $this->get(env('GATEWAY_URL').'menu',$token);
+
+        foreach($menu['data'] as $i => $val)
+        {
+            if(!array_key_exists($i, $request['add'])) {
+                $request['add'] = array_add($request['add'],$i,'0');
+            }
+
+            if(!array_key_exists($i, $request['view'])) {
+                $request['view'] = array_add($request['view'],$i,'0');
+            }
+
+            if(!array_key_exists($i, $request['edit'])) {
+                $request['edit'] = array_add($request['edit'],$i,'0');
+            }
+
+            if(!array_key_exists($i, $request['delete'])) {
+                $request['delete'] = array_add($request['delete'],$i,'0');
+            }
+
+            if(!array_key_exists($i, $request['other'])) {
+                $request['other'] = array_add($request['other'],$i,'0');
+            }
+        }
+        // dd($user);
+        $data = $request->except('_token');
+        
+        foreach($menu['data'] as $i => $val)
+        {
+            $data = [
+                'user_group_id' => $id,
+                'menu_id' => $request['menu_id'][$i],
+                'view'    => $request['view'][$i],
+                'add'     => $request['add'][$i],
+                'edit'    => $request['edit'][$i],
+                'delete'  => $request['delete'][$i],
+                'other'   => $request['other'][$i]
+
+            ];
+
+            $checkExist = collect($user)->where('menu_id',$val['id'])->first();
+            if (!empty($user) && !empty($checkExist)) {
+                $response = $this->post(env('GATEWAY_URL').'user-privileges/update/'.$checkExist['id'],$data,$token);
+                $newMenu[] = $response['data'];
+            }
+            else {
+                $response = $this->post(env('GATEWAY_URL').'user-privileges/add',$data,$token);
+                $newMenu[] = $response['data'];
+            }
+            
+        }
+   
+        if ($response['success']) {
+            // if (session()->get('data-user')['user_group_id'] == $request['user_group_id']) {
+            //     $request->session()->put('privileges',$newMenu);
+            // }
+            
+            return redirect()->route('user-group.index')->with('success','Data Saved');
+        } else {
+            return redirect()->back()->with('failed','Data Doesnt Saved,'.$response['message']);
+        }
+        
+    }
+
 
 }

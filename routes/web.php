@@ -55,6 +55,8 @@ Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () 
 	});
 
 	Route::resource('/user-group','account\UserGroupController');
+	Route::get('/user-group/privileges/{id}','account\UserGroupController@privileges')->name('user-group.privileges');
+	Route::post('/user-group/privileges/store','account\UserGroupController@storeprivileges')->name('user-group.privileges.store');
 
 	Route::get('activity','account\LogActivityController@index');
 	Route::post('activity/delete','account\LogActivityController@delete');

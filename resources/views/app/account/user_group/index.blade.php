@@ -50,8 +50,8 @@
                 <td>{{ $data['name'] }}</td>
                 <td>{!! $data['description'] !!}</td>
                 <td>
-                  <a href="{{ url('account/user/detail').'/'.$data['id'] }}" class="btn btn-info btn-action" data-toggle="tooltip" data-original-title="Privileges">
-                    <i class="fas fa-info"></i>
+                  <a href="{{ route('user-group.privileges',$data['id']) }}" class="btn btn-info btn-action" data-toggle="tooltip" data-original-title="Privileges">
+                    <i class="fas fa-key"></i>
                   </a>
                   <a href="{{ route('user-group.edit',$data['id']) }}" class="btn btn-warning btn-action" data-toggle="tooltip" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
                   <form action="{{ route('user-group.destroy',$data['id']) }}" method="POST" class="d-inline">
