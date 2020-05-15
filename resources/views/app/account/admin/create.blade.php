@@ -21,7 +21,7 @@
           {{session('failed')}}
         </div>
         @endif
-				<form action="{{url('account/admin/store')}}" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+				<form action="{{url('account/admin/store')}}" method="POST" class="" novalidate enctype="multipart/form-data">
           @csrf
           <div class="form-group">
 						<label>Company / Community</label>
@@ -32,6 +32,17 @@
               @endforeach
             </select>
 				  </div>
+          <div class="form-group">
+            <label>User Group</label>
+            <select class="form-group select2 selectric" name="user_group_id">
+              <option disabled selected>-- SELECT USER GROUP --</option>
+              @forelse($userGroups as $userGroup)
+              <option value="{{ $userGroup['id'] }}">{{ $userGroup['name'] }}</option>
+              @empty
+              <option value="">User Group Empty</option>
+              @endforelse
+            </select>
+          </div>
           <div class="form-group row mb-4">
               <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Photo</label>
               <div class="col-sm-12 col-md-7">
@@ -62,7 +73,7 @@
 						<input type="password" name="confirm" class="form-control">
 				  </div>
             <a href="{{url('account/admin')}}" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-primary">Add Member</button>
+            <button type="submit" class="btn btn-primary">Add Admin</button>
 				</form>
 			</div>
 		</div>
@@ -73,26 +84,14 @@
 
 @section('script')
 <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
+
+
+// $('.select2').select2({
+//   width:"100%"
+// });
 </script>
 
 <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+
 
 @endsection

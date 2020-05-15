@@ -17,8 +17,21 @@ class AdminController extends Controller
     {
       $token = $request->session()->get('token');
       $getadmin = $this->get(env('GATEWAY_URL'). 'admin', $token);
-      $admin = $getadmin['success'] == false ? null : $getadmin['data'];
+      $admin = $getadmin['success'] ? $getadmin['data'] : [];
       $message = $getadmin['message'];
+
+      $userGroups = $this->get(env('GATEWAY_URL').'user-group',$token);
+      $userGroups = $userGroups['success'] ? collect($userGroups['data']) : null;
+    
+      foreach ($admin as $key => $value) {
+        if ($userGroups && count($getadmin) > 0) {
+          $userGroup = $userGroups->where('id',$value['user_group_id'])->map(function($data) {
+            return collect($data)->only('name')->first();
+          })->first();
+          $admin[$key]['role'] = $userGroup;
+        }
+      }
+     
         return view('app.account.admin.index', compact('admin', 'message'));
     }
 
@@ -26,8 +39,11 @@ class AdminController extends Controller
     {
       $token = session()->get('token');
       $getcompany = $this->get(env('GATEWAY_URL'). 'company', $token);
-      $company = $getcompany['success'] == false ? null : $getcompany['data'];
-        return view('app.account.admin.create', compact('company'));
+      $company = $getcompany['success'] ? $getcompany['data'] : null;
+      $userGroups = $this->get(env('GATEWAY_URL').'user-group',$token);
+      $userGroups = $userGroups['success'] ? $userGroups['data'] : [];
+
+        return view('app.account.admin.create', compact('company','userGroups'));
     }
 
 
@@ -47,8 +63,7 @@ class AdminController extends Controller
             return redirect()->back()->with('failed',$validator->getMessageBag()->first());
         }
 
-        if($request->password != $request->confirm)
-        {
+        if ($request->password != $request->confirm) {
             return redirect()->back()->with('failed','Password Doesnt Match');
         }
 
@@ -60,7 +75,7 @@ class AdminController extends Controller
         }
 
         $response = $this->postMulti(env('GATEWAY_URL').'admin/add',$data,$token, $photo);
-
+        
         if($response['success'])
         {
             return redirect('account/admin')->with('success','Data Admin Created');
@@ -73,7 +88,7 @@ class AdminController extends Controller
     public function show($id)
     {
       $token = session()->get('token');
-      $data = $this->get(env('GATEWAY_URL'). 'admin/show/'. $id, $token);
+      $data = $this->get(env('GATEWAY_URL'). 'admin/edit/'. $id, $token);
       $data = $data['success'] ? $data['data'] : null;
       if ($data == null) {
         return redirect('account/admin')->with('failed', 'Data Admin Not Found');
@@ -84,14 +99,18 @@ class AdminController extends Controller
     public function edit(Request $req,$id)
     {
       $token = session()->get('token');
-      $data = $this->get(env('GATEWAY_URL'). 'admin/show/'. $id, $token);
+      $data = $this->get(env('GATEWAY_URL'). 'admin/edit/'. $id, $token);
       $data = $data['success'] ? $data['data'] : null;
       $getcompany = $this->get(env('GATEWAY_URL'). 'company', $token);
       $company = $getcompany['data'];
+
+      $userGroups = $this->get(env('GATEWAY_URL').'user-group',$token);
+      $userGroups = $userGroups['success'] ? $userGroups['data'] : [];
+
       if ($data == null) {
         return redirect('account/admin')->with('failed', 'Data Admin Not Found');
       }
-        return view('app.account.admin.edit', compact('data', 'company'));
+        return view('app.account.admin.edit', compact('data','company','userGroups'));
     }
 
 
@@ -100,9 +119,6 @@ class AdminController extends Controller
         // dd('ok');
         $data = $request->except('_token','oldpassword', 'confirm', 'image', 'password');
         $token = session()->get('token');
-        // $userGroup = $this->get(env('GATEWAY_URL').'user-group/edit/'.$request['privileges']    ,$token);
-
-        // $privileges = $userGroup['data']['name'];
 
         // jika merubah password tapi tidak sama saat confirm password
         if ($request->oldpassword != null || $request->password != null || $request->confirm != null) {
@@ -134,7 +150,6 @@ class AdminController extends Controller
             $photo['filename'] = 'photo.png';
         }
 
-        // return $data;
         $response = $this->postMulti(env('GATEWAY_URL').'admin/update/'.$id,$data,$token,$photo);
         // return $response;
         if($response['success'])

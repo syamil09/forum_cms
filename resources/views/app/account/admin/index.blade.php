@@ -22,37 +22,49 @@
         @if(session('failed'))
         <div class="alert alert-danger">{{session('failed')}}</div>
         @endif
+        @if(session('success'))
+        <div class="container alert alert-success alert-dismissible" role="alert">
+          {{session('success')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
         <div class="table-responsive">
           <table class="table table-striped" id="table-1">
             <thead>
               <tr>
                 <th>Company / Community</th>
                 <th width="10%">Photo</th>
-                <th>Userame</th>
+                <th>Username</th>
                 <th>Role</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($admin as $adm)
+              @forelse($admin as $adm)
               <tr>
                 <td>{{ $adm['company']['full_name'] }}</td>
                 <td>
-                  <img src="{{ $adm['photo'] }}" alt="photo" style="width: 50px;">
+                  <img src="{{ $adm['photo'] }}" alt="photo" class="rounded" style="width: 50px;">
                 </td>
                 <td>{{ $adm['username'] }}</td>
                 <td>{{ $adm['role'] }}</td>
                 <td>
-                  <a class="btn btn-info btn-sm text-white" href="{{url('account/admin/detail/'. $adm['company_id']) }}"><i class="fas fa-info"></i></a>
-                  <a title="" class="btn btn-warning btn-sm text-white" href="{{url('account/admin/edit/'. $adm['company_id']) }}"><i class="fas fa-pencil-alt"></i></a>
+                  <a class="btn btn-info btn-sm text-white" href="{{url('account/admin/detail/'. $adm['id']) }}"><i class="fas fa-info"></i></a>
+                  <a title="" class="btn btn-warning btn-sm text-white" href="{{url('account/admin/edit/'. $adm['id']) }}"><i class="fas fa-pencil-alt"></i></a>
                   <form action="{{ url('account/admin/delete') }}" method="post" class="d-inline form-del">
                       @csrf
                       <input type="hidden" name="id" value="{{$adm['id']}}">
-                      <button type="submit" class="btn btn-danger btn-sm delete" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                      <button type="submit" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>
-              @endforeach
+              @empty
+              <tr>
+                <td>Data Empty</td>
+              </tr>
+              @endforelse
             </tbody>
           </table>
         </div>

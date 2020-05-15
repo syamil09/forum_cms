@@ -21,7 +21,7 @@
                   <?php $menu_priv = collect(session()->get('privileges'))->where('menu_id',$menu['id'])->first(); ?>
                   
                     @if($menu_priv['view'] == "1")
-                    <li><a class="submenu nav-link" href="{{ url($menu['url']) }}">{{ $menu['name'] }}</a></li>
+                    <li class=""><a class="submenu nav-link {{ (request()->is($menu['url'].'*')) ? 'active' : '' }}" href="{{ url($menu['url']) }}">{{ $menu['name'] }}</a></li>
                     @endif
                   @endforeach
   

@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function index(Request $req)
     {
         $response = $this->post(env('GATEWAY_URL').'admin/signin',$req->all());
-
+        // dd($response);
         if($response['success'])
         {
             $privileges = $this->get(env('GATEWAY_URL').'user-privileges/show/'.$response['data']['id'],$response['token']);
@@ -82,6 +82,6 @@ class LoginController extends Controller
     }
     public function hash()
     {
-        return Hash::make('doni');
+        return Hash::make('superadmin123');
     }
 }

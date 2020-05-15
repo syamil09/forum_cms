@@ -32,6 +32,15 @@
               @endforeach
             </select>
 				  </div>
+          <div class="form-group">
+            <label>User Group</label>
+            <select class="form-group selectric" name="user_group_id">
+              <option disabled>-- SELECT COMPANY / COMMUNITY --</option>
+              @foreach($userGroups as $userGroup)
+              <option value="{{$userGroup['id']}}" @if($userGroup['id'] == $data['user_group_id']) selected @endif>{{$userGroup['name']}}</option>
+              @endforeach
+            </select>
+          </div>
           <div class="form-group row mb-4">
               <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Photo</label>
               <div class="col-sm-12 col-md-7">

@@ -33,22 +33,25 @@
   @include('layouts.javascript.js')
 
   <script>
-    $('.delete').on('click', function(e) {
-      e.preventDefault(); 
-      let form = $(this).parent(); // storing the form
-      console.log(form);
-        swal({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          buttons: true,
-        }).then((isConfirm) => {
-          console.log('confirm');
-          if (isConfirm) {
-            form.submit();
-          }
-        });
+    $(document).ready(function() {
+      $('.delete').on('click', function(e) {
+        e.preventDefault(); 
+        let form = $(this).parent(); // storing the form
+        console.log(form);
+          swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            buttons: true,
+          }).then((isConfirm) => {
+            console.log('confirm');
+            if (isConfirm) {
+              form.submit();
+            }
+          });
+      });
     });
+    
   </script>
 </body>
 </html>
