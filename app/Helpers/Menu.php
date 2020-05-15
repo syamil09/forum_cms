@@ -24,9 +24,9 @@ class Menu extends Controller
                     $MenuPrivilages = collect($privilages)->where('menu_id', $menu['id'])->first();
                     $GroupMenus[$iGM]['menu'][$iM]['view'] = $MenuPrivilages['view'];
                     if ($MenuPrivilages['view'] == "1") {
-                        $GroupMenus[$iGM]['totalMenu'] = empty($GroupMenus[$iGM]['totalMenu']) ? 1 :$GroupMenus[$iGM]['totalMenu'] + 1;
+                        $GroupMenus[$iGM]['totalMenu'] = empty($GroupMenus[$iGM]['totalMenu']) ? 1 : $GroupMenus[$iGM]['totalMenu'] + 1;
                     } else {
-                        $GroupMenus[$iGM]['totalMenu'] = 0;
+                        $GroupMenus[$iGM]['totalMenu'] = empty($GroupMenus[$iGM]['totalMenu']) ? 0 : $GroupMenus[$iGM]['totalMenu'];
                     }
                 }
             }
