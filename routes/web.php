@@ -206,5 +206,5 @@ Route::group(['prefix' => 'company', 'middleware' => ['CheckLogin']], function (
 
 
 
-
+Route::post('store-dropzone','general\EventController@store');
 Route::get('hash','LoginController@hash');

@@ -63,7 +63,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">Add Photos</h5>
@@ -71,7 +71,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="needs-validation" action="{{url('general/event/'.$event_id.'/gallery/store')}}" method="post" enctype="multipart/form-data">
+<!--       <form class="needs-validation" action="{{url('general/event/'.$event_id.'/gallery/store')}}" method="post" enctype="multipart/form-data">
         @csrf
       <div class="modal-body">
         <div class="container-fluid">
@@ -88,27 +88,25 @@
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button>
       </div>
-      </form>
-      <!-- <div class="row">
+      </form> -->
+      <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <form method="POST" action="{{url('general/event/'.$event_id.'/gallery/store')}}" class="dropzone" id="mydropzone" enctype="multipart/form-data">
+              <form method="POST" action="{{url('general/event/'.$event_id.'/gallery/store')}}" class="dropzone" id="dropzon" enctype="multipart/form-data">
                 @csrf
-                <div class="fallback">
-                  <input name="image[]" type="file" multiple />
-
-                </div>
-
 
             </div>
             <div class="modal-footer">
-              <button type="button" id="uploadfiles" class="btn btn-primary"><i class="fas fa-plus"></i>&nbspAdd to Gallery</button>
+              <button type="submit" id="uploadfiles" class="btn btn-primary">
+                <span id="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Add to Gallery
+              </button>
             </div>
             </form>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>
@@ -116,16 +114,40 @@
 <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
 <!-- <script src="{{ asset('stisla/assets/js/page/components-multiple-upload.js') }}"></script> -->
 <script>
-  Dropzone.autoDiscover = false;
+$('#loader').css({'display':'none'});
+$('.dropzone').dropzone({
+  autoProcessQueue:false,
+        maxFilesize: 10,
+        maxFiles:100,
+        parallelUploads: 100,
+        uploadMultiple: true,
+        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+        addRemoveLinks: true,
+        timeout: 50000,
+        init: function () {
 
-var myDropzone = new Dropzone(".dropzone", {
-   autoProcessQueue: false,
-   parallelUploads: 10 ,// Number of files process at a time (default 2)
-   url:"{{ url('general/event/'.$event_id.'/gallery/store') }}",
-});
-
-$('#uploadfiles').click(function(){
-   myDropzone.processQueue();
-});
+          mydp = this;
+          $('#uploadfiles').click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            $('#loader').css({'display':'inline-block'});
+            mydp.processQueue();
+          });
+        },
+        success: function(file, response)
+        {
+            file.previewElement.classList.add("dz-success");
+            $('#loader').css({'display':'none'});
+            console.log(response);
+            location.reload();
+        },
+        error: function(file, response)
+        {
+          console.log(response);
+          file.previewElement.classList.add("dz-error");
+          $('.dz-error-message').text(response);
+           // return false;
+        }
+      });
 </script>
 @endsection

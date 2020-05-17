@@ -51,7 +51,6 @@ class Controller extends BaseController
         if($image != '') {
             $data[] = $image;
         }
-        
         // dd($data);
         $client = new Client();
         $response = $client->post($url,[

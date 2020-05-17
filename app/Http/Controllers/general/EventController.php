@@ -37,7 +37,7 @@ class EventController extends Controller
     {
         $token = $request->session()->get('token');
         $data = $request->except('image');
-
+   
         $img[0]['name'] = 'image[]';
         $img[0]['contents'] = '';
         if ($request->has('image')) {

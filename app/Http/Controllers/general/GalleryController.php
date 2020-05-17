@@ -30,28 +30,51 @@ class GalleryController extends Controller
 
     public function store(Request $request, $event_id)
     {
-        $token = $request->session()->get('token');
-        $data = $request->except('image');
+        $image = $request->file('file');
+
         $data['event_id'] = $event_id;
-     
-        $img[0]['name'] = 'image[]';
+        $token = $request->session()->get('token');
+
+        $img[0]['name'] = 'photo[]';
         $img[0]['contents'] = '';
-        if ($request->has('image')) {
-          foreach ($request['image'] as $i => $value) {
+        if ($request->has('file')) {
+          foreach ($request['file'] as $i => $value) {
             $img[$i]['name'] = 'photo[]';
             $img[$i]['contents'] = fopen($value, 'r');
             $img[$i]['filename'] = 'photo.png';
             }
         }
+        
         $response = $this->postMulti(env('GATEWAY_URL').'event/gallery/add',$data,$token,null,$img);
-     
-        if($response['success'])
-        {
-            // LogActivity::addToLog('Added Data City');
-            return redirect('general/event/'.$event_id.'/gallery')->with('success','Gallery Event Created');
-        }else {
-            return redirect('general/event/'.$event_id.'/gallery')->with('failed','Gallery Event Doesnt Created ,'.$response['message']);
+        if ($response['success']) {
+                return response()->json(["status" => "success", "data" => $response]);
         }
+        
+        return response()->json(["status" => "failed", "data" => $response]);
+
+        // $token = $request->session()->get('token');
+        // $data = $request->except('image');
+        // $data['event_id'] = $event_id;
+     
+        // $img[0]['name'] = 'image[]';
+        // $img[0]['contents'] = '';
+        // if ($request->has('image')) {
+        //   foreach ($request['image'] as $i => $value) {
+        //     $img[$i]['name'] = 'photo[]';
+        //     $img[$i]['contents'] = fopen($value, 'r');
+        //     $img[$i]['filename'] = 'photo.png';
+        //     }
+        // }
+
+        // $response = $this->postMulti(env('GATEWAY_URL').'event/gallery/add',$data,$token,null,$img);
+     
+        // if($response['success'])
+        // {
+        //     // LogActivity::addToLog('Added Data City');
+        //     return redirect('general/event/'.$event_id.'/gallery')->with('success','Gallery Event Created');
+        // }else {
+        //     return redirect('general/event/'.$event_id.'/gallery')->with('failed','Gallery Event Doesnt Created ,'.$response['message']);
+        // }
 
     }
 
