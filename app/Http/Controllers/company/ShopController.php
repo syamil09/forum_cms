@@ -24,7 +24,6 @@ class ShopController extends Controller
         $token = $request->session()->get('token');
 
         $response = $this->get(env('GATEWAY_URL').'shop/item', $token);
-        // return $response;
 
         $shops = ($response['success'] == false)?null:$response['data'];
         $message = $response['message'];
@@ -63,6 +62,7 @@ class ShopController extends Controller
         $token = $request->session()->get('token');
 
         $data = $request->except('image');
+ 
         $photo[0]['name'] = 'photo[]';
         $photo[0]['contents'] = '';
         if($request->has('image')) {
@@ -73,9 +73,8 @@ class ShopController extends Controller
           }
         }
 
-        // dd($photo);
         $response = $this->postMulti(env('GATEWAY_URL').'shop/item/add', $data, $token, null, $photo);
-        // return $response;
+        // dd($response);
         if ($response['success']) {
             // LogActivity::addToLog('Added Data Mesjid');
             return redirect('company/shop')->with('success', 'Data Created');
@@ -143,13 +142,13 @@ class ShopController extends Controller
       }
 
       $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token, null, $photo);
-      // return $response;
+    
       if($response['success'])
       {
         // LogActivity::addToLog('Updated Data Mesjid');
         return redirect('company/shop')->with('success','Data Updated');
       }else {
-          return redirect('company/shop')->with('failed','Data Doesnt Updated.'. collect($response['message'])->first());
+          return redirect()->back()->with('failed','Data Doesnt Updated.'. collect($response['message'])->first()[0]);
       }
     }
 

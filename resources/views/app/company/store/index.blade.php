@@ -59,7 +59,7 @@
                   <form action="{{ url('company/store/delete') }}" method="post" class="d-inline form-del">
                     @csrf
                     <input type="hidden" name="id" value="{{$str['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>

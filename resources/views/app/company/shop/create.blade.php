@@ -9,16 +9,19 @@
   <div class="breadcrumb-item"><a href="#">Company</a></div>
   <div class="breadcrumb-item">CreateItem</div>
 </div>
+<style>
+  .btn_remove{
+    margin: -72px 0px 0px 10px;
+    position: relative;
+    z-index: 10;
+  }
+  .is-invalid {
+    color: red;
+  }
+</style>
 @endsection
 
 @section('wrap_content')
-{{-- Style Validation --}}
-    <style>
-        .is-invalid {
-            color: red;
-        }
-    </style>
-{{-- End Style Validation --}}
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -28,6 +31,9 @@
       <div class="card-body">
         <form method="POST" action="{{  url('company/shop/store') }}" id="createShop" novalidate="" enctype="multipart/form-data">
           @csrf
+        @if(session('failed'))
+        <div class="alert alert-danger">{{ session('failed') }}</div>
+        @endif
           @if($profile['company_id'] == null)
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">company_id</label>
@@ -155,7 +161,9 @@
               <label for="image-upload" id="image-label${x}">Choose File</label>
               <input type="file" name="image[${x}]" id="image-upload${x}" multiple required />
             </div>
-            <a href="#" class="btn btn-sm btn-danger btn_remove px-2">X</a>
+            <a href="#" class="btn btn-sm btn-danger btn_remove px-2">
+              <i class="fas fa-times"></i>
+            </a>
           </div>
           `);
 

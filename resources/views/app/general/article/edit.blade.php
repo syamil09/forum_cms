@@ -33,7 +33,7 @@
                             <div class="col-sm-12 col-md-7">
                                 <select class="form-control selectric" name="category_id">
                                     @foreach($categorys as $category)
-                                        <option value="{{ $category['id'] }}">{{ $category['category'] }}</option>
+                                        <option value="{{ $category['id'] }}" @if($category['id'] == $edit['category_id']) selected @endif>{{ $category['category'] }}</option>
                                     @endforeach
                                 </select>
                             </div>

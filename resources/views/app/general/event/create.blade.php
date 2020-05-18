@@ -28,6 +28,9 @@
       <div class="card-body">
         <form id="createEvent" class="" action="{{url('general/event/store')}}" method="post" enctype="multipart/form-data">
           @csrf
+          @if(session('failed'))
+          <div class="alert alert-danger">{{ session('failed') }}</div>
+          @endif
           @if($profile['company_id'] == null)
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">company_id</label>

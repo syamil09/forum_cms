@@ -133,6 +133,10 @@ $('.dropzone').dropzone({
             $('#loader').css({'display':'inline-block'});
             mydp.processQueue();
           });
+
+          mydp.on("complete", function(file) {
+            mydp.removeFile(file);
+          });
         },
         success: function(file, response)
         {

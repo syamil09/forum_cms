@@ -48,7 +48,7 @@
               <div class="col-sm-12 col-md-7">
                   <div id="image-preview" class="image-preview">
                       <label for="image-upload" id="image-label">Choose File</label>
-                      <input type="file" name="image" id="image-upload" required />
+                      <input type="file" name="image" id="photo" required />
                   </div>
               </div>
           </div>
@@ -82,13 +82,17 @@
 
 @endsection
 
-@section('script')
+@section('script_page')
 <script>
-
-
-// $('.select2').select2({
-//   width:"100%"
-// });
+$.uploadPreview({
+            input_field: "#photo",   // Default: .image-upload
+            preview_box: "#image-preview",  // Default: .image-preview
+            label_field: "#image-label",    // Default: .image-label
+            label_default: "Choose File",   // Default: Choose File
+            label_selected: "Change File",  // Default: Change File
+            no_label: false,                // Default: false
+            success_callback: null          // Default: null
+        });
 </script>
 
 <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>

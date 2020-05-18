@@ -22,16 +22,19 @@
         <form method="POST" action="{{  url('company/secretariat/update/'.$secretariat['id']) }}"
           class="needs-validation" novalidate="" enctype="multipart/form-data">
           @csrf
+          @if(session('failed'))
+          <div class="alert alert-danger">{{ session('failed') }}</div>
+          @endif
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Address</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple" name="address">{{$secretariat['address']}}</textarea>
+              <textarea class="summernote-simple" name="address" required="">{{$secretariat['address']}}</textarea>
             </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Longitude</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" name="longitude" value="{{ $secretariat['longitude'] }}">
+              <input type="text" class="form-control" name="longitude" value="{{ $secretariat['longitude'] }}" required="">
               @error('longitude')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror
@@ -40,7 +43,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Latitude</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" name="latitude" value="{{ $secretariat['latitude'] }}">
+              <input type="text" class="form-control" name="latitude" value="{{ $secretariat['latitude'] }}" required="">
               @error('latitude')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror

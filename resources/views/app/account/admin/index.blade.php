@@ -51,7 +51,7 @@
                 <td>{{ $adm['username'] }}</td>
                 <td>{{ $adm['role'] }}</td>
                 <td>
-                  <a class="btn btn-info btn-sm text-white" href="{{url('account/admin/detail/'. $adm['id']) }}"><i class="fas fa-info"></i></a>
+                  <!-- <a class="btn btn-info btn-sm text-white" href="{{url('account/admin/detail/'. $adm['id']) }}"><i class="fas fa-info"></i></a> -->
                   <a title="" class="btn btn-warning btn-sm text-white" href="{{url('account/admin/edit/'. $adm['id']) }}"><i class="fas fa-pencil-alt"></i></a>
                   <form action="{{ url('account/admin/delete') }}" method="post" class="d-inline form-del">
                       @csrf

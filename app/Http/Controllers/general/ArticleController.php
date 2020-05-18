@@ -69,6 +69,7 @@ class ArticleController extends Controller
         $response = $this->get(env('GATEWAY_URL') . 'article/edit/' . $id, $token);
         $categorys = $this->get(env('GATEWAY_URL') . 'article_category', $token)['data'];
         $edit = ($response['success']) ? $response['data'] : null;
+   
         return view('app.general.article.edit', compact('edit', 'categorys'));
     }
 

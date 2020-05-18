@@ -37,7 +37,7 @@ class EventController extends Controller
     {
         $token = $request->session()->get('token');
         $data = $request->except('image');
-   
+        $data['company_id'] = 1;
         $img[0]['name'] = 'image[]';
         $img[0]['contents'] = '';
         if ($request->has('image')) {
@@ -49,13 +49,13 @@ class EventController extends Controller
         }
 
         $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,$img);
-        // return $response;
+        dd($response);
         if($response['success'])
         {
             // LogActivity::addToLog('Added Data City');
             return redirect('general/event')->with('success','Event Created');
         }else {
-            return redirect('general/event')->with('failed','Event Doesnt Created ,'.$response['message']);
+            return redirect()->bac()->with('failed','Event Doesnt Created ,'.$response['message']);
         }
 
     }

@@ -70,12 +70,12 @@ class StoreController extends Controller
         $data = $request->except('image');
 
         $response = $this->postMulti(env('GATEWAY_URL').'store/add', $data, $token, $logo);
-// return $response;
+       
         if ($response['success']) {
             return redirect('company/store')->with('success', 'Data Created');
         }
 
-        return redirect('company/store')->with('failed', 'Data Doesnt Created, ' .$response['message']);
+        return redirect()->back()->with('failed', 'Data Doesnt Created, ' .$response['message']);
     }
 
     /**
@@ -123,6 +123,18 @@ class StoreController extends Controller
 
         $data = $request->except('_token','image');
 
+        $validate = Validator::make($request->all(),[
+          'name' => 'required',
+          'image' => 'max:3072',
+          'phone' => 'required',
+          'location' => 'required',
+          'latitude' => 'required',
+          'longitude' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+          return redirect()->back()->with('failed','Data Doesnt Updated, '. $validate->getMessageBag()->first());
+        }
         // jika user ganti photo
         $logo['name'] = 'logo';
         $logo['contents'] = '';
@@ -131,14 +143,14 @@ class StoreController extends Controller
             $logo['contents'] = fopen($request->image, 'r');
             $logo['filename'] = 'logo.png';
         }
-        // return $ data;
+  
         $response = $this->postMulti(env('GATEWAY_URL').'store/update/'.$id, $data, $token, $logo);
-        // return $response;
+         // dd($response);
         if($response['success'])
         {
             return redirect('company/store')->with('success','Data Updated');
         }else {
-            return redirect('company/store')->with('failed','Data Doesnt Updated, '. $response['message']);
+            return redirect()->back()->with('failed','Data Doesnt Updated, '. $response['message']);
         }
     }
 
