@@ -22,7 +22,7 @@ class AdminController extends Controller
 
       $userGroups = $this->get(env('GATEWAY_URL').'user-group',$token);
       $userGroups = $userGroups['success'] ? collect($userGroups['data']) : null;
-    
+
       foreach ($admin as $key => $value) {
         if ($userGroups && count($getadmin) > 0) {
           $userGroup = $userGroups->where('id',$value['user_group_id'])->map(function($data) {
@@ -31,7 +31,7 @@ class AdminController extends Controller
           $admin[$key]['role'] = $userGroup;
         }
       }
-     
+
         return view('app.account.admin.index', compact('admin', 'message'));
     }
 
@@ -75,7 +75,7 @@ class AdminController extends Controller
         }
 
         $response = $this->postMulti(env('GATEWAY_URL').'admin/add',$data,$token, $photo);
-        
+
         if($response['success'])
         {
             return redirect('account/admin')->with('success','Data Admin Created');
