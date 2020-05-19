@@ -95,7 +95,7 @@ class ArticleController extends Controller
         if ($response['success']) {
             return redirect('general/article')->with('success', 'Data Updated');
         }
-        return redirect('general/article')->with('failed', 'Data Doesnt Updated. ' . $response['message']);
+        return redirect()->back()->with('failed', 'Data Doesnt Updated. ' . $response['message']);
     }
 
     public function delete(Request $req)

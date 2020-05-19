@@ -109,7 +109,7 @@ class EventController extends Controller
             // LogActivity::addToLog('Updated Data City');
             return redirect('general/event')->with('success','Event Updated');
         }else {
-            return redirect('general/event')->with('failed','Event Doesnt Updated. '.$response['message']);
+            return redirect()->back()->with('failed','Event Doesnt Updated. '.$response['message']);
         }
     }
 

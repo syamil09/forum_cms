@@ -3,13 +3,13 @@
 @section('title','Forum | Article')
 
 @section('section_header')
-    <h1>Events</h1>
-    <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="{{ url('general/event') }}">General</a></div>
-        <div class="breadcrumb-item"><a href="{{ url('general/event') }}">Event</a></div>
-        <div class="breadcrumb-item">Edit Event</div>
-    </div>
+<h1>Events</h1>
+<div class="section-header-breadcrumb">
+  <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+  <div class="breadcrumb-item"><a href="{{ url('general/event') }}">General</a></div>
+  <div class="breadcrumb-item"><a href="{{ url('general/event') }}">Event</a></div>
+  <div class="breadcrumb-item">Edit Event</div>
+</div>
 @endsection
 
 @section('wrap_content')
@@ -91,6 +91,9 @@
                     <h4>Edit Event</h4>
                 </div>
                 <div class="card-body">
+                    @if(session('failed'))
+                        <div class="alert alert-danger">{{ session('failed') }}</div>
+                    @endif
                     <form id="editEvent"  class="" action="{{url('general/event/update/'. $edit['id'])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row mb-4">

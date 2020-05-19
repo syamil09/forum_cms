@@ -73,7 +73,7 @@
             <div class="col-sm-12 col-md-3 mb-2" data-idx="{{$i}}">
               <div id="image-preview" class="image-preview" style="background-image: url({{$poto}})">
                 <label for="image-upload" class="image-label">Choose File</label>
-                <input type="file" name="image[{{$i}}]" class="image-upload" id="image-upload" multiple required />
+                <input type="file" name="image[{{$i}}]" class="image-upload" id="image-upload" multiple />
               </div>
               @if($i > 0)<a href="#" class="btn btn-icon btn-sm btn-circle btn-danger btn_remove px-2"><i class="fas fa-times"></i></a>@endif
             </div>
