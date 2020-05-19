@@ -243,4 +243,14 @@ class AdminController extends Controller
         }
     }
 
+    public function setCompanyId(Request $request)
+    {
+      session()->put('company_id',$request['company_id']);
+
+        return response()->json([
+          'company_id' => $request['company_id'],
+          'company_name' => $request['company_name']
+        ]);
+    }
+
 }

@@ -16,12 +16,12 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-
+        $company_id = session()->get('company_id');
         $token = $request->session()->get('token');
 
-        $response = $this->get(env('GATEWAY_URL').'store', $token);
-        $store = ($response['success'] == false)?null:$response['data'];
-        $message = $response['message'];
+        $response = $this->get(env('GATEWAY_URL').'store?company_id='.$company_id, $token);
+        $store    = $response['success'] ? $response['data'] : null;
+        $message  = $response['message'];
 
         return view('app.company.store.index', compact('store', 'message'));
     }

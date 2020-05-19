@@ -41,7 +41,7 @@
             <tbody>
               @if ($store == null)
               <tr>
-                <td class="text-center" colspan="4">{{$message}}</td>
+                <td class="text-center" colspan="5">{{$message}}</td>
               </tr>
               @else
               @foreach ($store as $str)

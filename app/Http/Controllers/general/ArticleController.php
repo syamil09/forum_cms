@@ -11,8 +11,10 @@ class ArticleController extends Controller
     public function index(Request $req)
     {
         $token = $req->session()->get('token');
-        $response = $this->get(env('GATEWAY_URL') . 'article?sort=desc', $token);
-        $articles = ($response['success']) ? $response['data'] : [];
+        $company_id = session()->get('company_id');
+
+        $response = $this->get(env('GATEWAY_URL') . 'article?sort=desc&company_id='.$company_id, $token);
+        $articles = $response['success'] ? $response['data'] : [];
         $message = $response['message'];
 
         return view('app.general.article.index', compact('articles', 'message'));
@@ -46,6 +48,7 @@ class ArticleController extends Controller
             $img['contents'] = fopen($request->image, 'r');
             $img['filename'] = 'photo.png';
         }
+
         $response = $this->postMulti(env('GATEWAY_URL') . 'article/add', $data, $token, $img);
         // return $response;
         if ($response['success']) {

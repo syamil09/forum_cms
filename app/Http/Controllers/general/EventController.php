@@ -14,12 +14,13 @@ class EventController extends Controller
 
     public function index(Request $req)
     {
-      $token = $req->session()->get('token');
+        $company_id = session()->get('company_id');
+        $token = $req->session()->get('token');
 
-      $response = $this->get(env('GATEWAY_URL'). 'event', $token);
-      $events = ($response['success'])?$response['data']:null;
-      $message = $response['message'];
-      return view('app.general.event.index',compact('events', 'message'));
+        $response = $this->get(env('GATEWAY_URL'). 'event?company_id='.$company_id, $token);
+        $events   = $response['success'] ? $response['data'] : null;
+        $message  = $response['message'];
+        return view('app.general.event.index',compact('events', 'message'));
     }
 
     public function create()
@@ -37,7 +38,7 @@ class EventController extends Controller
     {
         $token = $request->session()->get('token');
         $data = $request->except('image');
-        $data['company_id'] = 1;
+
         $img[0]['name'] = 'image[]';
         $img[0]['contents'] = '';
         if ($request->has('image')) {
@@ -47,15 +48,15 @@ class EventController extends Controller
             $img[$i]['filename'] = 'event.png';
             }
         }
-
+        
         $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,$img);
-        dd($response);
+        // dd($response);
         if($response['success'])
         {
             // LogActivity::addToLog('Added Data City');
             return redirect('general/event')->with('success','Event Created');
         }else {
-            return redirect()->bac()->with('failed','Event Doesnt Created ,'.$response['message']);
+            return redirect()->back()->with('failed','Event Doesnt Created ,'.$response['message']);
         }
 
     }

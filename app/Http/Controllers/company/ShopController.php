@@ -18,15 +18,12 @@ class ShopController extends Controller
     public function index(Request $request)
     {
 
-        // session()->put('menu','Mesjid List');
-        // session()->put('group','Mesjid');
-
+        $company_id = session()->get('company_id');
         $token = $request->session()->get('token');
 
-        $response = $this->get(env('GATEWAY_URL').'shop/item', $token);
-
-        $shops = ($response['success'] == false)?null:$response['data'];
-        $message = $response['message'];
+        $response = $this->get(env('GATEWAY_URL').'shop/item?company_id='.$company_id, $token);
+        $shops    = $response['success'] == false ? null : $response['data'];
+        $message  = $response['message'];
 
         return view('app.company.shop.index', compact('shops', 'message'));
     }
