@@ -34,21 +34,28 @@
 
   <script>
     $(document).ready(function() {
-      $('.delete').on('click', function(e) {
-        e.preventDefault(); 
-        let form = $(this).parent(); // storing the form
-        console.log(form);
-          swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            buttons: true,
-          }).then((isConfirm) => {
-            console.log('confirm');
-            if (isConfirm) {
-              form.submit();
-            }
+
+      $('table').DataTable().rows().iterator('row',function(context,index) {
+        var node = $(this.row(index).node());
+
+        node.find('.delete').each(function(i,item) {
+          $(item).on('click', function(e) {
+            e.preventDefault(); 
+            let form = $(this).parent(); // storing the form
+            console.log(form);
+              swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                buttons: true,
+              }).then(function(isConfirm) {
+                console.log('confirm');
+                if (isConfirm) {
+                  form.submit();
+                }
+              });
           });
+        });
       });
     });
     
