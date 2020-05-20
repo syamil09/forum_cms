@@ -117,7 +117,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
                             <div class="col-sm-12 col-md-7">
-                                <textarea class="summernote-simple">{{$edit['description']}}</textarea>
+                                <textarea class="summernote-simple" name="description">{{$edit['description']}}</textarea>
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -141,14 +141,14 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Location</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" class="form-control" value="{{$edit['location']}}">
+                                <input type="text" class="form-control" name="location" value="{{$edit['location']}}">
                             </div>
                         </div>
                         <div class="form-group row mb-4">
-                            <div class="col-sm-12 col-md-4 offset-2">
+                            <div class="col-sm-12 col-md-3 offset-3">
                                 <input type="text" name="latitude" class="form-control" placeholder="Latitude..." value="{{ $edit['latitude'] }}">
                             </div>
-                            <div class="col-sm-12 col-md-4">
+                            <div class="col-sm-12 col-md-3">
                                 <input type="text" name="longitude" class="form-control" placeholder="Longitude..." value="{{ $edit['longitude'] }}">
                             </div>
                         </div>
@@ -169,6 +169,7 @@
 
 @section('script_page')
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
             document.getElementById('image').addEventListener('change', readImage, false);

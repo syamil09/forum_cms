@@ -34,6 +34,19 @@
 
   <script>
     $(document).ready(function() {
+      // select to for select company
+      $('#navbar-company').select2();
+
+      // preview image
+      $.uploadPreview({
+        input_field: ".image-upload",   // Default: .image-upload
+        preview_box: ".image-preview",  // Default: .image-preview
+        label_field: ".image-label",    // Default: .image-label
+        label_default: "Choose File",   // Default: Choose File
+        label_selected: "Change File",  // Default: Change File
+        no_label: false,                // Default: false
+        success_callback: null          // Default: null
+      });
 
       // set session company_id
       $('#navbar-company').on('change',function(e) {

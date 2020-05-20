@@ -50,13 +50,13 @@ class EventController extends Controller
         }
         
         $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,$img);
-        // dd($response);
+        dd($response);
         if($response['success'])
         {
             // LogActivity::addToLog('Added Data City');
             return redirect('general/event')->with('success','Event Created');
         }else {
-            return redirect()->back()->with('failed','Event Doesnt Created ,'.$response['message']);
+            return redirect()->back()->with('failed','Event Doesnt Created ,'.$response['message'])->withInput();
         }
 
     }
@@ -102,15 +102,14 @@ class EventController extends Controller
             $img[$i]['filename'] = 'event.png';
             }
         }
-
+        // dd($data);
         $response = $this->postMulti(env('GATEWAY_URL').'event/update/'.$id,$data,$token,null,$img);
-        // return $response;
-        if($response['success'])
-        {
+      
+        if ($response['success']) {
             // LogActivity::addToLog('Updated Data City');
             return redirect('general/event')->with('success','Event Updated');
-        }else {
-            return redirect()->back()->with('failed','Event Doesnt Updated. '.$response['message']);
+        } else {
+            return redirect()->back()->withInput()->with('failed','Event Doesnt Updated. '.$response['message']);
         }
     }
 
@@ -119,11 +118,10 @@ class EventController extends Controller
         $token = $req->session()->get('token');
         $response = $this->post(env('GATEWAY_URL').'event/delete',$req->only('id'),$token);
         // dd($req->all());
-        if($response['success'])
-        {
+        if ($response['success']) {
             // LogActivity::addToLog('Deleted Data City');
             return redirect('general/event')->with('success','Event Deleted');
-        }else {
+        } else {
             return redirect('general/event')->with('failed','Event Doesnt Deleted');
         }
 

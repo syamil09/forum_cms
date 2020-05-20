@@ -13,7 +13,7 @@
 
 @section('wrap_content')
 <div class="card col-md-10 offset-md-1 shadow">
-  <div class="card-body table-responsive">
+  <div class="card-body table-responsive mt-3">
     @if(session('failed'))
     <div class="alert alert-danger">{{ session('failed') }}</div>
     @endif
@@ -94,7 +94,7 @@
       </table>
       <div class="text-center mt-3">
         <button type="submit" class="btn btn-primary">Save Change</button>
-        <a href="{{ url('account/privileges') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ url('account/user-group') }}" class="btn btn-secondary">Back</a>
       </div>
     </form>
   </div>
