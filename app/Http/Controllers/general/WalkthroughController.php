@@ -14,27 +14,31 @@ class WalkthroughController extends Controller
 
     public function index(Request $req)
     {
-        // session()->put('menu','Contact');
-        // session()->put('group','Manage Site');
-
+        $company_id = $req->session()->get('company_id');
         $token = $req->session()->get('token');
-
-        $response = $this->get(env('GATEWAY_URL').'walk_through',$token);
-        // return $response;
-        $walkthrough = ($response['success'] == false)?null:$response['data'];
+        $response = $this->get(env('GATEWAY_URL').'walk_through?company_id='.$company_id,$token);
+        $walkthrough = $response['success'] ? $response['data'] : null;
         $message = $response['message'];
+      
         return view('app.general.walkthrough.index',compact('walkthrough', 'message'));
     }
 
     public function create()
     {
-      return view('app.general.walkthrough.create');
+      $token = session()->get('token');
+      $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+      $profile = $profile['success'] ? $profile['data'] : null;
+      $company = $this->get(env('GATEWAY_URL'). 'company', $token);
+      $company = $company['success'] ? $company['data'] : null;
+
+      return view('app.general.walkthrough.create',compact('company','profile'));
     }
 
     public function store(Request $request)
     {
       $token = $request->session()->get('token');
       $data = $request->except('image');
+      $data['company_id'] = session()->get('company_id');
       $img['name'] = 'image';
       $img['contents'] = '';
 
@@ -44,12 +48,11 @@ class WalkthroughController extends Controller
       }
 
       $response = $this->postMulti(env('GATEWAY_URL').'walk_through/add',$data,$token,$img,'');
-      // return $response;
-      if($response['success'])
-      {
+      // dd($response);
+      if ($response['success']) {
           // LogActivity::addToLog('Added Data City');
           return redirect('general/walkthrough')->with('success','Walktrough Created');
-      }else {
+      } else {
           return redirect('general/walkthrough')->with('failed','Walktrough Doesnt Created ,'.$response['message']);
       }
     }
@@ -68,8 +71,13 @@ class WalkthroughController extends Controller
     {
         $token      = $req->session()->get('token');
         $response   = $this->get(env('GATEWAY_URL').'walk_through/edit/'.$id,$token);
-        $edit       = ($response['success'])?$response['data']:null;
-        return view('app.general.walkthrough.edit',compact('edit'));
+        $edit       = $response['success'] ? $response['data'] : null;
+        $profile    = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+        $profile    = $profile['success'] ? $profile['data'] : null;
+        $company    = $this->get(env('GATEWAY_URL'). 'company', $token);
+        $company    = $company['success'] ? $company['data'] : null;
+
+        return view('app.general.walkthrough.edit',compact('edit','profile','company'));
     }
 
     public function update(Request $request,$id)
@@ -86,7 +94,7 @@ class WalkthroughController extends Controller
           $img['filename'] = 'walkthrough.png';
         }
         $response = $this->postMulti(env('GATEWAY_URL').'walk_through/update/'.$id,$data,$token,$img);
-        // return $response;
+        // dd($response);
         if($response['success'])
         {
             // LogActivity::addToLog('Updated Contact');

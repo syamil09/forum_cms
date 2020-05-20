@@ -21,6 +21,22 @@
       <div class="card-body">
         <form class="" action="{{ url('general/walkthrough/update/'.$edit['id']) }}" method="post" enctype="multipart/form-data">
           @csrf
+          @if($profile['company_id'] == null)
+            <div class="form-group row mb-4">
+              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">company_id</label>
+              <div class="col-sm-12 col-md-7">
+                <select class="form-control selectric" name="company_id">
+                @if($company == null)
+                  <option>Add Company First</option>
+                @else
+                  @foreach ($company as $com)
+                    <option value="{{$com['id']}}" @if($com['id'] == $edit['company_id']) selected @endif>{{$com['company_name']}}</option>
+                  @endforeach
+                @endif
+                </select>
+              </div>
+            </div>
+          @endif
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
             <div class="col-sm-12 col-md-7">
@@ -58,5 +74,5 @@
 @endsection
 
 @section('script_page')
-<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
 @endsection

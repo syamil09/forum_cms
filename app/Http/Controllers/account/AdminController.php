@@ -237,7 +237,7 @@ class AdminController extends Controller
         // return $response;
         if($response['success'])
         {
-            return redirect('account/admin/profile')->with('success','Data Updated');
+            return redirect('account/admin')->with('success','Data Updated');
         }else {
             return redirect('account/admin/profile')->with('failed','Data Doesnt Updated.'. $response['message']);
         }

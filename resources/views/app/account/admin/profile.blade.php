@@ -35,8 +35,8 @@
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Change Photo</label>
             <div class="col-sm-12 col-md-7">
               <div id="image-preview" class="image-preview" style="height: 200px; width:200px;">
-                <label for="image-upload" id="image-label">Choose File</label>
-                <input type="file" name="image" id="image-upload" />
+                <label for="image-upload" class="image-label" id="image-label">Choose File</label>
+                <input type="file" name="image" class="image-upload" id="image-upload" />
               </div>
             </div>
           </div>

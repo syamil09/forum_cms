@@ -75,5 +75,5 @@
 @endsection
 
 @section('script_page')
-<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
 @endsection
