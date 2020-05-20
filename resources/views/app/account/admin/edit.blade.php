@@ -45,8 +45,8 @@
               <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Photo</label>
               <div class="col-sm-12 col-md-7">
                   <div id="preview" class="image-preview" style="background-image: url({{ $data['photo'] }});">
-                      <label for="image-upload" id="image-label">Choose File</label>
-                      <input type="file" name="image" id="photo" />
+                      <label for="image-upload" class="image-label" id="image-label">Choose File</label>
+                      <input type="file" name="image" class="image-upload" id="photo" />
                   </div>
               </div>
           </div>
@@ -86,17 +86,6 @@
 @endsection
 
 @section('script')
-<script type="text/javascript">
-  $.uploadPreview({
-    input_field: "#photo",   // Default: .image-upload
-    preview_box: "#preview",  // Default: .image-preview
-    label_field: "#image-label",    // Default: .image-label
-    label_default: "Choose File",   // Default: Choose File
-    label_selected: "Change File",  // Default: Change File
-    no_label: false,                // Default: false
-    success_callback: null          // Default: null
-  });
-</script>
 
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields

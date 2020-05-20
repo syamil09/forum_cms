@@ -36,10 +36,11 @@ class VoteController extends Controller
     public function index()
     {
         $token = Session::get('token');
-        $company = session()->get('data')['company_id'];
+        $company = session()->get('data')['company_id'] ? session()->get('data')['company_id'] : session()->get('company_id');
         $votes = $this->get(env('GATEWAY_URL') . 'vote', $token);
-        $users = collect($this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token)['data']);
-
+        $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
+        $users = $users['success'] ? collect($users['data']) : collect([]);
+        
         if (key_exists('data', $votes)) {
             foreach ($votes['data'] as $iVote => $vote){
                 foreach ($vote['candidates'] as $iCandidate => $candidate) {
@@ -66,7 +67,7 @@ class VoteController extends Controller
     {
         $token = Session::get('token');
 
-        $company = session()->get('data')['company_id'];
+        $company = session()->get('data')['company_id'] ? session()->get('data')['company_id'] : session()->get('company_id');
 
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
         $DateNotAvailable = $this->get(env('GATEWAY_URL') . 'vote/notAvailableDate', $token);
@@ -87,7 +88,7 @@ class VoteController extends Controller
         $votingPeriod =  explode(' - ', $request->voting_period);
         $data['start_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[0]));
         $data['end_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[1]));
-
+        
         $token = Session::get('token');
         $votes = $this->post(env('GATEWAY_URL') . 'vote/add', $data, $token);
         if ($votes['success']) {

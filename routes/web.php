@@ -26,7 +26,7 @@ Route::post('signin','LoginController@index');
 Route::get('signout','LoginController@logout');
 Route::get('cek','LoginController@cekSession');
 Route::get('login','LoginController@login');
-
+Route::post('set_company_id', 'account\AdminController@setCompanyId');
 // ------------------ account -------------------
 Route::group(['prefix' => 'account','middleware' => ['CheckLogin']],function () {
 

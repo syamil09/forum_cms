@@ -20,6 +20,7 @@ class LoginController extends Controller
         if($response['success'])
         {
             $privileges = $this->get(env('GATEWAY_URL').'user-privileges/show/'.$response['data']['id'],$response['token']);
+            $companies  = $this->get(env('GATEWAY_URL').'company',$response['token']);
             $dataSession = [
                 'company_id'    => $response['data']['company_id'],
                 'user_id'       => $response['data']['id'],
@@ -29,10 +30,12 @@ class LoginController extends Controller
                 'user_group_id' => $response['data']['user_group_id']
             ];
             $privileges = $privileges['success'] ? $privileges['data'] : [];
+            $companies  = $companies['success'] ? $companies['data'] : [];
             // $req->session()->flush();
             $req->session()->put('token',$response['token']);
             $req->session()->put('data',$dataSession);
             $req->session()->put('privileges',$privileges);
+            $req->session()->put('companies',$companies);
 
             return redirect('/')->with('success','You are login');
         }

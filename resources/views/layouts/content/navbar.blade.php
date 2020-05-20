@@ -4,14 +4,21 @@
       <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
       <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
     </ul>
-    @if(session()->get('data')['user_group_id'] == 1)
+    @if(session()->get('data')['company_id'] == null)
     <div class="search-element">
       {{-- <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250"> --}}
-      <select class="form-control select2" data-width="250">
-        <option disabled selected>Please select company</option>
-        <option>Fevci</option>
-        <option>Astra</option>
-      </select>
+      <div class="d-flex align-items-center" id="wrap_company">
+        <select class="form-control select2" id="navbar-company" data-width="250">
+        <option value="">Please select company</option>
+
+        @forelse(session()->get('companies') as $company)
+        <option value="{{ $company['id'] }}" @if($company['id'] == session()->get('company_id')) selected @endif>{{ $company['company_name'] }}</option>
+        @empty
+        <option value="">Company Not Avaible</option>
+        @endforelse
+        </select>
+      </div>
+      
       {{-- <button class="btn" type="submit"><i class="fas fa-search"></i></button> --}}
       <div class="search-backdrop"></div>
       <div class="search-result">

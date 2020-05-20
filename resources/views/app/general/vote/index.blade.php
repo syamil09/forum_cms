@@ -72,7 +72,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="6">Empty</td>
+                                    <td class="text-center" colspan="7">Empty</td>
                                 </tr>
                             @endforelse
 

@@ -48,7 +48,7 @@
             <div class="card-footer text-center">
               <a href="{{url('company/shop/detail/'.$shop['id'])}}" class="btn btn-info btn-sm"><i class="fas fa-info"></i></a>
               <a href="{{url('company/shop/edit/'.$shop['id'])}}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-              <form action="{{ url('company/shop/delete') }}" method="post" class="d-inline form-del">
+              <form action="{{ url('company/shop/delete') }}" method="post" class="d-inline delete">
                 @csrf
                 <input type="hidden" name="id" value="{{$shop['id']}}">
                 <button type="submit" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"></i></button>
