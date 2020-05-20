@@ -124,5 +124,5 @@
         $('#createEvent').valid();
     </script>
     {{-- End Valiidatoor --}}
-<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
+<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
 @endsection
