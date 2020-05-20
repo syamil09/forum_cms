@@ -44,6 +44,14 @@
             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-6">{!! $detail['description'] !!}</label>
           </div>
           <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Weight : </label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['berat']}}</label>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">kondisi : </label>
+            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['kondisi']}}</label>
+          </div>
+          <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3 offset-1">Price : </label>
             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">{{$detail['price']}}</label>
           </div>

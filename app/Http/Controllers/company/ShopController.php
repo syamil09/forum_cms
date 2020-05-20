@@ -36,12 +36,13 @@ class ShopController extends Controller
     public function create(Request $request)
     {
       $token = $request->session()->get('token');
-      $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
-      $category = ($getcategory['success'] == false)?null:$getcategory['data'];
-      $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
-      $store = $getstore['success']  == false ? null : $getstore['data'];
       $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
       $profile = $profile['success'] ? $profile['data'] : null;
+      $company_id = $profile['company_id'] !== null ? $profile['company_id'] : session()->get('company_id');
+      $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
+      $category = ($getcategory['success'] == false)?null:$getcategory['data'];
+      $getstore = $this->get(env('GATEWAY_URL'). 'store?company_id='. $company_id, $token);
+      $store = $getstore['success']  == false ? null : $getstore['data'];
       $company = $this->get(env('GATEWAY_URL'). 'company', $token);
       $company = $company['data'];
         return view('app.company.shop.create', compact('category', 'store', 'profile', 'company'));
@@ -59,7 +60,7 @@ class ShopController extends Controller
         $token = $request->session()->get('token');
 
         $data = $request->except('image');
- 
+
         $photo[0]['name'] = 'photo[]';
         $photo[0]['contents'] = '';
         if($request->has('image')) {
@@ -139,7 +140,7 @@ class ShopController extends Controller
       }
 
       $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token, null, $photo);
-    
+
       if($response['success'])
       {
         // LogActivity::addToLog('Updated Data Mesjid');
