@@ -29,7 +29,7 @@
         <form id="createEvent" class="" action="{{url('company/store/store')}}" method="post" enctype="multipart/form-data">
           @csrf
           @if($profile['company_id'] == null)
-          <div class="form-group row mb-4">
+          <!-- <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">company_id</label>
             <div class="col-sm-12 col-md-7">
               <select class="form-control selectric" name="company_id">
@@ -42,7 +42,8 @@
                 @endif
               </select>
             </div>
-          </div>
+          </div> -->
+          <input type="hidden" name="company_id" value="{{session()->get('company_id')}}">
           @endif
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
@@ -107,7 +108,7 @@
             no_label: false,                // Default: false
             success_callback: null          // Default: null
         });
-      
+
          $.validator.setDefaults({
             errorElement: "span",
             errorClass: "is-invalid",
@@ -134,5 +135,5 @@
         $('#createEvent').valid();
     </script>
     {{-- End Valiidatoor --}}
-<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
 @endsection

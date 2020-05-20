@@ -87,6 +87,27 @@
             </div>
           </div>
           <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Weight (gr)</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="number" class="form-control @error('price') is-invalid @enderror" name="berat" value="{{old('berat')}}" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">kondisi</label>
+            <div class="col-sm-12 col-md-7">
+              <select class="form-control selectric" name="kondisi">
+                <option value="baru" @if($shop['kondisi'] === 'baru') selected @endif>Baru</option>
+                <option value="bekas" @if($shop['kondisi'] === 'bekas') selected @endif>Bekas</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Min. Pemesanan</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="number" class="form-control @error('price') is-invalid @enderror" name="min_pesanan" value="{{$shop['min_pesanan']}}" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Price</label>
             <div class="col-sm-12 col-md-7">
               <input type="number" class="form-control" name="price" value="{{$shop['price']}}" required>

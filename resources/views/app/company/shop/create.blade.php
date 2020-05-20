@@ -96,7 +96,7 @@
         <div class="alert alert-danger">{{ session('failed') }}</div>
         @endif
           @if($profile['company_id'] == null)
-          <div class="form-group row mb-4">
+          <!-- <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">company_id</label>
             <div class="col-sm-12 col-md-7">
               <select class="form-control selectric" name="company_id">
@@ -104,12 +104,13 @@
                 <option>Add Company First</option>
                 @else
                 @foreach ($company as $com)
-                  <option value="{{$com['id']}}">{{$com['company_name']}}</option>
+                <option value="{{$com['id']}}">{{$com['company_name']}}</option>
                 @endforeach
                 @endif
               </select>
             </div>
-          </div>
+          </div> -->
+          <input type="hidden" name="company_id" value="{{session()->get('company_id')}}">
           @endif
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Store</label>
@@ -170,6 +171,36 @@
             </div>
             <div class="col-sm-12 col-md-7">
               @error('description')
+              <div class="invalid-feedback">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Weight (gr)</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="number" class="form-control @error('price') is-invalid @enderror" name="berat" value="{{old('berat')}}" required>
+              @error('berat')
+              <div class="invalid-feedback">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">kondisi</label>
+            <div class="col-sm-12 col-md-7">
+              <select class="form-control selectric" name="kondisi">
+                <option value="baru">Baru</option>
+                <option value="bekas">Bekas</option>
+              </select>
+              @error('kondisi')
+              <div class="invalid-feedback">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Min. Pemesanan</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="number" class="form-control @error('price') is-invalid @enderror" name="min_pesanan" value="1" required>
+              @error('min_pesanan')
               <div class="invalid-feedback">{{$message}}</div>
               @enderror
             </div>
