@@ -15,6 +15,9 @@
 <div class="row">
   <div class="col-12">
     <div class="card">
+      <div class="card-header">
+        <a href="{{ url('general/walkthrough/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Walktrough</a>
+      </div>
       <div class="card-body">
         <div class="table-responsive">
           @if(session('success'))
@@ -26,7 +29,6 @@
           <table class="table table-striped" id="table-1">
             <thead>
               <tr>
-                <!-- <th class="text-center">#<th> -->
                 <th>Image</th>
                 <th>Title</th>
                 <th class="text-center">Action</th>
@@ -40,7 +42,6 @@
               @else
               @foreach ($walkthrough as $wt)
               <tr>
-                <!-- <td>1</td> -->
                 <td>
                   <img src="{{ $wt['image'] }}" alt="walkthrough" style="height:100px;">
                 </td>
@@ -51,7 +52,7 @@
                   <form action="{{ url('general/walkthrough/delete') }}" method="post" class="d-inline form-del">
                     @csrf
                     <input type="hidden" name="id" value="{{$wt['id']}}">
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('delete this data?');"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger btn-sm delete"><i class="fas fa-trash"></i></button>
                   </form>
                 </td>
               </tr>
@@ -61,12 +62,14 @@
           </table>
         </div>
       </div>
-      <div class="card-header">
-        <!-- <h4>Basic DataTables</h4> -->
-        <a href="{{ url('general/walkthrough/create') }}" class="btn btn-lg btn-primary text-white rounded"><i class="fas fa-plus"></i>&nbsp Add Walktrough</a>
-      </div>
     </div>
   </div>
 </div>
 
+@endsection
+
+@section('script_page')
+<script>
+  $('table').dataTable();
+</script>
 @endsection

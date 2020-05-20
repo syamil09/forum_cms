@@ -29,7 +29,7 @@ class EventController extends Controller
       $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
       $profile = $profile['success'] ? $profile['data'] : null;
       $company = $this->get(env('GATEWAY_URL'). 'company', $token);
-      $company = $company['data'];
+      $company = $company['success'] ? $company['data'] : null;
         return view('app.general.event.create', compact('profile', 'company'));
     }
 
@@ -50,7 +50,7 @@ class EventController extends Controller
         }
         
         $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,$img);
-        dd($response);
+      
         if($response['success'])
         {
             // LogActivity::addToLog('Added Data City');
