@@ -21,17 +21,40 @@
 				@endif
 				<form action="{{ url('account/user/store') }}" method="POST" class="needs-validation" novalidate="">
 					@csrf
+					@if($profile['company_id'] == null)
+                    <div class="form-group">
+                      <label class="">company_id</label>
+                        <select class="form-control selectric" name="company_id">
+                          @if($company == null)
+                          <option>Add Company First</option>
+                          @else
+                          @foreach ($company as $com)
+                            <option value="{{$com['id']}}">{{$com['company_name']}}</option>
+                          @endforeach
+                          @endif
+                        </select>
+                    </div>
+                    @endif
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" name="name" required>
+						<input type="text" class="form-control" name="name" value="{{old('name')}}" required>
 					</div>
 					<div class="form-group">
 						<label>Username</label>
-						<input type="text" class="form-control" name="username" required>
+						<input type="text" class="form-control" name="username" value="{{old('username')}}" required>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-						<input type="email" class="form-control" name="email" required>
+						<input type="email" class="form-control" name="email" value="{{old('email')}}" required>
+					</div>
+					<div class="form-group">
+						<label>Photo</label>
+						<div class="col-sm-12 col-md-7">
+			              <div id="image-preview" class="image-preview">
+			                <label for="image-upload" class="image-label" id="image-label">Choose File</label>
+			                <input type="file" name="photo" class="image-upload" id="image-upload" />
+			              </div>
+			            </div>
 					</div>
 					<div class="form-group">
 						<label>Password</label>

@@ -105,13 +105,13 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event Start</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="date" class="form-control" name="event_start" value="{{$edit['event_start']}}">
+                                <input type="text" id="startDate" class="form-control" name="event_start" value="{{$edit['event_start']}}" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event End</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="date" class="form-control" name="event_end" value="{{$edit['event_end']}}">
+                                <input type="text" id="endDate" class="form-control" name="event_end" value="{{$edit['event_end']}}" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -125,7 +125,7 @@
                             <div class="col-sm-12 col-md-7">
                                 <fieldset class="form-group">
                                     <a href="javascript:void(0)" onclick="$('#image').click()" class="btn btn-primary">Upload Image</a>
-                                    <input type="file" id="image" name="image[]" style="display: none;" class="form-control" multiple required autocomplete="off">
+                                    <input type="file" id="image" name="image[]" style="display: none;" class="form-control" multiple autocomplete="off">
                                 </fieldset>
                                 <div class="preview-images-zone">
                                     @foreach($edit['image'] as $image)
@@ -172,6 +172,25 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            $('#startDate').daterangepicker({
+                locale: {format: 'YYYY-MM-DD'},
+                singleDatePicker: true,
+                minDate: new Date()
+            }).on('apply.daterangepicker', function(ev, picker) {
+                $('#endDate').daterangepicker({
+                    locale: {format: 'YYYY-MM-DD'},
+                    singleDatePicker: true,
+                    minDate: picker.startDate.format('YYYY/MM/DD')
+                });
+            });
+
+            $('#endDate').daterangepicker({
+                locale: {format: 'YYYY-MM-DD'},
+                singleDatePicker: true,
+                minDate: new Date(),
+            });
+
             document.getElementById('image').addEventListener('change', readImage, false);
             document.getElementById('image').addEventListener("activate", readImage, false);
 

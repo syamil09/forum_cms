@@ -122,13 +122,13 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event Start</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="date" class="form-control" name="event_start" value="{{old('event_start')}}" required>
+                                <input type="text" id="startDate" class="form-control" name="event_start" value="{{old('event_start')}}" required autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Event End</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="date" class="form-control" name="event_end" value="{{old('event_end')}}" required>
+                                <input type="text" id="endDate" class="form-control" name="event_end" value="{{old('event_end')}}" required autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -178,10 +178,30 @@
 @endsection
 
 @section('script_page')
-
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+
         $(document).ready(function () {
+       
+            $('#startDate').daterangepicker({
+                locale: {format: 'YYYY-MM-DD'},
+                singleDatePicker: true,
+                minDate: new Date()
+            }).on('apply.daterangepicker', function(ev, picker) {
+                $('#endDate').daterangepicker({
+                    locale: {format: 'YYYY-MM-DD'},
+                    singleDatePicker: true,
+                    minDate: picker.startDate.format('YYYY/MM/DD')
+                });
+            });
+
+            $('#endDate').daterangepicker({
+                locale: {format: 'YYYY-MM-DD'},
+                singleDatePicker: true,
+                minDate: new Date(),
+            });
+
+
             document.getElementById('image').addEventListener('change', readImage, false);
             document.getElementById('image').addEventListener("activate", readImage, false);
 

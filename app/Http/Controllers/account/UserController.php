@@ -27,7 +27,13 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('app.account.user.create');
+        $token = session()->get('token');
+        $getcompany = $this->get(env('GATEWAY_URL'). 'company', $token);
+        $company = $getcompany['success'] ? $getcompany['data'] : null;
+        $profile = $this->get(env('GATEWAY_URL'). 'admin/profile', $token);
+        $profile = $profile['success'] ? $profile['data'] : null;
+
+        return view('app.account.user.create',compact('company','profile'));
     }
 
 
@@ -35,8 +41,8 @@ class UserController extends Controller
     {
         $data = $request->all();
         $token = $request->session()->get('token');
-        $com_id = $request->session()->get('data')['company_id'];
-        $data['company_id'] = $com_id;
+        // $com_id = $request->session()->get('data')['company_id'];
+        // $data['company_id'] = $com_id;
 
         $validator = Validator::make($request->all(),[
             'username'    => 'required',
@@ -56,12 +62,12 @@ class UserController extends Controller
         // }
 
         $response = $this->post(env('GATEWAY_URL').'user/add',$data,$token);
-
+        // dd($response);
         if($response['success'])
         {
             return redirect('account/user')->with('success','Data '.$response['data']['username'].' Created');
         }else {
-            return redirect()->back()->with('failed','Data Doesnt Created,'.$response['message']);
+            return redirect()->back()->with('failed','Data Doesnt Created,'.$response['message'])->withInput();
         }
 
     }
@@ -115,7 +121,7 @@ class UserController extends Controller
         $token = $req->session()->get('token');
 
         $response = $this->post(env('GATEWAY_URL').'user/delete',$req->all(),$token);
-
+      
         if($response['success'])
         {
             // LogActivity::addToLog('Deleted Data User');

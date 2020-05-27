@@ -48,8 +48,9 @@ class EventController extends Controller
             $img[$i]['filename'] = 'event.png';
             }
         }
-        
+        // dd($request->all());
         $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,$img);
+        // $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,null);
       
         if($response['success'])
         {
@@ -116,8 +117,9 @@ class EventController extends Controller
     public function delete(Request $req)
     {
         $token = $req->session()->get('token');
+
         $response = $this->post(env('GATEWAY_URL').'event/delete',$req->only('id'),$token);
-        // dd($req->all());
+        // dd($response);
         if ($response['success']) {
             // LogActivity::addToLog('Deleted Data City');
             return redirect('general/event')->with('success','Event Deleted');
@@ -129,4 +131,3 @@ class EventController extends Controller
 
 }
 
-// https://drive.google.com/file/d/0B3tiTbadc-HgTGdQajNWSlNYVGs/view
