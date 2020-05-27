@@ -48,15 +48,13 @@ class EventController extends Controller
             $img[$i]['filename'] = 'event.png';
             }
         }
-        // dd($request->all());
+
         $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,$img);
-        // $response = $this->postMulti(env('GATEWAY_URL').'event/add',$data,$token,null,null);
-      
-        if($response['success'])
-        {
+  
+        if ($response['success']) {
             // LogActivity::addToLog('Added Data City');
             return redirect('general/event')->with('success','Event Created');
-        }else {
+        } else {
             return redirect()->back()->with('failed','Event Doesnt Created ,'.$response['message'])->withInput();
         }
 

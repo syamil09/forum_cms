@@ -62,7 +62,7 @@ class UserController extends Controller
         // }
 
         $response = $this->post(env('GATEWAY_URL').'user/add',$data,$token);
-        // dd($response);
+
         if($response['success'])
         {
             return redirect('account/user')->with('success','Data '.$response['data']['username'].' Created');
@@ -99,20 +99,22 @@ class UserController extends Controller
             'email'       => 'required|email',
         ]);
 
-        $img['name'] = 'photo';
-        $img['contents'] = '';
-        if ($request->has('photo')) {
+        
+        if ($request->hasFile('photo')) {
+            $img['name'] = 'photo';
             $img['contents'] = fopen($request->photo, 'r');
             $img['filename'] = 'photo.png';
+            $response = $this->postMulti(env('GATEWAY_URL') . 'user/update/'.$id, $data, $token, $img);
+        } else {
+            $response = $this->post(env('GATEWAY_URL').'user/update/'.$id, $data, $token);
         }
-        $response = $this->postMulti(env('GATEWAY_URL') . 'user/update/'.$id, $data, $token, $img);
+        
 
-        if($response['success'])
-        {
+        if ($response['success']) {
             // LogActivity::addToLog('Updated Data User');
-            return redirect('account/user')->with('success','Data '.$response['data']['username'].' Updated');
-        }else {
-            return redirect('account/user')->with('failed','Data Doesnt Updated. '.$response['message']);
+            return redirect('account/user')->with('success','Data '.$response['data']['email'].' Updated');
+        } else {
+            return redirect()->back()->with('failed','Data Doesnt Updated. '.$response['message']);
         }
     }
 
