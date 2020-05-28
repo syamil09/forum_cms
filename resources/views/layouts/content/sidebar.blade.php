@@ -8,7 +8,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class=" active">
+            <li class="{{ (request()->is('/')) ? 'active' : '' }}">
                 <a href="{{ url('/') }}" class="nav-link"><i class=" fas fa-fire"></i><span>Dashboard</span></a>
             </li>
             <li class="menu-header">Starter</li>
@@ -20,7 +20,7 @@
                     <ul class="dropdown-menu">
                         @foreach($GroupMenu['menu'] as $menu)
                             @if($menu['view'] == 1)
-                                <li>
+                                <li class="{{ (request()->is($menu['url'].'*')) ? 'active' : '' }}">
                                     <a class="submenu nav-link" href="{{ url($menu['url']) }}">{{ $menu['name'] }}</a>
                                 </li>
                             @endif
@@ -78,6 +78,13 @@
           if (count_menu === 0) {
             $(item).css({"display":"none"});
           }
+
+          var active_menu = $(item).find('.active');
+          if (active_menu.length > 0) {
+            $(item).addClass('active');
+            $(item).find('.dropdown-menu').addClass('d-block');
+          }
+          console.log(active_menu);
         });
         
       });
