@@ -86,21 +86,20 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->except('_token', 'image');
+        $data = $request->except('_token', 'image', 'totalImage');
         $token = session()->get('token');
-        // return $data;
 
         $img[0]['name'] = 'image[]';
         $img[0]['contents'] = '';
         if ($request->has('image')) {
-          foreach ($request['image'] as $i => $value) {
-            $img[$i]['name'] = 'image[]';
-            $img[$i]['contents'] = fopen($value, 'r');
-            $img[$i]['filename'] = 'event.png';
+            foreach ($request['image'] as $i => $value) {
+                $img[$i]['name'] = 'image[]';
+                $img[$i]['contents'] = fopen($value, 'r');
+                $img[$i]['filename'] = 'event.png';
             }
         }
-        $data['imageView'] = json_encode($data['imageView'], true);
-        // dd($data);
+        $data['imageView'] = !empty($data['imageView']) ? json_encode($data['imageView'], true) : null;
+
         $response = $this->postMulti(env('GATEWAY_URL').'event/update/'.$id,$data,$token,null,$img);
 
         if ($response['success']) {
