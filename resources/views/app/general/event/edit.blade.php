@@ -128,10 +128,11 @@
                                     <input type="file" id="image" name="image[]" style="display: none;" class="form-control" multiple autocomplete="off">
                                 </fieldset>
                                 <div class="preview-images-zone">
-                                    @foreach($edit['image'] as $image)
-                                        <div class="preview-image preview-show-1">
-                                            <div class="image-cancel" data-no="1">x</div>
-                                            <div class="image-zone"><img id="pro-img-1" src="{{ $image }}"></div>
+                                    @foreach($edit['image'] as $i => $image)
+                                        <div class="preview-image preview-show-{{$i}}">
+                                            <div class="image-cancel" data-no="{{$i}}">x</div>
+                                            <div class="image-zone"><img id="pro-img-{{$i}}" src="{{ $image }}"></div>
+                                            <input type="text" name="imageView[]" style="display: none"  class="form-control" value="{{ $image }}">
                                         </div>
                                     @endforeach
                                 </div>
@@ -202,7 +203,7 @@
             });
         });
 
-        var num = 0;
+            var num = {{ count($edit['image']) }};
 
         function readImage() {
             if (window.File && window.FileList && window.FileReader) {

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\general;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Support\Facades\Validator;
-use App\Helpers\LogActivity;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
@@ -101,9 +99,10 @@ class EventController extends Controller
             $img[$i]['filename'] = 'event.png';
             }
         }
+        $data['imageView'] = json_encode($data['imageView'], true);
         // dd($data);
         $response = $this->postMulti(env('GATEWAY_URL').'event/update/'.$id,$data,$token,null,$img);
-      
+
         if ($response['success']) {
             // LogActivity::addToLog('Updated Data City');
             return redirect('general/event')->with('success','Event Updated');
