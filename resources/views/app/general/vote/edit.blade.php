@@ -117,12 +117,33 @@
     </script>
     {{-- End Valiidatoor --}}
     <script>
+        var disabledArr = [{!! $DateNotAvailable !!}]
+
         $('.rangeDateTimes').daterangepicker({
             timePicker: true,
             timePicker24Hour: true,
+            minDate: new Date(),
             locale: {
                 format: 'D-M-Y H:mm'
             },
+            isInvalidDate: function(arg){
+                // Prepare the date comparision
+                var thisMonth = arg._d.getMonth()+1;   // Months are 0 based
+                if (thisMonth<10){
+                    thisMonth = "0"+thisMonth; // Leading 0
+                }
+                var thisDate = arg._d.getDate();
+                if (thisDate<10){
+                    thisDate = "0"+thisDate; // Leading 0
+                }
+                var thisYear = arg._d.getYear()+1900;   // Years are 1900 based
+
+                var thisCompare = thisYear +"-"+ thisMonth +"-"+ thisDate;
+
+                if($.inArray(thisCompare,disabledArr)!=-1){
+                    return true; //arg._pf = {userInvalidated: true};
+                }
+            }
         }, function (start, end) {
             var startDateTime = start.format('YYYY-MM-DD H:m');
             var endDateTime = end.format('YYYY-MM-DD H:m');

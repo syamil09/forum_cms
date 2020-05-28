@@ -73,6 +73,7 @@ class VoteController extends Controller
         $DateNotAvailable = $this->get(env('GATEWAY_URL') . 'vote/notAvailableDate', $token);
         $users = $this->replaceExistData($users);
         $DateNotAvailable = '"'. implode('","',$this->replaceExistData($DateNotAvailable)) . '"';
+
         return view('app.general.vote.create', compact('users', 'DateNotAvailable'));
     }
 
@@ -166,7 +167,26 @@ class VoteController extends Controller
         })->toArray();
 
         $users = array_merge($users, $selected);
-        return view('app.general.vote.edit', compact('vote', 'users'));
+
+        $thisDate = [];
+        $period = new \DatePeriod(
+            new \DateTime($vote['start_vote']),
+            new \DateInterval('P1D'),
+            new \DateTime(date('Y-m-d', strtotime($vote['end_vote']."+1 days")))
+        );
+        foreach ($period as $key => $value) {
+            $thisDate[] = $value->format('Y-m-d');
+        }
+        $DateNotAvailable = $this->get(env('GATEWAY_URL') . 'vote/notAvailableDate', $token);
+        $NewDateNot = [];
+        if ($DateNotAvailable['success']) {
+            $NewDateNot = array_diff($DateNotAvailable['data'], $thisDate);
+            
+        }
+        // $DateNotAvailable = '"'. implode('","',$this->replaceExistData($DateNotAvailable)) . '"';
+        $DateNotAvailable = '"'. implode('","',$NewDateNot) . '"';
+
+        return view('app.general.vote.edit', compact('vote', 'users','DateNotAvailable'));
 
     }
 

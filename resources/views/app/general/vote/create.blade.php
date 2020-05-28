@@ -48,7 +48,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Voting Period</label>
                             <div class="col-sm-12 col-md-7">
-                                <input name="voting_period" type="text" class="form-control rangeDateTimes" required>
+                                <input name="voting_period" type="text" class="form-control rangeDateTimes" required autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -116,6 +116,7 @@
             timePicker: true,
             timePicker24Hour: true,
             autoUpdateInput: false,
+            minDate: new Date(),
             locale: {
                 format: 'DD-MM-YYYY H:mm'
             },
