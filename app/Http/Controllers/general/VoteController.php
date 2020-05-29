@@ -36,7 +36,7 @@ class VoteController extends Controller
     public function index()
     {
         $token = Session::get('token');
-        $company = session()->get('data')['company_id'] ? session()->get('data')['company_id'] : session()->get('company_id');
+
         $votes = $this->get(env('GATEWAY_URL') . 'vote', $token);
 
         if (key_exists('data', $votes)) {
@@ -99,7 +99,7 @@ class VoteController extends Controller
         $votingPeriod =  explode(' - ', $request->voting_period);
         $data['start_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[0]));
         $data['end_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[1]));
-        
+
         $token = Session::get('token');
         $votes = $this->post(env('GATEWAY_URL') . 'vote/add', $data, $token);
         if ($votes['success']) {
@@ -157,10 +157,12 @@ class VoteController extends Controller
     public function edit($id)
     {
         $token = Session::get('token');
-        $company = session()->get('data')['company_id'];
 
         $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
         $vote = $this->replaceExistData($vote);
+
+        $company = $vote['company_id'];
+
         $vote['start_vote'] = date('d-m-Y H:i', strtotime($vote['start_vote']));
         $vote['end_vote'] = date('d-m-Y H:i:s', strtotime($vote['end_vote']));
         $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
@@ -187,17 +189,17 @@ class VoteController extends Controller
         foreach ($period as $key => $value) {
             $thisDate[] = $value->format('Y-m-d');
         }
-        $DateNotAvailable = $this->get(env('GATEWAY_URL') . 'vote/notAvailableDate', $token);
+        $DateNotAvailable = $this->get(env('GATEWAY_URL') . 'vote/notAvailableDate?company_id=' . $company, $token);
+
         $NewDateNot = [];
         if ($DateNotAvailable['success']) {
             $NewDateNot = array_diff($DateNotAvailable['data'], $thisDate);
-            
+
         }
         // $DateNotAvailable = '"'. implode('","',$this->replaceExistData($DateNotAvailable)) . '"';
         $DateNotAvailable = '"'. implode('","',$NewDateNot) . '"';
 
         return view('app.general.vote.edit', compact('vote', 'users','DateNotAvailable'));
-
     }
 
     /**
@@ -209,6 +211,7 @@ class VoteController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $data = $request->except(['_token','_method', 'voting_period']);
         $votingPeriod =  explode(' - ', $request->voting_period);
         $data['start_vote'] = date('Y-m-d H:i:s', strtotime($votingPeriod[0]));

@@ -41,6 +41,8 @@
                     <form method="POST" action="{{  route('vote.update', $vote['id']) }}">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
+                        <input name="company_id" type="text" class="form-control" value="{{ $vote['company_id'] }}" hidden>
+
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
@@ -117,7 +119,7 @@
     </script>
     {{-- End Valiidatoor --}}
     <script>
-        var disabledArr = [{!! $DateNotAvailable !!}]
+        var disabledArr = [{!! $DateNotAvailable !!}];
 
         $('.rangeDateTimes').daterangepicker({
             timePicker: true,
