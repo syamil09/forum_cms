@@ -117,7 +117,6 @@ class VoteController extends Controller
     public function show($id)
     {
         $token = Session::get('token');
-        $company = session()->get('data')['company_id'];
 
         $vote = $this->get(env('GATEWAY_URL') . 'vote/edit/' . $id, $token);
         $vote = $this->replaceExistData($vote);
@@ -125,7 +124,7 @@ class VoteController extends Controller
 
         $votings = [];
 
-        $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
+        $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $vote['company_id'], $token);
         $users = collect($this->replaceExistData($users));
 
         foreach ($candidates as  $i => $candidate){
