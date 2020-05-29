@@ -38,13 +38,23 @@ class VoteController extends Controller
         $token = Session::get('token');
         $company = session()->get('data')['company_id'] ? session()->get('data')['company_id'] : session()->get('company_id');
         $votes = $this->get(env('GATEWAY_URL') . 'vote', $token);
-        $users = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
-        $users = $users['success'] ? collect($users['data']) : collect([]);
-        
+
         if (key_exists('data', $votes)) {
+            $companys = collect($votes['data'])->map(function ($data) {
+                return $data['company_id'];
+            })->unique();
+            $users = [];
+            foreach ($companys as $company) {
+                $usersCompany = $this->get(env('GATEWAY_URL') . 'user/member?company_id=' . $company, $token);
+                if (key_exists('data', $usersCompany)) {
+                    $users = array_merge($users, $usersCompany['data']);
+                }
+            }
+
+
             foreach ($votes['data'] as $iVote => $vote){
                 foreach ($vote['candidates'] as $iCandidate => $candidate) {
-                    $user = $users->where('id', $candidate['user_id'])->map(function ($data) {
+                    $user = collect($users)->where('id', $candidate['user_id'])->map(function ($data) {
                         return collect($data)->only(['name','photo']);
                     })->first();
                     $votes['data'][$iVote]['candidates'][$iCandidate]['user'] = $user;
