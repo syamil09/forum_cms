@@ -187,12 +187,8 @@ class AdminController extends Controller
 
     public function uprof(Request $request, $id)
     {
-        // dd('ok');
         $data = $request->except('_token','oldpassword', 'confirm', 'image', 'password');
         $token = session()->get('token');
-        // $userGroup = $this->get(env('GATEWAY_URL').'user-group/edit/'.$request['privileges']    ,$token);
-
-        // $privileges = $userGroup['data']['name'];
 
         // jika merubah password tapi tidak sama saat confirm password
         if ($request->oldpassword != null || $request->password != null || $request->confirm != null) {
@@ -232,7 +228,6 @@ class AdminController extends Controller
             $photo['filename'] = 'photo.png';
         }
 
-        // return $data;
         $response = $this->postMulti(env('GATEWAY_URL').'admin/update/'.$id,$data,$token,$photo);
         // return $response;
         if($response['success'])

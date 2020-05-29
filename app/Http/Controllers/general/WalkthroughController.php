@@ -38,7 +38,7 @@ class WalkthroughController extends Controller
     {
       $token = $request->session()->get('token');
       $data = $request->except('image');
-      $data['company_id'] = session()->get('company_id');
+    
       $img['name'] = 'image';
       $img['contents'] = '';
 
@@ -50,10 +50,10 @@ class WalkthroughController extends Controller
       $response = $this->postMulti(env('GATEWAY_URL').'walk_through/add',$data,$token,$img,'');
       // dd($response);
       if ($response['success']) {
-          // LogActivity::addToLog('Added Data City');
+          session()->put('company_id',$request['company_id']);
           return redirect('general/walkthrough')->with('success','Walktrough Created');
       } else {
-          return redirect('general/walkthrough')->with('failed','Walktrough Doesnt Created ,'.$response['message']);
+          return redirect()->back()->with('failed','Walktrough Doesnt Created ,'.$response['message']);
       }
     }
 

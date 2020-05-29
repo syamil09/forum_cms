@@ -87,6 +87,8 @@
           console.log(active_menu);
         });
         
+
       });
+
     </script>
 @endsection
