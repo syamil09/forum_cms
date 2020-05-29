@@ -22,36 +22,45 @@
       <div class="card-body">
         <form class="needs-validation" action="{{url('general/event/'.$event_id.'/schedule/store')}}" method="post" enctype="multipart/form-data">
           @csrf
+          @if(session('failed'))
+            <div class="alert alert-danger">{{ session('failed') }}</div>
+          @endif
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
             <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" name="title" value="{{old('title')}}">
+              <input type="text" class="form-control" name="title" value="{{old('title')}}" required>
             </div>
           </div>
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple" name="description">{{old('description')}}</textarea>
+              <textarea class="summernote-simple" name="description" required>{{old('description')}}</textarea>
             </div>
           </div>
-          <div class="form-group row mb-4">
+<!--           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date</label>
             <div class="col-sm-12 col-md-7">
               <input type="date" class="form-control" name="date" value="{{old('date')}}">
             </div>
-          </div>
-          <div class="form-group row mb-4">
+          </div> -->
+<!--           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Time</label>
             <div class="col-sm-12 col-md-7">
-              <input type="time" class="form-control" name="time" value="{{old('time')}}">
+              <input type="text" class="form-control" id="time" name="time" value="{{old('time')}}">
+            </div>
+          </div> -->
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date Time</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="text" id="start" class="form-control" name="date" value="{{old('date')}}" required autocomplete="off">
             </div>
           </div>
           <div class="form-group row mb-4">
-            <div class="col-sm-12 col-md-4 offset-2">
-              <input type="text" name="latitude" class="form-control" placeholder="Latitude..." value="{{old('latitude')}}">
+            <div class="col-sm-12 col-md-3 offset-3">
+              <input type="text" name="latitude" class="form-control" placeholder="Latitude..." value="{{old('latitude')}}" required>
             </div>
-            <div class="col-sm-12 col-md-4">
-              <input type="text" name="longitude" class="form-control" placeholder="Longitude..." value="{{old('longitude')}}">
+            <div class="col-sm-12 col-md-3">
+              <input type="text" name="longitude" class="form-control" placeholder="Longitude..." value="{{old('longitude')}}" required>
             </div>
           </div>
 
@@ -71,5 +80,26 @@
 @endsection
 
 @section('script_page')
-<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
+<script>
+  $(document).ready(function() {
+
+    var disabledArr = ["{{ date('Y-m-d',strtotime($event['event_end'].'+1 days')) }}"];
+    $('#start').daterangepicker({
+      startDate: "{{ date('Y/m/d',strtotime($event['event_start'])) }}",
+      minDate: "{{ date('Y/m/d',strtotime($event['event_start'])) }}",
+      maxDate: "{{ date('Y/m/d',strtotime($event['event_end'].'+1 days')) }}",
+      locale: {format: 'YYYY-MM-DD hh:mm'},
+      singleDatePicker: true,
+      timePicker: true,
+      timePicker24Hour: true,
+      drops: 'up',
+      isInvalidDate: function(ele) {
+        var currDate = moment(ele._d).format('YYYY-MM-DD');
+        return disabledArr.indexOf(currDate) != -1;
+      }
+
+    });
+  });
+</script>
 @endsection

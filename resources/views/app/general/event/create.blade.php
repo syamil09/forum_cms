@@ -186,11 +186,13 @@
             $('#startDate').daterangepicker({
                 locale: {format: 'YYYY-MM-DD'},
                 singleDatePicker: true,
-                minDate: new Date()
+                minDate: new Date(),
+                timePicker: true
             }).on('apply.daterangepicker', function(ev, picker) {
                 $('#endDate').daterangepicker({
                     locale: {format: 'YYYY-MM-DD'},
                     singleDatePicker: true,
+                    timePicker: true,
                     minDate: picker.startDate.format('YYYY/MM/DD')
                 });
             });
@@ -198,6 +200,7 @@
             $('#endDate').daterangepicker({
                 locale: {format: 'YYYY-MM-DD'},
                 singleDatePicker: true,
+                timePicker: true,
                 minDate: new Date(),
             });
 

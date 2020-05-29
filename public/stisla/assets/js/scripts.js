@@ -103,6 +103,7 @@ $(function() {
         const count_active = $('.main-sidebar .sidebar-menu li.active').length;
         if (count_active > 0) {
           $('.main-sidebar .sidebar-menu li.active').removeClass('active');
+          me.parent().find('> .dropdown-menu').removeClass('d-block');
         }
         
 
