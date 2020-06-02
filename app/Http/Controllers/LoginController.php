@@ -19,7 +19,7 @@ class LoginController extends Controller
         // dd($response);
         if($response['success'])
         {
-            $privileges = $this->get(env('GATEWAY_URL').'user-privileges/show/'.$response['data']['id'],$response['token']);
+            $privileges = $this->get(env('GATEWAY_URL').'user-privileges/show/'.$response['data']['user_group_id'],$response['token']);
             $companies  = $this->get(env('GATEWAY_URL').'company',$response['token']);
             $dataSession = [
                 'company_id'    => $response['data']['company_id'],
