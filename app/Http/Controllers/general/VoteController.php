@@ -36,8 +36,8 @@ class VoteController extends Controller
     public function index()
     {
         $token = Session::get('token');
-
-        $votes = $this->get(env('GATEWAY_URL') . 'vote', $token);
+        $SessionCompany = Session::get('company_id');
+        $votes = $this->get(env('GATEWAY_URL') . 'vote?company_id=' . $SessionCompany, $token);
 
         if (key_exists('data', $votes)) {
             $companys = collect($votes['data'])->map(function ($data) {
