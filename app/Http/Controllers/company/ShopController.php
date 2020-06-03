@@ -113,6 +113,7 @@ class ShopController extends Controller
       $category = ($getcategory['success'] == false)?null:$getcategory['data'];
       $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
       $store = $getstore['success']  == false ? null : $getstore['data'];
+      // dd($shop);
       return view('app.company.shop.edit',compact('shop', 'category', 'store'));
     }
 
@@ -126,26 +127,24 @@ class ShopController extends Controller
     public function update(Request $request, $id)
     {
       $token = $request->session()->get('token');
-
-      $data = $request->except('_token','image');
-
+      $data  = $request->except('_token','image','totalImage');
+    
       $photo[0]['name'] = 'photo[]';
       $photo[0]['contents'] = '';
       if($request->has('image')) {
         foreach ($request['image'] as $key => $value) {
-          $photo[$key]['name'] = 'photo['.$key.']';
+          $photo[$key]['name'] = 'photo[]';
           $photo[$key]['contents'] = fopen($value, 'r');
           $photo[$key]['filename'] = 'shop.png';
         }
       }
+      $data['imageView'] = !empty($data['imageView']) ? json_encode($data['imageView'], true) : null;
 
       $response = $this->postMulti(env('GATEWAY_URL').'shop/item/update/'.$id,$data,$token, null, $photo);
-
-      if($response['success'])
-      {
-        // LogActivity::addToLog('Updated Data Mesjid');
+   
+      if ($response['success']) {
         return redirect('company/shop')->with('success','Data Updated');
-      }else {
+      } else {
           return redirect()->back()->with('failed','Data Doesnt Updated.'. collect($response['message'])->first()[0]);
       }
     }

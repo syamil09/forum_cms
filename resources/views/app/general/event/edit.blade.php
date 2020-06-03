@@ -173,7 +173,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script>
-        var num = {{ count($edit['image']) }};
+        var num = parseInt("{{ count($edit['image']) }}",10);
 
         $(document).ready(function () {
             $('#totalImage').val(num);
