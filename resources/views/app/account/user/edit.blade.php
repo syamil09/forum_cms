@@ -19,7 +19,7 @@
 				@if(session('failed'))
 				<div class="alert alert-danger">{{ session('failed') }}</div>
 				@endif
-				<form action="{{ url('account/user/update').'/'.$member['id'] }}" method="POST" class="needs-validation" novalidate="">
+				<form action="{{ url('account/user/update').'/'.$member['id'] }}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
 						<label>Photo</label>
@@ -48,7 +48,7 @@
 				    </div> -->
 				    <div class="form-group">
 						<label>Date of birth</label>
-						<input type="text" class="form-control" name="date_birth" value="{{ $member['date_birth'] }}">
+						<input type="date" class="form-control" name="date_birth" value="{{ $member['date_birth'] }}">
 					</div>
 					<div class="form-group">
 						<label>Phone number</label>
