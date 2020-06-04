@@ -108,11 +108,16 @@ class ShopController extends Controller
     {
       $token = $request->session()->get('token');
       $response = $this->get(env('GATEWAY_URL').'shop/item/edit/'.$id,$token);
-      $shop = $response['data'];
+      $shop = $response['success'] ? $response['data'] : null;
       $getcategory = $this->get(env('GATEWAY_URL').'shop/category',$token);
       $category = ($getcategory['success'] == false)?null:$getcategory['data'];
       $getstore = $this->get(env('GATEWAY_URL'). 'store', $token);
       $store = $getstore['success']  == false ? null : $getstore['data'];
+
+      if ($shop && $shop['berat'] != null) {
+        $weightExplode = explode(' ', $shop['berat']);
+        $shop['berat'] = $weightExplode[0];
+      }
       // dd($shop);
       return view('app.company.shop.edit',compact('shop', 'category', 'store'));
     }

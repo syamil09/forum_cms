@@ -98,7 +98,7 @@
         @if(session('failed'))
         <div class="alert alert-danger">{{ session('failed') }}</div>
         @endif
-        <form method="POST" action="{{  url('company/shop/update/'.$shop['id']) }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
+        <form id="editShop" method="POST" action="{{  url('company/shop/update/'.$shop['id']) }}" enctype="multipart/form-data">
         @csrf
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Store</label>
@@ -156,7 +156,7 @@
               <fieldset class="form-group">
                 <a href="javascript:void(0)" onclick="$('#image').click()" class="btn btn-primary">Upload Image</a>
                 <input type="file" id="image" name="image[]" style="display: none;" class="form-control" multiple autocomplete="off">
-                <input type="text" id="totalImage" name="totalImage" style="display: none;" class="form-control" multiple required>
+                <input type="text" id="totalImage" name="totalImage" style="display: none;" class="form-control" multiple>
               </fieldset>
               <div class="preview-images-zone">
               @foreach($shop['photo'] as $i => $image)
@@ -178,7 +178,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Weight (gr)</label>
             <div class="col-sm-12 col-md-7">
-              <input type="number" class="form-control @error('price') is-invalid @enderror" name="berat" value="{{old('berat')}}" required>
+              <input type="number" class="form-control @error('price') is-invalid @enderror" name="berat" value="{{$shop['berat']}}" required>
             </div>
           </div>
           <div class="form-group row mb-4">
@@ -219,6 +219,7 @@
 
 @section('script_page')
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
 <script type="text/javascript">
   var num = parseInt("{{ count($shop['photo']) }}",10);
 
@@ -237,17 +238,17 @@
     document.getElementById('image').addEventListener('change', readImage, false);
     document.getElementById('image').addEventListener("activate", readImage, false);
 
-            $(".preview-images-zone").sortable();
+    $(".preview-images-zone").sortable();
 
-            $(document).on('click', '.image-cancel', function () {
-                let no = $(this).data('no');
-                $(".preview-image.preview-show-" + no).remove();
-                num--;
-                $('#totalImage').val(num);
-                if (num == 0) {
-                    $('#totalImage').val('');
-                }
-            });
+    $(document).on('click', '.image-cancel', function () {
+      let no = $(this).data('no');
+      $(".preview-image.preview-show-" + no).remove();
+      num--;
+      $('#totalImage').val(num);
+      if (num == 0) {
+        $('#totalImage').val('');
+      }
+    });
 
     function readImage() {
       if (window.File && window.FileList && window.FileReader) {
@@ -283,6 +284,31 @@
       }
             // $('#createArticle').valid();
       }
+
+      $.validator.setDefaults({
+            errorElement: "span",
+            errorClass: "is-invalid",
+            ignore: [],
+            //  validClass: 'stay',
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass(errorClass);
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass(errorClass);
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else if (element.hasClass('select2')) {
+                    error.insertAfter(element.next('span'));
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+        $('#editShop').validate();
   });
 </script>
 
