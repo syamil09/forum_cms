@@ -178,7 +178,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Weight (gr)</label>
             <div class="col-sm-12 col-md-7">
-              <input type="number" class="form-control @error('price') is-invalid @enderror" name="berat" value="{{old('berat')}}" required>
+              <input type="number" class="form-control @error('berat') is-invalid @enderror" name="berat" value="0" required>
               @error('berat')
               <div class="invalid-feedback">{{$message}}</div>
               @enderror
