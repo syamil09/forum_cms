@@ -99,7 +99,7 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
-                                <input type="text" class="form-control" value="{{$edit['title']}}" name="title">
+                                <input type="text" class="form-control" value="{{$edit['title']}}" name="title" required>
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -126,12 +126,14 @@
                                 <fieldset class="form-group">
                                     <a href="javascript:void(0)" onclick="$('#image').click()" class="btn btn-primary">Upload Image</a>
                                     <input type="file" id="image" name="image[]" style="display: none;" class="form-control" multiple autocomplete="off">
+                                    <input type="text" id="totalImage" name="totalImage" style="display: none;" class="form-control" multiple required>
                                 </fieldset>
                                 <div class="preview-images-zone">
-                                    @foreach($edit['image'] as $image)
-                                        <div class="preview-image preview-show-1">
-                                            <div class="image-cancel" data-no="1">x</div>
-                                            <div class="image-zone"><img id="pro-img-1" src="{{ $image }}"></div>
+                                    @foreach($edit['image'] as $i => $image)
+                                        <div class="preview-image preview-show-{{$i}}">
+                                            <div class="image-cancel" data-no="{{$i}}">x</div>
+                                            <div class="image-zone"><img id="pro-img-{{$i}}" src="{{ $image }}"></div>
+                                            <input type="text" name="imageView[]" style="display: none"  class="form-control" value="{{ $image }}">
                                         </div>
                                     @endforeach
                                 </div>
@@ -171,13 +173,15 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script>
-        $(document).ready(function () {
+        var num = parseInt("{{ count($edit['image']) }}",10);
 
+        $(document).ready(function () {
+            $('#totalImage').val(num);
             $('#startDate').daterangepicker({
                 locale: {format: 'YYYY-MM-DD'},
                 singleDatePicker: true,
                 minDate: new Date()
-            }).on('apply.daterangepicker', function(ev, picker) {
+            }).on('apply.daterangepicker', function (ev, picker) {
                 $('#endDate').daterangepicker({
                     locale: {format: 'YYYY-MM-DD'},
                     singleDatePicker: true,
@@ -199,10 +203,13 @@
             $(document).on('click', '.image-cancel', function () {
                 let no = $(this).data('no');
                 $(".preview-image.preview-show-" + no).remove();
+                num--;
+                $('#totalImage').val(num);
+                if (num == 0) {
+                    $('#totalImage').val('');
+                }
             });
         });
-
-        var num = 0;
 
         function readImage() {
             if (window.File && window.FileList && window.FileReader) {
@@ -222,17 +229,23 @@
                             '</div>';
                         output.append(html);
                         num = num + 1;
+                        $('#totalImage').val(num);
+                        if (num == 0) {
+                            $('#totalImage').val('');
+                        }
                     });
 
                     picReader.readAsDataURL(file);
                 }
                 // $("#image").val(files);
-                console.log(files);
+                // console.log(files);
+
             } else {
                 console.log('Browser not support');
             }
             $('#createArticle').valid();
         }
+
         $.validator.setDefaults({
             errorElement: "span",
             errorClass: "is-invalid",

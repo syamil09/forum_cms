@@ -99,7 +99,6 @@ class UserController extends Controller
             'email'       => 'required|email',
         ]);
 
-        
         if ($request->hasFile('photo')) {
             $img['name'] = 'photo';
             $img['contents'] = fopen($request->photo, 'r');
@@ -108,10 +107,8 @@ class UserController extends Controller
         } else {
             $response = $this->post(env('GATEWAY_URL').'user/update/'.$id, $data, $token);
         }
-        
-
+       
         if ($response['success']) {
-            // LogActivity::addToLog('Updated Data User');
             return redirect('account/user')->with('success','Data '.$response['data']['email'].' Updated');
         } else {
             return redirect()->back()->with('failed','Data Doesnt Updated. '.$response['message']);

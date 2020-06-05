@@ -202,6 +202,6 @@
         }
 
         {{-- Validate duluan sebelom submit HAHA --}}
-        $('#createVote').valid();
+        // $('#createVote').valid();
     </script>
 @endsection

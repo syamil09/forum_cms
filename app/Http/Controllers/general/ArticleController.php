@@ -52,6 +52,7 @@ class ArticleController extends Controller
         $response = $this->postMulti(env('GATEWAY_URL') . 'article/add', $data, $token, $img);
         // return $response;
         if ($response['success']) {
+            session()->put('company_id',$request['company_id']);
             return redirect('general/article')->with('success', 'Data created');
         }
         return redirect()->back()->with('failed', 'Data Doesnt Created ,' . collect($response['message'])->first()[0]);

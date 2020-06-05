@@ -20,7 +20,7 @@
         <h4>Edit Event Schedule</h4>
       </div>
       <div class="card-body">
-        <form class="" action="{{url('general/event/'.$event_id.'/schedules/update/'. $edit['id'])}}" method="post" enctype="multipart/form-data">
+        <form class="" action="{{url('general/event/'.$event_id.'/schedule/update/'. $edit['id'])}}" method="post" enctype="multipart/form-data">
           @csrf
           @if(session('failed'))
           <div class="alert alert-danger">{{ session('failed') }}</div>
@@ -34,10 +34,10 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
             <div class="col-sm-12 col-md-7">
-              <textarea class="summernote-simple">{{$edit['description']}}</textarea>
+              <textarea class="summernote-simple" name="description">{{$edit['description']}}</textarea>
             </div>
           </div>
-          <div class="form-group row mb-4">
+<!--           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date</label>
             <div class="col-sm-12 col-md-7">
               <input type="date" class="form-control" name="event_start" value="{{$edit['date']}}">
@@ -48,11 +48,20 @@
             <div class="col-sm-12 col-md-7">
               <input type="date" class="form-control" name="event_end" value="{{$edit['time']}}">
             </div>
+          </div> -->
+          <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date Time</label>
+            <div class="col-sm-12 col-md-7">
+              <input type="text" id="start" class="form-control" name="date" value="{{ $edit['date'].' '.$edit['time'] }}" required autocomplete="off">
+            </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Location</label>
-            <div class="col-sm-12 col-md-7">
-              <input type="text" class="form-control" value="">
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Latitude / Longitude</label>
+            <div class="col-sm-12 col-md-3">
+              <input type="text" name="latitude" class="form-control" placeholder="Latitude..." value="{{ $edit['latitude'] }}" required>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <input type="text" name="longitude" class="form-control" placeholder="Longitude..." value="{{ $edit['longitude'] }}" required>
             </div>
           </div>
           <div class="form-group row mb-4">
@@ -71,5 +80,27 @@
 @endsection
 
 @section('script_page')
-<script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script>
+<!-- <script src="{{ asset('stisla/assets/js/page/features-post-create.js') }}"></script> -->
+<script>
+  $(document).ready(function() {
+
+    var disabledArr = ["{{ date('Y-m-d',strtotime($event['event_end'].'+1 days')) }}"];
+    $('#start').daterangepicker({
+      minDate: "{{ date('Y/m/d',strtotime($event['event_start'])) }}",
+      maxDate: "{{ date('Y/m/d',strtotime($event['event_end'].'+1 days')) }}",
+      locale: {format: 'YYYY-MM-DD hh:mm'},
+      singleDatePicker: true,
+      timePicker: true,
+      timePicker24Hour: true,
+      drops: 'up',
+      isInvalidDate: function(ele) {
+        var currDate = moment(ele._d).format('YYYY-MM-DD');
+        return disabledArr.indexOf(currDate) != -1;
+      }
+
+    });
+
+    console.log(disabledArr);
+  });
+</script>
 @endsection

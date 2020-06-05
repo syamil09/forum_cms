@@ -19,14 +19,14 @@
 				@if(session('failed'))
 				<div class="alert alert-danger">{{ session('failed') }}</div>
 				@endif
-				<form action="{{ url('account/user/update').'/'.$member['id'] }}" method="POST" class="needs-validation" novalidate="">
+				<form action="{{ url('account/user/update').'/'.$member['id'] }}" method="POST" class="needs-validation" novalidate="" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
 						<label>Photo</label>
 						<div class="col-sm-12 col-md-7">
 			              <div id="image-preview" class="image-preview" style="background-image: url({{ $member['photo'] }});">
-			                <label for="image-upload" id="image-label">Choose File</label>
-			                <input type="file" name="photo" id="image-upload" multiple />
+			                <label for="image-upload" id="image-label" class="image-label">Choose File</label>
+			                <input type="file" name="photo" id="image-upload" class="image-upload" />
 			              </div>
 			            </div>
 					</div>
@@ -48,7 +48,7 @@
 				    </div> -->
 				    <div class="form-group">
 						<label>Date of birth</label>
-						<input type="text" class="form-control" name="date_birth" value="{{ $member['date_birth'] }}">
+						<input type="date" class="form-control" name="date_birth" value="{{ $member['date_birth'] }}">
 					</div>
 					<div class="form-group">
 						<label>Phone number</label>
